@@ -45,7 +45,6 @@ public class TooltipMixin extends Gui {
 
             k2 += 10;
         }
-
         this.zLevel = 0.0F;
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_DEPTH_TEST);

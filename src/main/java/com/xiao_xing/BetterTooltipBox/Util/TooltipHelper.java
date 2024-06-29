@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class TooltipHelper {
 
-    private static Minecraft mc = Minecraft.getMinecraft();
+    private static final Minecraft mc = Minecraft.getMinecraft();
 
     private static final ResourceLocation TEXTURE_TOOLTIP = new ResourceLocation(ResourceID + "gui/Tooltip.png");
 
