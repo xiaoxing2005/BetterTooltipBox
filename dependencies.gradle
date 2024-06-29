@@ -36,4 +36,5 @@
 dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
     implementation("com.github.GTNewHorizons:CodeChickenLib:1.2.0:dev")
+    implementation("com.github.GTNewHorizons:AppleCore:3.3.0:dev")
 }

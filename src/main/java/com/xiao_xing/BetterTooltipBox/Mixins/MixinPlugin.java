@@ -23,8 +23,8 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("com.xiao_xing.BetterTooltipBox.Mixins.TooltipMixin")
-            || mixinClassName.equals("com.xiao_xing.BetterTooltipBox.Mixins.ItemTooltipMixin")) {
+        if (mixinClassName.equals("com.xiao_xing.BetterTooltipBox.Mixins.ItemTooltipMixin")
+            || mixinClassName.equals("com.xiao_xing.BetterTooltipBox.Mixins.TooltipMixin")) {
             return Config.Enable_BetterTooltipBox;
         }
         return true;

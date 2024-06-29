@@ -7,7 +7,7 @@ import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
 import codechicken.lib.gui.GuiDraw;
 
-@Mixin(value = GuiDraw.class, remap = false)
+@Mixin(value = GuiDraw.class)
 public class ItemTooltipMixin {
 
     /**
@@ -15,7 +15,7 @@ public class ItemTooltipMixin {
      * @reason 修改Tooltip提示框
      */
 
-    @Overwrite
+    @Overwrite(remap = false)
     public static void drawTooltipBox(int x, int y, int width, int height) {
         TooltipHelper.DrawTooltip(x, y, width, height);
     }
