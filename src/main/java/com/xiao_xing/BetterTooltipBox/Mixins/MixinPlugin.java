@@ -1,13 +1,13 @@
 package com.xiao_xing.BetterTooltipBox.Mixins;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import cpw.mods.fml.common.Loader;
 import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-
-import com.xiao_xing.BetterTooltipBox.Config;
 
 public class MixinPlugin implements IMixinConfigPlugin {
 
@@ -23,10 +23,6 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("com.xiao_xing.BetterTooltipBox.Mixins.ItemTooltipMixin")
-            || mixinClassName.equals("com.xiao_xing.BetterTooltipBox.Mixins.TooltipMixin")) {
-            return Config.Enable_BetterTooltipBox;
-        }
         return true;
     }
 
@@ -37,7 +33,11 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public List<String> getMixins() {
-        return null;
+        List<String> MixinClass =  new ArrayList<>();
+        if (Loader.isModLoaded("AppleCore")){
+            MixinClass.add("com.xiao_xing.BetterTooltipBox.Mixins.TooltipMixin");
+        }
+        return MixinClass;
     }
 
     @Override
