@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8.5-GTNH",
+  "package": "com.xiao_xing.BetterTooltipBox.Mixins",
+  "refmap": "mixins.GTNHOriginalEnhancement.refmap.json",
+  "target": "@env(DEFAULT)",
+  "plugin": "com.xiao_xing.BetterTooltipBox.Mixins.MixinPlugin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ItemTooltipMixin"
+  ],
+  "client": [
+    "TooltipMixin"
+  ],
+  "server": []
+}
