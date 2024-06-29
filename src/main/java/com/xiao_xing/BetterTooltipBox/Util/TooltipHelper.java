@@ -12,8 +12,7 @@ public class TooltipHelper {
 
     private static Minecraft mc = Minecraft.getMinecraft();
 
-    private static final ResourceLocation TEXTURE_TOOLTIP = new ResourceLocation(
-        ResourceID + "gui/tooltip_borders.png");
+    private static final ResourceLocation TEXTURE_TOOLTIP = new ResourceLocation(ResourceID + "gui/Tooltip.png");
 
     private static final ResourceLocation TEXTURE_TOOLTIP_BACKGROUND = new ResourceLocation(
         ResourceID + "gui/Tooltip_Background.png");
@@ -35,55 +34,65 @@ public class TooltipHelper {
     }
 
     private static void renderBackground(Tessellator tessellator, int x, int y, int width, int height) {
-        Minecraft.getMinecraft()
-            .getTextureManager()
+        mc.getTextureManager()
             .bindTexture(TEXTURE_TOOLTIP_BACKGROUND);
 
-        float texWidth = 256.0f; // 纹理的实际宽度
-        float texHeight = 256.0f; // 纹理的实际高度
+        float texWidth = 64.0f; // 纹理的实际宽度
+        float texHeight = 64.0f; // 纹理的实际高度
 
-        renderQuad(tessellator, x, y, width, height, 3, 3, 253, 253, 256, 256);
+        renderQuad(tessellator, x, y, width, height, 0, 0, 64, 64, texWidth, texHeight);
     }
 
     private static void renderBorder(int x, int y, int width, int height) {
-        Minecraft.getMinecraft()
-            .getTextureManager()
+        mc.getTextureManager()
             .bindTexture(TEXTURE_TOOLTIP);
 
-        float texWidth = 128.0f; // 纹理的实际宽度
-        float texHeight = 128.0f; // 纹理的实际高度
+        float texWidth = 64.0f; // 纹理的实际宽度
+        float texHeight = 64.0f; // 纹理的实际高度
 
         Tessellator tessellator = Tessellator.instance;
         // 左上角
-        renderQuad(tessellator, x - 4f, y - 4f, 8, 8, 1, 1, 7, 7, texWidth, texHeight);
+        renderQuad(tessellator, x - 1, y - 1, 3, 3, 16, 16, 19, 19, texWidth, texHeight);
         // 右上角
-        renderQuad(tessellator, x + width - 5.3f, y - 4, 8, 8, 56, 1, 62, 7, texWidth, texHeight);
+        renderQuad(tessellator, x + width - 2, y - 1, 3, 3, 43, 16, 46, 19, texWidth, texHeight);
         // 左下角
-        renderQuad(tessellator, x - 3.5f, y + height - 5.7f, 8, 8, 1, 7, 8, 14, texWidth, texHeight);
+        renderQuad(tessellator, x - 1, y + height - 2, 3, 3, 16, 43, 19, 46, texWidth, texHeight);
         // 右下角
-        renderQuad(tessellator, x + width - 5.7f, y + height - 5.7f, 8, 8, 55, 7, 62, 14, texWidth, texHeight);
+        renderQuad(tessellator, x + width - 2, y + height - 2, 3, 3, 43, 43, 46, 46, texWidth, texHeight);
 
-        // 中心
+        // 左边
+        renderQuad(tessellator, x - 1, y + 2, 1, height - 3d, 16, 19, 17, 43, texWidth, texHeight);
+        // 右边
+        renderQuad(tessellator, x + width, y + 2, 1, height - 3d, 45, 19, 46, 43, texWidth, texHeight);
+        // 上边
+        renderQuad(tessellator, x + 2, y - 1, ((double) width / 2) - 7.5d, 1, 19, 16, 26, 17, texWidth, texHeight);
         renderQuad(
             tessellator,
-            ((float) x + ((float) width / 2)) - 15.5f,
-            y - 6,
-            30,
-            6,
-            12,
-            0,
-            50,
-            7,
+            x + ((double) width / 2) + 7.5d,
+            y - 1,
+            ((double) width / 2) - 8.5d,
+            1,
+            36,
+            16,
+            43,
+            17,
             texWidth,
             texHeight);
+        // 下边
+        renderQuad(tessellator, x + 2, y + height, width - 3d, 1, 18, 45, 43, 46, texWidth, texHeight);
+        // 顶部中央
+        renderQuad(tessellator, x + ((double) width / 2) - 5.5d, y, 2, 1, 26, 17, 28, 18, texWidth, texHeight);
+        renderQuad(tessellator, x + ((double) width / 2) + 5.5d, y, 2, 1, 34, 17, 36, 18, texWidth, texHeight);
+        renderQuad(tessellator, x + +((double) width / 2) - 4.5, y - 5, 11, 7, 2, 2, 13, 9, texWidth, texHeight);
+
     }
 
-    private static void renderQuad(Tessellator tessellator, float x, float y, float width, float height, float uStart,
-        float vStart, float uEnd, float vEnd, float texWidth, float texHeight) {
-        float uMin = uStart / texWidth;
-        float vMin = vStart / texHeight;
-        float uMax = uEnd / texWidth;
-        float vMax = vEnd / texHeight;
+    private static void renderQuad(Tessellator tessellator, double x, double y, double width, double height,
+        double uStart, double vStart, double uEnd, double vEnd, double texWidth, double texHeight) {
+        double uMin = uStart / texWidth;
+        double vMin = vStart / texHeight;
+        double uMax = uEnd / texWidth;
+        double vMax = vEnd / texHeight;
 
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(x, y, 0, uMin, vMin);

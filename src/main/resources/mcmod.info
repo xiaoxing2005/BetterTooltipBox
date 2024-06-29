@@ -3,7 +3,7 @@
 	"modList": [{
 		"modid": "${modId}",
 		"name": "${modName}",
-		"description": "此mod修改了Tooltip提示框，以便玩家们按照指定图片规格自由修改",
+		"description": "此mod修改了Tooltip提示框，以便玩家们按照规定图片规格自由修改",
 		"version": "${modVersion}",
 		"mcversion": "${minecraftVersion}",
 		"url": "https://github.com/xiaoxing2005/BetterTooltipBox",
