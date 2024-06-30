@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import cpw.mods.fml.common.Loader;
 import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -23,7 +22,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return true;
+        return false;
     }
 
     @Override
@@ -33,10 +32,11 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public List<String> getMixins() {
-        List<String> MixinClass =  new ArrayList<>();
-        if (Loader.isModLoaded("AppleCore")){
-            MixinClass.add("com.xiao_xing.BetterTooltipBox.Mixins.TooltipMixin");
-        }
+        List<String> MixinClass = new ArrayList<>();
+        try {
+            Class.forName("squeek.applecore.AppleCore");
+            MixinClass.add("TooltipMixin");
+        } catch (ClassNotFoundException ignored) {}
         return MixinClass;
     }
 
