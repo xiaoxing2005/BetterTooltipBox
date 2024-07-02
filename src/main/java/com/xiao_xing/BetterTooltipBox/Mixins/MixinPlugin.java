@@ -37,6 +37,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
             Class.forName("squeek.applecore.AppleCore");
             MixinClass.add("TooltipMixin");
         } catch (ClassNotFoundException ignored) {}
+        MixinClass.add("ItemTooltipMixin");
         return MixinClass;
     }
 

@@ -38,6 +38,7 @@ public class TooltipMixin extends Gui {
         cancellable = true)
     private void onDrawHoveringText(List<String> textLines, int x, int y, FontRenderer font, CallbackInfo ci, int k,
         Iterator<String> iterator, int j2, int k2, int i1, int i) {
+        TooltipHelper.z = 300;
         TooltipHelper.DrawTooltip(j2 - 2, k2 - 2, k + 4, i1 + 4);
         for (int i2 = 0; i2 < textLines.size(); ++i2) {
             TooltipOverlayHandler.toolTipX = j2;

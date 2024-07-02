@@ -7,10 +7,7 @@
   "plugin": "com.xiao_xing.BetterTooltipBox.Mixins.MixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "priority": 999,
-  "mixins": [
-    "ItemTooltipMixin"
-  ],
-  "client": [
-  ],
+  "mixins": [],
+  "client": [],
   "server": []
 }

@@ -1,5 +1,7 @@
 package com.xiao_xing.BetterTooltipBox.Mixins;
 
+import static codechicken.lib.gui.GuiDraw.gui;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -17,6 +19,7 @@ public class ItemTooltipMixin {
 
     @Overwrite(remap = false)
     public static void drawTooltipBox(int x, int y, int width, int height) {
+        TooltipHelper.z = (int) gui.getZLevel();
         TooltipHelper.DrawTooltip(x, y, width, height);
     }
 }

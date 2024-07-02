@@ -17,12 +17,14 @@ public class TooltipHelper {
     private static final ResourceLocation TEXTURE_TOOLTIP_BACKGROUND = new ResourceLocation(
         ResourceID + "gui/Tooltip_Background.png");
 
+    public static int z;
+
     public static void DrawTooltip(int x, int y, int width, int height) {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         Tessellator tessellator = Tessellator.instance;
-
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         // 绘制背景
         renderBackground(tessellator, x, y, width, height);
 
@@ -95,10 +97,10 @@ public class TooltipHelper {
         double vMax = vEnd / texHeight;
 
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x, y, 0, uMin, vMin);
-        tessellator.addVertexWithUV(x, y + height, 0, uMin, vMax);
-        tessellator.addVertexWithUV(x + width, y + height, 0, uMax, vMax);
-        tessellator.addVertexWithUV(x + width, y, 0, uMax, vMin);
+        tessellator.addVertexWithUV(x, y, z, uMin, vMin);
+        tessellator.addVertexWithUV(x, y + height, z, uMin, vMax);
+        tessellator.addVertexWithUV(x + width, y + height, z, uMax, vMax);
+        tessellator.addVertexWithUV(x + width, y, z, uMax, vMin);
         tessellator.draw();
     }
 }
