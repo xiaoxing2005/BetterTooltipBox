@@ -67,12 +67,12 @@ public class TooltipHelper {
         // 右边
         renderQuad(tessellator, x + width, y + 2, 1, height - 3d, 45, 19, 46, 43, texWidth, texHeight);
         // 上边
-        renderQuad(tessellator, x + 2, y - 1, ((double) width / 2) - 7.5d, 1, 19, 16, 26, 17, texWidth, texHeight);
+        renderQuad(tessellator, x + 2, y - 1, ((double) width / 2) - 8.5d, 1, 19, 16, 26, 17, texWidth, texHeight);
         renderQuad(
             tessellator,
-            x + ((double) width / 2) + 7.5d,
+            x + ((double) width / 2) + 8.5d,
             y - 1,
-            ((double) width / 2) - 8.5d,
+            ((double) width / 2) - 10.5d,
             1,
             36,
             16,
@@ -82,10 +82,14 @@ public class TooltipHelper {
             texHeight);
         // 下边
         renderQuad(tessellator, x + 2, y + height, width - 3d, 1, 18, 45, 43, 46, texWidth, texHeight);
+        // 渐变线
+        if (!(height < 15)) {
+            renderQuad(tessellator, x + 4, y + 13, width - 8d, 1, 18, 7, 44, 8, texWidth, texHeight);
+        }
         // 顶部中央
-        renderQuad(tessellator, x + ((double) width / 2) - 5.5d, y, 2, 1, 26, 17, 28, 18, texWidth, texHeight);
-        renderQuad(tessellator, x + ((double) width / 2) + 5.5d, y, 2, 1, 34, 17, 36, 18, texWidth, texHeight);
-        renderQuad(tessellator, x + +((double) width / 2) - 4.5, y - 5, 11, 7, 2, 2, 13, 9, texWidth, texHeight);
+        renderQuad(tessellator, x + ((double) width / 2) - 6.5d, y, 2, 1, 26, 17, 28, 18, texWidth, texHeight);
+        renderQuad(tessellator, x + ((double) width / 2) + 6.5d, y, 2, 1, 34, 17, 36, 18, texWidth, texHeight);
+        renderQuad(tessellator, x + +((double) width / 2) - 6.5d, y - 11, 15, 13, 1, 1, 16, 14, texWidth, texHeight);
 
     }
 
