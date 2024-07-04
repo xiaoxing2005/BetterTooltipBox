@@ -83,7 +83,7 @@ public class TooltipHelper {
         // 下边
         renderQuad(tessellator, x + 2, y + height, width - 3d, 1, 18, 45, 43, 46, texWidth, texHeight);
         // 渐变线
-        if (!(height < 15)) {
+        if (!(height < 16)) {
             renderQuad(tessellator, x + 4, y + 13, width - 8d, 1, 18, 7, 44, 8, texWidth, texHeight);
         }
         // 顶部中央
