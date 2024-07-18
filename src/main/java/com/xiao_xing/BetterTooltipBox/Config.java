@@ -19,10 +19,10 @@ public class Config {
             "Enable BetterTooltipBox");
 
         Enable_SelectionBox = configuration.getBoolean(
-                "Enable SelectionBox",
+            "Enable SelectionBox",
             Configuration.CATEGORY_GENERAL,
-                Enable_SelectionBox,
-                "Enable SelectionBox");
+            Enable_SelectionBox,
+            "Enable SelectionBox");
 
         if (configuration.hasChanged()) {
             configuration.save();
