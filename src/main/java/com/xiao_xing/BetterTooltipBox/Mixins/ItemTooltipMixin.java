@@ -9,7 +9,7 @@ import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
 import codechicken.lib.gui.GuiDraw;
 
-@Mixin(value = GuiDraw.class)
+@Mixin(value = GuiDraw.class, priority = 999)
 public class ItemTooltipMixin {
 
     /**
@@ -18,8 +18,9 @@ public class ItemTooltipMixin {
      */
 
     @Overwrite(remap = false)
-    public static void drawTooltipBox(int x, int y, int width, int height) {
+    public static void drawTooltipBox(int x, int y, int w, int h, int bgStart, int bgEnd, int borderStart,
+        int borderEnd) {
         TooltipHelper.z = (int) gui.getZLevel();
-        TooltipHelper.DrawTooltip(x, y, width, height);
+        TooltipHelper.DrawTooltip(x, y, w, h);
     }
 }
