@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
+import cpw.mods.fml.common.Loader;
 import squeek.applecore.client.TooltipOverlayHandler;
 
 @Mixin(value = GuiScreen.class)
@@ -41,10 +42,12 @@ public class TooltipMixin extends Gui {
         TooltipHelper.z = 300;
         TooltipHelper.DrawTooltip(j2 - 2, k2 - 2, k + 4, i1 + 4);
         for (int i2 = 0; i2 < textLines.size(); ++i2) {
-            TooltipOverlayHandler.toolTipX = j2;
-            TooltipOverlayHandler.toolTipY = k2;
-            TooltipOverlayHandler.toolTipW = k;
-            TooltipOverlayHandler.toolTipH = i1;
+            if (Loader.isModLoaded("AppleCore")) {
+                TooltipOverlayHandler.toolTipX = j2;
+                TooltipOverlayHandler.toolTipY = k2;
+                TooltipOverlayHandler.toolTipW = k;
+                TooltipOverlayHandler.toolTipH = i1;
+            }
             String s1 = (String) textLines.get(i2);
             font.drawStringWithShadow(s1, j2, k2, -1);
 
