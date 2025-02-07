@@ -37,7 +37,7 @@ public class NotItemStackTooltipMixin extends Gui {
      * @reason 修改Tooltip提示框
      */
     @Overwrite(remap = false)
-    protected void func_146283_a(List<String> textLines, int x, int y) {
+    public void func_146283_a(List<String> textLines, int x, int y) {
         betterTooltipBox$drawHoveringText(textLines, x, y, fontRendererObj);
     }
 
