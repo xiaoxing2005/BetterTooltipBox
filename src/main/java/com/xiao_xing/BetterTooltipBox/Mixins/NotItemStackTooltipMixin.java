@@ -17,6 +17,9 @@ import org.spongepowered.asm.mixin.Unique;
 
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
+import cpw.mods.fml.common.Loader;
+import squeek.applecore.client.TooltipOverlayHandler;
+
 @Mixin(value = GuiScreen.class)
 public class NotItemStackTooltipMixin extends Gui {
 
@@ -77,6 +80,12 @@ public class NotItemStackTooltipMixin extends Gui {
             this.zLevel = 300.0F;
             itemRender.zLevel = 300.0F;
 
+            if (Loader.isModLoaded("AppleCore")) {
+                TooltipOverlayHandler.toolTipX = j2 + 2;
+                TooltipOverlayHandler.toolTipY = k2 + 2;
+                TooltipOverlayHandler.toolTipW = k;
+                TooltipOverlayHandler.toolTipH = i1;
+            }
             TooltipHelper.z = 300;
             TooltipHelper.DrawTooltip(j2 - 2, k2 - 2, k + 4, i1 + 4);
 

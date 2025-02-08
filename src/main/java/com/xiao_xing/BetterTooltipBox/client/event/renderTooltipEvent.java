@@ -9,9 +9,11 @@ import net.minecraftforge.common.MinecraftForge;
 import com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent;
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import squeek.applecore.client.TooltipOverlayHandler;
 
 public class renderTooltipEvent {
 
@@ -58,6 +60,12 @@ public class renderTooltipEvent {
                 y = mcHeight - height - 6;
             }
 
+            if (Loader.isModLoaded("AppleCore")) {
+                TooltipOverlayHandler.toolTipX = x + 2;
+                TooltipOverlayHandler.toolTipY = y + 2;
+                TooltipOverlayHandler.toolTipW = width;
+                TooltipOverlayHandler.toolTipH = height;
+            }
             TooltipHelper.z = 300;
             TooltipHelper.DrawTooltip(x - 2, y - 2, width + 4, height + 4);
 
