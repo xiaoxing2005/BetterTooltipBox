@@ -8,8 +8,6 @@ import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import cpw.mods.fml.common.Mod;
-
 public class MixinPlugin implements IMixinConfigPlugin {
 
     public static boolean isLoaderGTNHlib = false;
@@ -38,33 +36,21 @@ public class MixinPlugin implements IMixinConfigPlugin {
     public List<String> getMixins() {
         List<String> MixinClass = new ArrayList<>();
         try {
-            boolean hasAnnotation = Class.forName("com.gtnewhorizon.gtnhlib.GTNHLib")
-                .isAnnotationPresent(Mod.class);
-            if (hasAnnotation) {
-                Mod mod = Class.forName("com.gtnewhorizon.gtnhlib.GTNHLib")
-                    .getAnnotation(Mod.class);
-                if (compareVersion(mod.version(), "0.6.0") != -1) {
-                    try {
-                        Class.forName("com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent");
-                        isLoaderGTNHlib = true;
-                        MixinClass.add("NotItemStackTooltipMixin");
-                        MixinClass.add("drawSelectionBoxMixin");
-                        return MixinClass;
-                    } catch (ClassNotFoundException ignored) {}
-                }
-                // System.out.println("id" + mod.version());
-            }
+            Class.forName("com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent");
+            isLoaderGTNHlib = true;
+            MixinClass.add("NotItemStackTooltipMixin");
+            MixinClass.add("drawSelectionBoxMixin");
+            return MixinClass;
         } catch (ClassNotFoundException ignored) {
-            ignored.printStackTrace();
+            try {
+                Class.forName("squeek.applecore.AppleCore");
+                MixinClass.add("TooltipMixin");
+            } catch (ClassNotFoundException ignored1) {}
+            MixinClass.add("ItemTooltipMixin");
+            MixinClass.add("drawSelectionBoxMixin");
+            return MixinClass;
         }
-
-        try {
-            Class.forName("squeek.applecore.AppleCore");
-            MixinClass.add("TooltipMixin");
-        } catch (ClassNotFoundException ignored) {}
-        MixinClass.add("ItemTooltipMixin");
-        MixinClass.add("drawSelectionBoxMixin");
-        return MixinClass;
+        // System.out.println("id" + mod.version());
     }
 
     @Override

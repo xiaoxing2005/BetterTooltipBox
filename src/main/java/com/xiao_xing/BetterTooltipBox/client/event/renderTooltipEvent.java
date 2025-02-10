@@ -1,7 +1,5 @@
 package com.xiao_xing.BetterTooltipBox.client.event;
 
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,7 +25,6 @@ public class renderTooltipEvent {
         // event.setCanceled(false);
 
         event.alternativeRenderer = (t) -> {
-            List<String> textLines = t;
 
             int mouseX = event.x;
             int mouseY = event.y;
@@ -37,7 +34,7 @@ public class renderTooltipEvent {
             int mcHeight = Minecraft.getMinecraft().displayHeight;
 
             int width = 0;
-            for (String s : textLines) {
+            for (String s : t) {
                 int lineWidth = font.getStringWidth(s);
                 if (lineWidth > width) {
                     width = lineWidth;
@@ -48,8 +45,8 @@ public class renderTooltipEvent {
             int y = mouseY - 12;
             int height = 8;
 
-            if (textLines.size() > 1) {
-                height += 2 + (textLines.size() - 1) * 10;
+            if (t.size() > 1) {
+                height += 2 + (t.size() - 1) * 10;
             }
 
             if (x + width > mcWidth) {
@@ -69,8 +66,8 @@ public class renderTooltipEvent {
             TooltipHelper.z = 300;
             TooltipHelper.DrawTooltip(x - 2, y - 2, width + 4, height + 4);
 
-            for (int i = 0; i < textLines.size(); i++) {
-                String s = textLines.get(i);
+            for (int i = 0; i < t.size(); i++) {
+                String s = t.get(i);
                 font.drawStringWithShadow(s, x, y, -1);
 
                 if (i == 0) {
