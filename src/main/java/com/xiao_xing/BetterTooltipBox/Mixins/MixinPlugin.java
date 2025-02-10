@@ -43,10 +43,17 @@ public class MixinPlugin implements IMixinConfigPlugin {
             return MixinClass;
         } catch (ClassNotFoundException ignored) {
             try {
-                Class.forName("squeek.applecore.AppleCore");
-                MixinClass.add("TooltipMixin");
-            } catch (ClassNotFoundException ignored1) {}
-            MixinClass.add("ItemTooltipMixin");
+                Class<?> c = Class.forName("codechicken.core.asm.Tags");
+                String VERSION = c.getField("VERSION")
+                    .get(null)
+                    .toString();
+                if ((compareVersion(VERSION, "1.3.10") != -1)) {
+                    MixinClass.add("ItemTooltipMixin");
+                } else {
+                    MixinClass.add("oldItemTooltipMixin");
+                }
+            } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException ignored1) {}
+            MixinClass.add("TooltipMixin");
             MixinClass.add("drawSelectionBoxMixin");
             return MixinClass;
         }

@@ -1,6 +1,5 @@
 package com.xiao_xing.BetterTooltipBox.Mixins;
 
-import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -16,8 +15,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
 import cpw.mods.fml.common.Loader;
@@ -35,10 +34,9 @@ public class TooltipMixin extends Gui {
             value = "INVOKE",
             target = "Lnet/minecraft/client/gui/GuiScreen;drawGradientRect(IIIIII)V",
             shift = At.Shift.BEFORE),
-        locals = LocalCapture.CAPTURE_FAILHARD,
         cancellable = true)
-    private void onDrawHoveringText(List<String> textLines, int x, int y, FontRenderer font, CallbackInfo ci, int k,
-        Iterator<String> iterator, int j2, int k2, int i1, int i) {
+    private void onDrawHoveringText(List<String> textLines, int x, int y, FontRenderer font, CallbackInfo ci,
+        @Local(ordinal = 2) int k, @Local(ordinal = 3) int j2, @Local(ordinal = 4) int k2, @Local(ordinal = 5) int i1) {
         TooltipHelper.z = 300;
         TooltipHelper.DrawTooltip(j2 - 2, k2 - 2, k + 4, i1 + 4);
         for (int i2 = 0; i2 < textLines.size(); ++i2) {
