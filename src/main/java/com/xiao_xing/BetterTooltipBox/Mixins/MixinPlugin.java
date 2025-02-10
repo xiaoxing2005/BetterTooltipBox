@@ -43,8 +43,11 @@ public class MixinPlugin implements IMixinConfigPlugin {
             if (hasAnnotation) {
                 Mod mod = Class.forName("com.gtnewhorizon.gtnhlib.GTNHLib")
                     .getAnnotation(Mod.class);
-                if (compareVersion(mod.version(), "0.6.6") == -1) {
-                    isLoaderGTNHlib = true;
+                if (compareVersion(mod.version(), "0.6.0") == -1) {
+                    try {
+                        Class.forName("com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent");
+                        isLoaderGTNHlib = true;
+                    } catch (ClassNotFoundException ignored) {}
                     MixinClass.add("NotItemStackTooltipMixin");
                     MixinClass.add("drawSelectionBoxMixin");
                     return MixinClass;
