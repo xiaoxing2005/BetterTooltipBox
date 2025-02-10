@@ -47,12 +47,12 @@ public class MixinPlugin implements IMixinConfigPlugin {
                     try {
                         Class.forName("com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent");
                         isLoaderGTNHlib = true;
+                        MixinClass.add("NotItemStackTooltipMixin");
+                        MixinClass.add("drawSelectionBoxMixin");
+                        return MixinClass;
                     } catch (ClassNotFoundException ignored) {}
-                    MixinClass.add("NotItemStackTooltipMixin");
-                    MixinClass.add("drawSelectionBoxMixin");
-                    return MixinClass;
                 }
-                System.out.println("id" + mod.version());
+                // System.out.println("id" + mod.version());
             }
         } catch (ClassNotFoundException ignored) {
             ignored.printStackTrace();
