@@ -1,4 +1,4 @@
-package com.xiao_xing.BetterTooltipBox;
+package com.xiao_xing.BetterTooltipBox.Config;
 
 import java.io.File;
 

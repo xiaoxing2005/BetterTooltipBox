@@ -1,5 +1,7 @@
 package com.xiao_xing.BetterTooltipBox;
 
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,7 +33,7 @@ public class BetterTooltipBox {
 
     @Mod.EventHandler
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) throws IOException {
         proxy.init(event);
     }
 

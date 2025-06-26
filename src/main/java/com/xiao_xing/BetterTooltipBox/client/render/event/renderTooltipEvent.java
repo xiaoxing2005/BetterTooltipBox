@@ -1,11 +1,11 @@
-package com.xiao_xing.BetterTooltipBox.client.event;
+package com.xiao_xing.BetterTooltipBox.client.render.event;
 
+import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent;
-import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -63,9 +63,10 @@ public class renderTooltipEvent {
                 TooltipOverlayHandler.toolTipW = width;
                 TooltipOverlayHandler.toolTipH = height;
             }
-            TooltipHelper.z = 300;
-            TooltipHelper.DrawTooltip(x - 2, y - 2, width + 4, height + 4);
-
+             TooltipHelper.z = 300;
+             TooltipHelper.DrawTooltip(x - 2, y - 2, width + 4, height + 4);
+            // TooltipManager.getTooltip(event.itemStack, event.gui)
+            //    .drawTooltip(x - 3, y - 3, width + 6, height + 6);
             for (int i = 0; i < t.size(); i++) {
                 String s = t.get(i);
                 font.drawStringWithShadow(s, x, y, -1);
