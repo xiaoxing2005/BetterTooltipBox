@@ -2,6 +2,7 @@ package com.xiao_xing.BetterTooltipBox.client.event;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent;
@@ -30,41 +31,47 @@ public class renderTooltipEvent {
             int mouseY = event.y;
             FontRenderer font = event.font;
 
-            int mcWidth = Minecraft.getMinecraft().displayWidth;
-            int mcHeight = Minecraft.getMinecraft().displayHeight;
+            ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth,
+                Minecraft.getMinecraft().displayHeight);
 
-            int width = 0;
+            int width = scaledresolution.getScaledWidth();
+            int height = scaledresolution.getScaledHeight();
+
+            int fontWidth = 0;
+
             for (String s : t) {
-                int lineWidth = font.getStringWidth(s);
-                if (lineWidth > width) {
-                    width = lineWidth;
+                int l = font.getStringWidth(s);
+
+                if (l > fontWidth) {
+                    fontWidth = l;
                 }
             }
 
+
             int x = mouseX + 12;
             int y = mouseY - 12;
-            int height = 8;
+            int fontHeight = 8;
 
             if (t.size() > 1) {
-                height += 2 + (t.size() - 1) * 10;
+                fontHeight += 2 + (t.size() - 1) * 10;
             }
 
-            if (x + width > mcWidth) {
-                x -= 28 + width;
+            if (x + fontWidth > width) {
+                x -= 28 + fontWidth;
             }
 
-            if (y + height + 6 > mcHeight) {
-                y = mcHeight - height - 6;
+            if (y + fontHeight + 6 > height) {
+                y = height - fontHeight - 6;
             }
 
             if (Loader.isModLoaded("AppleCore")) {
                 TooltipOverlayHandler.toolTipX = x + 2;
                 TooltipOverlayHandler.toolTipY = y + 2;
-                TooltipOverlayHandler.toolTipW = width;
-                TooltipOverlayHandler.toolTipH = height;
+                TooltipOverlayHandler.toolTipW = fontWidth;
+                TooltipOverlayHandler.toolTipH = fontHeight;
             }
             TooltipHelper.z = 300;
-            TooltipHelper.DrawTooltip(x - 2, y - 2, width + 4, height + 4);
+            TooltipHelper.DrawTooltip(x - 2, y - 2, fontWidth + 4, fontHeight + 4);
 
             for (int i = 0; i < t.size(); i++) {
                 String s = t.get(i);
