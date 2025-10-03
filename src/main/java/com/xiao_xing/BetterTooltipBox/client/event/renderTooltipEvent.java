@@ -1,5 +1,6 @@
 package com.xiao_xing.BetterTooltipBox.client.event;
 
+import codechicken.lib.gui.GuiDraw;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -16,6 +17,9 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import squeek.applecore.client.TooltipOverlayHandler;
+
+
+import java.awt.Dimension;
 
 public class renderTooltipEvent {
 
@@ -44,31 +48,34 @@ public class renderTooltipEvent {
             int mouseY = event.y;
             FontRenderer font = event.font;
 
-            ScaledResolution scaledresolution = new ScaledResolution(
-                Minecraft.getMinecraft(),
-                Minecraft.getMinecraft().displayWidth,
-                Minecraft.getMinecraft().displayHeight);
+            ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 
             int width = scaledresolution.getScaledWidth();
             int height = scaledresolution.getScaledHeight();
 
             int fontWidth = 0;
+            int fontHeight = -2;
 
             for (String s : t) {
+                // NEI Handler 行处理
+                if (s.startsWith(GuiDraw.TOOLTIP_HANDLER)) {
+                    GuiDraw.ITooltipLineHandler tipLine = GuiDraw.getTipLine(s);
+                    Dimension size = tipLine.getSize();
+                    fontWidth = Math.max(fontWidth, size.width);
+                    fontHeight += size.height + 4;
+                    continue;
+                }
+
                 int l = font.getStringWidth(s);
 
                 if (l > fontWidth) {
                     fontWidth = l;
                 }
+                fontHeight += s.endsWith(GuiDraw.TOOLTIP_LINESPACE) ? 12 : 10;
             }
 
             int x = mouseX + 12;
             int y = mouseY - 12;
-            int fontHeight = 8;
-
-            if (t.size() > 1) {
-                fontHeight += 2 + (t.size() - 1) * 10;
-            }
 
             if (x + fontWidth > width) {
                 x -= 28 + fontWidth;
@@ -116,12 +123,19 @@ public class renderTooltipEvent {
 
             for (int i = 0; i < t.size(); i++) {
                 String s = t.get(i);
+                if (s.startsWith(GuiDraw.TOOLTIP_HANDLER)) {
+                    GuiDraw.ITooltipLineHandler tipLine = GuiDraw.getTipLine(s);
+                    tipLine.draw(x, y);
+                    Dimension size = tipLine.getSize();
+                    y += size.height + 4;
+                    continue;
+                }
                 font.drawStringWithShadow(s, x, y, -1);
 
                 if (i == 0) {
                     y += 2;
                 }
-                y += 10;
+                y += s.endsWith(GuiDraw.TOOLTIP_LINESPACE) ? 12 : 10;
             }
         };
     }
