@@ -1,5 +1,9 @@
 package com.xiao_xing.BetterTooltipBox.client.event;
 
+import java.awt.Dimension;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -16,11 +20,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import squeek.applecore.client.TooltipOverlayHandler;
-
-
-import java.awt.Dimension;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public class renderTooltipEvent {
 
