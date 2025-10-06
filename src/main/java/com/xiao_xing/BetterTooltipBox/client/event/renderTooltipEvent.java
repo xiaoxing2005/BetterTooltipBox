@@ -1,5 +1,9 @@
 package com.xiao_xing.BetterTooltipBox.client.event;
 
+import java.awt.Dimension;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -22,6 +26,42 @@ public class renderTooltipEvent {
     // 用于记录上一次渲染的物品
     private static ItemStack lastRenderItemStack = null;
     private static int offsetY = 0;
+
+    // NEI 反射相关
+    private static boolean isLoaderNei = true;
+    private static String TOOLTIP_HANDLER = null;
+    private static String TOOLTIP_LINESPACE = null;
+    private static Method getTipLineMethod = null;
+    private static Method getSizeMethod = null;
+    private static Method drawMethod = null;
+
+    static {
+        try {
+            // 反射获取 GuiDraw 类
+            Class<?> guiDrawClass = Class.forName("codechicken.lib.gui.GuiDraw");
+
+            // 获取静态字段
+            Field tooltipHandlerField = guiDrawClass.getField("TOOLTIP_HANDLER");
+            TOOLTIP_HANDLER = (String) tooltipHandlerField.get(null);
+
+            Field tooltipLinespaceField = guiDrawClass.getField("TOOLTIP_LINESPACE");
+            TOOLTIP_LINESPACE = (String) tooltipLinespaceField.get(null);
+
+            // 获取 getTipLine 方法
+            getTipLineMethod = guiDrawClass.getMethod("getTipLine", String.class);
+
+            // 获取 ITooltipLineHandler 接口
+            Class<?> iTooltipLineHandlerClass = Class.forName("codechicken.lib.gui.GuiDraw$ITooltipLineHandler");
+
+            // 获取 ITooltipLineHandler 的方法
+            getSizeMethod = iTooltipLineHandlerClass.getMethod("getSize");
+            drawMethod = iTooltipLineHandlerClass.getMethod("draw", int.class, int.class);
+
+        } catch (Exception e) {
+            // 反射失败，设置标志为 false
+            isLoaderNei = false;
+        }
+    }
 
     public renderTooltipEvent() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -53,22 +93,32 @@ public class renderTooltipEvent {
             int height = scaledresolution.getScaledHeight();
 
             int fontWidth = 0;
+            int fontHeight = -2;
 
             for (String s : t) {
+                // NEI Handler 行处理
+                if (isLoaderNei && s.startsWith(TOOLTIP_HANDLER)) {
+                    try {
+                        Object tipLine = getTipLineMethod.invoke(null, s);
+                        Dimension size = (Dimension) getSizeMethod.invoke(tipLine);
+                        fontWidth = Math.max(fontWidth, size.width);
+                        fontHeight += size.height + 4;
+                        continue;
+                    } catch (Exception e) {
+                        // 反射调用失败，按正常文本处理
+                    }
+                }
+
                 int l = font.getStringWidth(s);
 
                 if (l > fontWidth) {
                     fontWidth = l;
                 }
+                fontHeight += (isLoaderNei && s.endsWith(TOOLTIP_LINESPACE)) ? 12 : 10;
             }
 
             int x = mouseX + 12;
             int y = mouseY - 12;
-            int fontHeight = 8;
-
-            if (t.size() > 1) {
-                fontHeight += 2 + (t.size() - 1) * 10;
-            }
 
             if (x + fontWidth > width) {
                 x -= 28 + fontWidth;
@@ -116,12 +166,23 @@ public class renderTooltipEvent {
 
             for (int i = 0; i < t.size(); i++) {
                 String s = t.get(i);
+                if (isLoaderNei && s.startsWith(TOOLTIP_HANDLER)) {
+                    try {
+                        Object tipLine = getTipLineMethod.invoke(null, s);
+                        drawMethod.invoke(tipLine, x, y);
+                        Dimension size = (Dimension) getSizeMethod.invoke(tipLine);
+                        y += size.height + 4;
+                        continue;
+                    } catch (Exception e) {
+                        // 反射调用失败，按正常文本处理
+                    }
+                }
                 font.drawStringWithShadow(s, x, y, -1);
 
                 if (i == 0) {
                     y += 2;
                 }
-                y += 10;
+                y += (isLoaderNei && s.endsWith(TOOLTIP_LINESPACE)) ? 12 : 10;
             }
         };
     }
