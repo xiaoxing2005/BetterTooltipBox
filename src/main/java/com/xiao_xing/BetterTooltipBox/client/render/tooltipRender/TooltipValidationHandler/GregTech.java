@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import bartworks.common.blocks.BWBlocks;
 import bartworks.common.blocks.BWBlocksGlass2;
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureManager;
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TextureManager;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -17,10 +17,7 @@ import gregtech.api.util.GlassTier;
 import gregtech.common.blocks.BlockMachines;
 import gregtech.common.blocks.ItemMachines;
 import net.minecraft.block.Block;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
-
-import static gregtech.api.enums.GTValues.V;
 
 public class GregTech implements ITooltipValidationHandler{
 

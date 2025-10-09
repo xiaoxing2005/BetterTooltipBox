@@ -2,12 +2,11 @@ package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender;
 
 import static com.xiao_xing.BetterTooltipBox.Util.TooltipHelper.mc;
 import static com.xiao_xing.BetterTooltipBox.client.render.shader.ShaderFactory.createProgram;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Bottom_Center;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Top_Center;
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture.TextureFragmentType.Bottom_Center;
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture.TextureFragmentType.Top_Center;
 import static org.lwjgl.BufferUtils.createFloatBuffer;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.GL_NEAREST;
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
@@ -20,7 +19,7 @@ import static org.lwjgl.opengl.GL11.glTexParameteri;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;

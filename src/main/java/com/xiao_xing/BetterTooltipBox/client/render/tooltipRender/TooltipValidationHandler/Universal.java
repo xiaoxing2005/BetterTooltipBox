@@ -1,7 +1,6 @@
 package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler;
 
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
-import net.minecraft.client.gui.GuiScreen;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
 import net.minecraft.item.ItemStack;
 
 public class Universal implements ITooltipValidationHandler {

@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -16,7 +16,6 @@ import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.input.Mouse;
 
 import com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent;
-import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

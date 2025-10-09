@@ -1,12 +1,8 @@
-package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue;
+package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture;
 
 import static com.xiao_xing.BetterTooltipBox.BetterTooltipBox.LOG;
-import static com.xiao_xing.BetterTooltipBox.BetterTooltipBox.ResourceID;
 
 import java.util.HashMap;
-
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.ITooltipValidationHandler;
-import net.minecraft.util.ResourceLocation;
 
 public class TextureManager {
 

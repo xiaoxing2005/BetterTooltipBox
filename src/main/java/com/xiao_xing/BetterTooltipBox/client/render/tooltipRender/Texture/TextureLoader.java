@@ -1,8 +1,8 @@
-package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue;
+package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture;
 
 import net.minecraft.util.ResourceLocation;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragment;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.*;
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture.TextureFragment;
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture.TextureFragmentType.*;
 
 public class TextureLoader {
 
