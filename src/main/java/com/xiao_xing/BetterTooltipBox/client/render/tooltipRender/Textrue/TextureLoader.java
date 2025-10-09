@@ -59,22 +59,22 @@ public class TextureLoader {
         textureManager.register("default",defaultTexture);
         ULV = new TooltipsTexture(
                 new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-                new int[][]{{184,103,89, 240},{ 184,103,89, 240,}},
+                new int[][]{{17,7,7, 248},{ 160,108,95, 248,}},
                 new int[][]{
                     {
-                        216,136,123,255,
-                        216,136,123,255,
+                        184,103,89,255,
+                        184,103,89,255,
                     },
                     {
                         216,136,123,255,
                         216,136,123,255,
                     },
                     {
-                        216,136,123,255,
+                        184,103,89,255,
                         216,136,123,255,
                     },
                     {
-                        216,136,123,255,
+                        184,103,89,255,
                         216,136,123,255,
                     }},
                 64,
@@ -82,7 +82,7 @@ public class TextureLoader {
         );
         ULV.addTextureFragment(
                 new TextureFragment(Top_Left, 64,240,0,0,7,7,-4, -4),
-                new TextureFragment(Top_Center,64,240,24,0,16,8, 0,-8),
+                new TextureFragment(Top_Center,64,240,24,0,15,8, 0,-6),
                 new TextureFragment(Top_Right,64,240,57,0,7,7,3,-3),
 
                 new TextureFragment(Bottom_Left,64,240,0,9,7,7,-4,4),
@@ -92,23 +92,23 @@ public class TextureLoader {
         textureManager.register("ULV",ULV);
         LV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{173,173,173, 240},{ 173,173,173, 240,}},
+            new int[][]{{6,9,10, 248},{ 40,39,37, 248,}},
             new int[][]{
                 {
-                    28,28,33,255,
-                    28,28,33,255,
+                    61,57,52,255,
+                    61,57,52,255,
                 },
                 {
-                    28,28,33,255,
-                    28,28,33,255,
+                    74,70,65,255,
+                    74,70,65,255,
                 },
                 {
-                    28,28,33,255,
-                    28,28,33,255,
+                    61,57,52,255,
+                    74,70,65,255,
                 },
                 {
-                    28,28,33,255,
-                    28,28,33,255,
+                    61,57,52,255,
+                    74,70,65,255,
                 }},
             64,
             240
@@ -116,7 +116,7 @@ public class TextureLoader {
         int level = 1;
         LV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,25 + 64 * level,16 * level,13,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -127,30 +127,30 @@ public class TextureLoader {
         level++;
         MV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{137,179,198, 240},{ 137,179,198, 240,}},
+            new int[][]{{6,7,8, 248},{ 86,109,121, 248,}},
             new int[][]{
                 {
-                    0,235,236,255,
-                    0,235,236,255,
+                    51,74,76,255,
+                    51,74,76,255,
                 },
                 {
-                    0,235,236,255,
-                    0,235,236,255,
+                    122,157,174,255,
+                    122,157,174,255,
                 },
                 {
-                    0,235,236,255,
-                    0,235,236,255,
+                    51,74,76,255,
+                    122,157,174,255,
                 },
                 {
-                    0,235,236,255,
-                    0,235,236,255,
+                    51,74,76,255,
+                    122,157,174,255,
                 }},
             64,
             240
         );
         MV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,25 + 64 * level,16 * level,13,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -161,30 +161,30 @@ public class TextureLoader {
         level++;
         HV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{147,147,163, 240},{ 147,147,163, 240,}},
+            new int[][]{{30,30,35, 248},{ 155,155,164, 248,}},
             new int[][]{
                 {
-                    250,242,94,255,
-                    250,242,94,255,
+                    93,93,106, 255,
+                    93,93,106, 255,
                 },
                 {
-                    250,242,94,255,
-                    250,242,94,255,
+                    206,206,220,255,
+                    206,206,220,255,
                 },
                 {
-                    250,242,94,255,
-                    250,242,94,255,
+                    93,93,106, 255,
+                    206,206,220,255,
                 },
                 {
-                    250,242,94,255,
-                    250,242,94,255,
+                    93,93,106, 255,
+                    206,206,220,255,
                 }},
             64,
             240
         );
         HV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,25 + 64 * level,16 * level,13,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -195,30 +195,30 @@ public class TextureLoader {
         level++;
         EV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{216,148,211, 240},{ 216,148,211, 240,}},
+            new int[][]{{15,13,16, 248},{ 105,85,110, 248,}},
             new int[][]{
                 {
-                    138,22,173,255,
-                    138,22,173,255,
+                    83,74,87,255,
+                    83,74,87,255,
                 },
                 {
-                    138,22,173,255,
-                    138,22,173,255,
+                    151,123,160,255,
+                    151,123,160,255,
                 },
                 {
-                    138,22,173,255,
-                    138,22,173,255,
+                    83,74,87,255,
+                    151,123,160,255,
                 },
                 {
-                    138,22,173,255,
-                    138,22,173,255,
+                    83,74,87,255,
+                    151,123,160,255,
                 }},
             64,
             240
         );
         EV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,25 + 64 * level,16 * level,13,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -229,30 +229,30 @@ public class TextureLoader {
         level++;
         IV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{121,137,191, 240},{ 121,137,191, 240,}},
+            new int[][]{{2,2,4, 248},{ 23,32,54, 248,}},
             new int[][]{
                 {
-                    45,63,150,255,
-                    45,63,150,255,
+                    53,67,110,255,
+                    53,67,110,255,
                 },
                 {
-                    45,63,150,255,
-                    45,63,150,255,
+                    53,67,110,255,
+                    53,67,110,255,
                 },
                 {
-                    45,63,150,255,
-                    45,63,150,255,
+                    53,67,110,255,
+                    53,67,110,255,
                 },
                 {
-                    45,63,150,255,
-                    45,63,150,255,
+                    53,67,110,255,
+                    53,67,110,255,
                 }},
             64,
             240
         );
         IV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,25 + 64 * level,16 * level,13,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -263,30 +263,30 @@ public class TextureLoader {
         level++;
         LuV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{161,153,153, 240},{ 161,153,153, 240,}},
+            new int[][]{{3,2,3, 248},{ 38,28,41, 248}},
             new int[][]{
                 {
-                    215,79,194,255,
-                    215,79,194,255,
+                    91,64,95,255,
+                    91,64,95,255,
                 },
                 {
-                    215,79,194,255,
-                    215,79,194,255,
+                    88,62,91,255,
+                    88,62,91,255,
                 },
                 {
-                    215,79,194,255,
-                    215,79,194,255,
+                    91,64,95,255,
+                    88,62,91,255,
                 },
                 {
-                    215,79,194,255,
-                    215,79,194,255,
+                    91,64,95,255,
+                    88,62,91,255,
                 }},
             64,
             240
         );
         LuV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,15,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -297,30 +297,30 @@ public class TextureLoader {
         level++;
         ZPM = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{221,221,221, 240},{ 221,221,221, 240,}},
+            new int[][]{{1,1,1, 248},{ 1,1,1, 248,}},
             new int[][]{
                 {
-                    0,255,33,255,
-                    0,255,33,255,
+                    47,35,67,255,
+                    47,35,67,255,
                 },
                 {
-                    0,255,33,255,
-                    0,255,33,255,
+                    121,110,138,255,
+                    121,110,138,255,
                 },
                 {
-                    0,255,33,255,
-                    0,255,33,255,
+                    47,35,67,255,
+                    121,110,138,255,
                 },
                 {
-                    0,255,33,255,
-                    0,255,33,255,
+                    47,35,67,255,
+                    121,110,138,255,
                 }},
             64,
             240
         );
         ZPM.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,23 + 64 * level,16 * level,17,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -331,30 +331,30 @@ public class TextureLoader {
         level++;
         UV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{75,75,196, 240},{ 75,75,196, 240,}},
+            new int[][]{{17,18,27, 248},{ 53,57,87, 248,}},
             new int[][]{
                 {
-                    29,29,76,255,
-                    29,29,76,255,
+                    74,221,244,255,
+                    74,221,244,255,
                 },
                 {
-                    29,29,76,255,
-                    29,29,76,255,
+                    61,72,193,255,
+                    61,72,193,255,
                 },
                 {
-                    29,29,76,255,
-                    29,29,76,255,
+                    74,221,244,255,
+                    61,72,193,255,
                 },
                 {
-                    29,29,76,255,
-                    29,29,76,255,
+                    74,221,244,255,
+                    61,72,193,255,
                 }},
             64,
             240
         );
         UV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,25 + 64 * level,16 * level,13,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -365,30 +365,30 @@ public class TextureLoader {
         level++;
         UHV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{207,207,207, 240},{ 207,207,207, 240,}},
+            new int[][]{{23,22,26, 248},{ 71,69,81, 248,}},
             new int[][]{
                 {
-                    255,0,110,255,
-                    255,0,110,255,
+                    242,146,235,255,
+                    242,146,235,255,
                 },
                 {
-                    255,0,110,255,
-                    255,0,110,255,
+                    167,42,104,255,
+                    167,42,104,255,
                 },
                 {
-                    255,0,110,255,
-                    255,0,110,255,
+                    242,146,235,255,
+                    167,42,104,255,
                 },
                 {
-                    255,0,110,255,
-                    255,0,110,255,
+                    242,146,235,255,
+                    167,42,104,255,
                 }},
             64,
             240
         );
         UHV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,15,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -399,30 +399,30 @@ public class TextureLoader {
         level++;
         UEV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{182,255,0, 240},{ 182,255,0, 240,}},
+            new int[][]{{19,16,16, 248},{ 56,47,45, 248,}},
             new int[][]{
                 {
-                    0,255,255,255,
-                    0,255,255,255,
+                    73,99,0,255,
+                    73,99,0,255,
                 },
                 {
-                    0,255,255,255,
-                    0,255,255,255,
+                    153,208,0,255,
+                    153,208,0,255,
                 },
                 {
-                    0,255,255,255,
-                    0,255,255,255,
+                    73,99,0,255,
+                    153,208,0,255,
                 },
                 {
-                    0,255,255,255,
-                    0,255,255,255,
+                    73,99,0,255,
+                    153,208,0,255,
                 }},
             64,
             240
         );
         UEV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,15,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -433,30 +433,30 @@ public class TextureLoader {
         level++;
         UIV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{91,88,90, 240},{ 91,88,90, 240,}},
+            new int[][]{{14,14,17, 248},{ 45,45,57, 248,}},
             new int[][]{
                 {
-                    255,255,255,255,
-                    255,255,255,255,
+                    239,240,245,255,
+                    239,240,245,255,
                 },
                 {
-                    255,255,255,255,
-                    255,255,255,255,
+                    206,209,225,255,
+                    206,209,225,255,
                 },
                 {
-                    255,255,255,255,
-                    255,255,255,255,
+                    239,240,245,255,
+                    206,209,225,255,
                 },
                 {
-                    255,255,255,255,
-                    255,255,255,255,
+                    239,240,245,255,
+                    206,209,225,255,
                 }},
             64,
             240
         );
         UIV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,15,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -467,30 +467,30 @@ public class TextureLoader {
         level++;
         UMV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{161,127,255, 240},{ 161,127,255, 240,}},
+            new int[][]{{35,7,37, 248},{ 63,34,55, 248,}},
             new int[][]{
                 {
-                    118,27,140,255,
-                    118,27,140,255,
+                    129,32,167,255,
+                    129,32,167,255,
                 },
                 {
-                    118,27,140,255,
-                    118,27,140,255,
+                    169,47,224,255,
+                    169,47,224,255,
                 },
                 {
-                    118,27,140,255,
-                    118,27,140,255,
+                    129,32,167,255,
+                    169,47,224,255,
                 },
                 {
-                    118,27,140,255,
-                    118,27,140,255,
+                    129,32,167,255,
+                    169,47,224,255,
                 }},
             64,
             240
         );
         UMV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,23 + 64 * level,16 * level,17,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -501,30 +501,30 @@ public class TextureLoader {
         level++;
         UXV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{137,59,11, 240},{ 137,59,11, 240,}},
+            new int[][]{{41,23,8, 248},{ 108,94,74, 248,}},
             new int[][]{
                 {
-                    255,0,0,255,
-                    255,0,0,255,
+                    208,195,98,255,
+                    208,195,98,255,
                 },
                 {
-                    255,0,0,255,
-                    255,0,0,255,
+                    232,107,41,255,
+                    232,107,41,255,
                 },
                 {
-                    255,0,0,255,
-                    255,0,0,255,
+                    208,195,98,255,
+                    232,107,41,255,
                 },
                 {
-                    255,0,0,255,
-                    255,0,0,255,
+                    208,195,98,255,
+                    232,107,41,255,
                 }},
             64,
             240
         );
         UXV.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,15,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),
@@ -535,30 +535,30 @@ public class TextureLoader {
         level++;
         MAX = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
-            new int[][]{{112,105,112, 240},{ 112,105,112, 240,}},
+            new int[][]{{22,20,27, 248},{ 38,34,46, 248,}},
             new int[][]{
                 {
-                    255,45,63,255,
-                    255,45,63,255,
+                    174,106,187,255,
+                    174,106,187,255,
                 },
                 {
-                    255,45,63,255,
-                    255,45,63,255,
+                    83,71,108,255,
+                    83,71,108,255,
                 },
                 {
-                    255,45,63,255,
-                    255,45,63,255,
+                    174,106,187,255,
+                    83,71,108,255,
                 },
                 {
-                    255,45,63,255,
-                    255,45,63,255,
+                    174,106,187,255,
+                    83,71,108,255,
                 }},
             64,
             240
         );
         MAX.addTextureFragment(
             new TextureFragment(Top_Left, 64,240,0,16 * level,7,7,-4, -4),
-            new TextureFragment(Top_Center,64,240,24 + 64 * level,16 * level,16,8, 0,-8),
+            new TextureFragment(Top_Center,64,240,23 + 64 * level,16 * level,17,8, 0,-6),
             new TextureFragment(Top_Right,64,240,57 + 64 * level,16 * level,7,7,3,-3),
 
             new TextureFragment(Bottom_Left,64,240,0,9 + 16 * level,7,7,-4,4),

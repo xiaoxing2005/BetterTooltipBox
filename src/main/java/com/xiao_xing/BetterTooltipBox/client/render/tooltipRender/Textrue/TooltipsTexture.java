@@ -2,10 +2,7 @@ package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue;
 
 import net.minecraft.util.ResourceLocation;
 
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
-
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Top_Center;
 
 public class TooltipsTexture{
 
