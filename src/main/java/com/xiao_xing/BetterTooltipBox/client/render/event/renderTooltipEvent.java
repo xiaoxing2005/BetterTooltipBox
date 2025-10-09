@@ -96,11 +96,11 @@ public class renderTooltipEvent {
                 Minecraft.getMinecraft().displayWidth,
                 Minecraft.getMinecraft().displayHeight);
 
-            int width = scaledresolution.getScaledWidth();
-            int height = scaledresolution.getScaledHeight();
+            int scaledWidth = scaledresolution.getScaledWidth();
+            int scaledHeight = scaledresolution.getScaledHeight();
 
             int fontWidth = 0;
-            int fontHeight = -2;
+            int fontHeight = 0;
 
             for (String s : t) {
                 // NEI Handler 行处理
@@ -127,20 +127,24 @@ public class renderTooltipEvent {
             int x = mouseX + 12;
             int y = mouseY - 12;
 
-            if (x + fontWidth > width) {
+//            if (t.size() > 1) {
+//                height += 2 + (t.size() - 1) * 10;
+//            }
+
+            if (x + fontWidth > scaledWidth) {
                 x -= 28 + fontWidth;
                 // 判定是否超出游戏画面
                 if (x < 0) {
                     // 居中
-                    x = (width / 2) - (fontWidth / 2);
+                    x = (scaledWidth / 2) - (fontWidth / 2);
                 }
             }
 
-            if (y + fontHeight + 6 > height) {
-                y = height - fontHeight - 6;
+            if (y + fontHeight + 6 > scaledHeight) {
+                y = scaledHeight - fontHeight - 6;
                 if (y < 0) {
 
-                    y = (height / 2) - (fontHeight / 2);
+                    y = (scaledHeight / 2) - (fontHeight / 2);
 
                     // 如果居中后依旧小于0，那么将调整为指定坐标
                     if (y < 0) {
@@ -171,9 +175,9 @@ public class renderTooltipEvent {
              TooltipHelper.z = 300;
             TooltipsTexture texture = getTooltipValidation(Objects.requireNonNull(GameRegistry.findUniqueIdentifierFor(event.itemStack.getItem())).modId, event.itemStack);
             if (texture != null) {
-                TooltipHelper.DrawTooltip(texture,x - 2, y - 2, width + 4, height + 4);
+                TooltipHelper.DrawTooltip(texture,x - 2, y - 2, fontWidth + 4, fontHeight + 4);
             }else {
-                TooltipHelper.DrawTooltip(x - 2, y - 2, width + 4, height + 4);
+                TooltipHelper.DrawTooltip(x - 2, y - 2, fontWidth + 4, fontHeight + 4);
             }
             // TooltipManager.getTooltip(event.itemStack, event.gui)
             //    .drawTooltip(x - 3, y - 3, width + 6, height + 6);
@@ -190,7 +194,13 @@ public class renderTooltipEvent {
                         // 反射调用失败，按正常文本处理
                     }
                 }
-                font.drawStringWithShadow(s, x, y, -1);
+                if (i == 0 && font.getStringWidth(s) < fontWidth){
+                    int nameX = x + ((fontWidth - font.getStringWidth(s)) / 2);
+                    font.drawStringWithShadow(s, nameX, y, -1);
+                } else {
+                    font.drawStringWithShadow(s, x, y, -1);
+                }
+
 
                 if (i == 0) {
                     y += 2;
