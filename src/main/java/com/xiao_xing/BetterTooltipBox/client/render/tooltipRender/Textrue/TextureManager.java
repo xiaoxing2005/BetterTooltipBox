@@ -10,23 +10,28 @@ import net.minecraft.util.ResourceLocation;
 
 public class TextureManager {
 
-    private static final HashMap<String, ITexture> TEXTURE_MAP = new HashMap<>();
+    private final HashMap<String, TooltipsTexture> TEXTURE_MAP = new HashMap<>();
 
+    public static final TextureManager INSTANCE = new TextureManager();
 //    static {
 //        TEXTURE_MAP.put("default", new ResourceLocation(ResourceID + "gui/tooltip_borders.png"));
 //    }
 
-    public static void register(String Name, ITexture iTexture) {
+    public static TextureManager getInstance() {
+        return INSTANCE;
+    }
+
+    public void register(String Name, TooltipsTexture Texture) {
         if (TEXTURE_MAP.containsKey(Name)) {
             LOG.error("Texture {} already exists", Name);
             return;
-        } else if (iTexture != null) {
-            TEXTURE_MAP.put(Name, iTexture);
+        } else if (Texture != null) {
+            TEXTURE_MAP.put(Name, Texture);
         }
         LOG.error("Texture {} register failed",Name);
     }
 
-    public static ITexture getTexture(String TextureName) {
+    public TooltipsTexture getTexture(String TextureName) {
         if (TEXTURE_MAP.containsKey(TextureName)) {
             return TEXTURE_MAP.get(TextureName);
         }
@@ -34,10 +39,10 @@ public class TextureManager {
         return null;
     }
 
-    public static ITexture getTexture(ITooltipValidationHandler handler){
-        if(handler==null){
-            return null;
-        }
-        return getTexture(handler.getTooltipName());
-    }
+//    public static ITexture getTexture(ITooltipValidationHandler handler){
+//        if(handler==null){
+//            return null;
+//        }
+//        return getTexture(handler.getTooltipName());
+//    }
 }

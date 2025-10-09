@@ -4,8 +4,6 @@ import net.minecraft.client.Minecraft;
 
 import org.lwjgl.input.Keyboard;
 
-import com.xiao_xing.BetterTooltipBox.client.render.Gui.Window.WindowManagerScreen;
-import com.xiao_xing.BetterTooltipBox.client.render.Gui.Window.testWindow;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

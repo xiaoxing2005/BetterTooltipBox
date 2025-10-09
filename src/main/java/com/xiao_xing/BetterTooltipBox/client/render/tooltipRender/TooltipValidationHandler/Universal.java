@@ -1,9 +1,10 @@
 package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler;
 
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
 
-public class Universal extends ModIdValidationBase {
+public class Universal implements ITooltipValidationHandler {
 
     private final String ModId;
 
@@ -12,12 +13,7 @@ public class Universal extends ModIdValidationBase {
     }
 
     @Override
-    public boolean modIdCheck(String modId, ItemStack itemStack) {
-        return modId.equals(ModId);
-    }
-
-    @Override
-    public String getTooltipName() {
-        return ModId;
+    public TooltipsTexture TooltipValidation(String modId, ItemStack itemStack) {
+        return null;
     }
 }

@@ -6,9 +6,9 @@ public interface ITexture {
 
     ResourceLocation getResourceLocation();
 
-    int getWidth();
+    float getWidth();
 
-    int getHeight();
+    float getHeight();
 
     float getMaxU();
 
