@@ -175,7 +175,7 @@ public class renderTooltipEvent {
              TooltipHelper.z = 300;
             TooltipsTexture texture = getTooltipValidation(Objects.requireNonNull(GameRegistry.findUniqueIdentifierFor(event.itemStack.getItem())).modId, event.itemStack);
             if (texture != null) {
-                TooltipHelper.DrawTooltip(texture,x - 2, y - 2, fontWidth + 4, fontHeight + 4);
+                TooltipHelper.DrawTooltip(texture,x - 3, y - 5, fontWidth + 5, fontHeight + 9);
             }else {
                 TooltipHelper.DrawTooltip(x - 2, y - 2, fontWidth + 4, fontHeight + 4);
             }
