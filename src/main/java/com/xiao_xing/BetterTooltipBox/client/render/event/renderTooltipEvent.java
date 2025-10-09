@@ -1,9 +1,12 @@
-package com.xiao_xing.BetterTooltipBox.client.event;
+package com.xiao_xing.BetterTooltipBox.client.render.event;
 
 import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -20,6 +23,10 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import squeek.applecore.client.TooltipOverlayHandler;
+
+import java.util.Objects;
+
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.ITooltipValidationHandler.getTooltipValidation;
 
 public class renderTooltipEvent {
 
@@ -161,9 +168,15 @@ public class renderTooltipEvent {
                 TooltipOverlayHandler.toolTipW = fontWidth;
                 TooltipOverlayHandler.toolTipH = fontHeight;
             }
-            TooltipHelper.z = 300;
-            TooltipHelper.DrawTooltip(x - 2, y - 2, fontWidth + 4, fontHeight + 4);
-
+             TooltipHelper.z = 300;
+            TooltipsTexture texture = getTooltipValidation(Objects.requireNonNull(GameRegistry.findUniqueIdentifierFor(event.itemStack.getItem())).modId, event.itemStack);
+            if (texture != null) {
+                TooltipHelper.DrawTooltip(texture,x - 2, y - 2, width + 4, height + 4);
+            }else {
+                TooltipHelper.DrawTooltip(x - 2, y - 2, width + 4, height + 4);
+            }
+            // TooltipManager.getTooltip(event.itemStack, event.gui)
+            //    .drawTooltip(x - 3, y - 3, width + 6, height + 6);
             for (int i = 0; i < t.size(); i++) {
                 String s = t.get(i);
                 if (isLoaderNei && s.startsWith(TOOLTIP_HANDLER)) {

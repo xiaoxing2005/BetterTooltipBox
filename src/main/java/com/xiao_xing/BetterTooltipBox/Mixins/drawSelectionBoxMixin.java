@@ -1,6 +1,6 @@
 package com.xiao_xing.BetterTooltipBox.Mixins;
 
-import static com.xiao_xing.BetterTooltipBox.Config.Enable_SelectionBox;
+import static com.xiao_xing.BetterTooltipBox.Config.Config.Enable_SelectionBox;
 
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.util.AxisAlignedBB;
