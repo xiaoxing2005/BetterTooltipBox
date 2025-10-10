@@ -1,10 +1,9 @@
 package com.xiao_xing.BetterTooltipBox.Util;
 
 import static com.xiao_xing.BetterTooltipBox.BetterTooltipBox.ResourceID;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureLoader.ULV;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureLoader.defaultTexture;
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TextureLoader.defaultTexture;
 
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipRender;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.client.Minecraft;

@@ -1,10 +1,8 @@
 package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler;
 
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
 import net.minecraft.item.ItemStack;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 
 import static com.xiao_xing.BetterTooltipBox.BetterTooltipBox.LOG;

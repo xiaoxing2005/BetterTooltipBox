@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import com.xiao_xing.BetterTooltipBox.Mixins.plugin.mixinPlugin;
 import com.xiao_xing.BetterTooltipBox.client.render.event.keyInputEvent;
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureLoader;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TextureLoader;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.TooltipValidationLoader;
 
 import cpw.mods.fml.common.Loader;
