@@ -17,6 +17,10 @@ public class lateMixinPlugin implements ILateMixinLoader {
 
     @Override
     public @NotNull List<String> getMixins(Set<String> loadedMods) {
-        return new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
+        if (loadedMods.contains("modularui")) {
+            list.add("MuiTextBoxMixin");
+        }
+        return list;
     }
 }

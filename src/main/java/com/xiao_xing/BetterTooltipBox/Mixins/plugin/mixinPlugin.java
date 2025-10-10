@@ -40,23 +40,22 @@ public class mixinPlugin implements IMixinConfigPlugin {
             isLoaderGTNHlib = true;
             MixinClass.add("NotItemStackTooltipMixin");
             MixinClass.add("drawSelectionBoxMixin");
-            return MixinClass;
-        } catch (ClassNotFoundException ignored) {
-            try {
-                Class<?> c = Class.forName("codechicken.core.asm.Tags");
-                String VERSION = c.getField("VERSION")
-                    .get(null)
-                    .toString();
-                if ((compareVersion(VERSION, "1.3.10") != -1)) {
-                    MixinClass.add("ItemTooltipMixin");
-                } else {
-                    MixinClass.add("oldItemTooltipMixin");
-                }
-            } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException ignored1) {}
-            MixinClass.add("TooltipMixin");
-            MixinClass.add("drawSelectionBoxMixin");
-            return MixinClass;
-        }
+        } catch (ClassNotFoundException ignored) {}
+
+        try {
+            Class<?> c = Class.forName("codechicken.core.asm.Tags");
+            String VERSION = c.getField("VERSION")
+                .get(null)
+                .toString();
+            if ((compareVersion(VERSION, "1.3.10") != -1)) {
+                MixinClass.add("NEIItemTooltipMixin");
+            } else {
+                MixinClass.add("oldNEIItemTooltipMixin");
+            }
+        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException ignored1) {}
+        MixinClass.add("TooltipMixin");
+        MixinClass.add("drawSelectionBoxMixin");
+        return MixinClass;
         // System.out.println("id" + mod.version());
     }
 
