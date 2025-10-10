@@ -1,4 +1,4 @@
-package com.xiao_xing.BetterTooltipBox.Mixins;
+package com.xiao_xing.BetterTooltipBox.Mixins.plugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-public class MixinPlugin implements IMixinConfigPlugin {
+public class mixinPlugin implements IMixinConfigPlugin {
 
     public static boolean isLoaderGTNHlib = false;
 

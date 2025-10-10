@@ -1,7 +1,8 @@
-package com.xiao_xing.BetterTooltipBox.Mixins;
+package com.xiao_xing.BetterTooltipBox.Mixins.late;
 
 import static codechicken.lib.gui.GuiDraw.gui;
 
+import com.gtnewhorizon.gtnhmixins.LateMixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -9,6 +10,7 @@ import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
 import codechicken.lib.gui.GuiDraw;
 
+@LateMixin
 @Mixin(value = GuiDraw.class)
 public class oldItemTooltipMixin {
 

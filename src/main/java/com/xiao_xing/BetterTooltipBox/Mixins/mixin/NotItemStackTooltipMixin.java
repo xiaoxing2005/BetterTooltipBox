@@ -1,4 +1,4 @@
-package com.xiao_xing.BetterTooltipBox.Mixins;
+package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
 
 import java.util.List;
 
@@ -80,14 +80,9 @@ public class NotItemStackTooltipMixin extends Gui {
             this.zLevel = 300.0F;
             itemRender.zLevel = 300.0F;
 
-            if (Loader.isModLoaded("AppleCore")) {
-                TooltipOverlayHandler.toolTipX = j2 + 2;
-                TooltipOverlayHandler.toolTipY = k2 + 2;
-                TooltipOverlayHandler.toolTipW = k;
-                TooltipOverlayHandler.toolTipH = i1;
-            }
             TooltipHelper.z = 300;
-            TooltipHelper.DrawTooltip(j2 - 2, k2 - 2, k + 4, i1 + 4);
+            TooltipHelper.AppleCoreDraw(j2 + 2, k2 + 2, k, i1);
+            TooltipHelper.DrawTooltip(j2 - 3, k2 - 5, k + 5, i1 + 9);
 
             for (int i2 = 0; i2 < textLines.size(); ++i2) {
                 String s1 = (String) textLines.get(i2);

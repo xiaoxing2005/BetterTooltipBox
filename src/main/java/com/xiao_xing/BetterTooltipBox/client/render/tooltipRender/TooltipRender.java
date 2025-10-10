@@ -61,7 +61,12 @@ public class TooltipRender {
         assert SmoothShader != null;
         // Draw Background and Lines
         // Draw Background
-        FloatBuffer VertexBuffer = BufferUtils.createFloatBuffer(24 + (24 * 4));
+        boolean isRenderNameUnderscore = height > 20;
+        int capacity = 24 + (24 * 4);
+        if (isRenderNameUnderscore){
+            capacity += 48;
+        }
+        FloatBuffer VertexBuffer = BufferUtils.createFloatBuffer(capacity);
         int[][] bgColor = texture.getBackgroundColor();
         int[][] lineColor = texture.getLineColor();
         VertexBuffer.put(new  float[] {
@@ -92,7 +97,24 @@ public class TooltipRender {
             x + width, y, lineColor[3][0], lineColor[3][1], lineColor[3][2], lineColor[3][3],
             x + width, y + height, lineColor[3][4], lineColor[3][5], lineColor[3][6], lineColor[3][7],
             x + width - 1, y + height,lineColor[3][4], lineColor[3][5], lineColor[3][6], lineColor[3][7],
+
         });
+        if (isRenderNameUnderscore){
+            VertexBuffer.put(
+                new float[]{
+                    // Name underscore
+                    x, y + 14, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3],
+                    x + width / 2, y + 14, lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7],
+                    x + width / 2, y + 15, lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7],
+                    x, y + 15, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3],
+
+                    x + width / 2, y + 14, lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7],
+                    x + width, y + 14, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3],
+                    x + width, y + 15, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3],
+                    x + width / 2, y + 15, lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7],
+                }
+            );
+        }
         VertexBuffer.flip();
 
         GL11.glPushMatrix();
@@ -112,7 +134,7 @@ public class TooltipRender {
         GL20.glEnableVertexAttribArray(1);
         GL20.glVertexAttribPointer(1, 4, GL11.GL_FLOAT, false, 4 * 6, 2 * 4);
 
-        GL11.glDrawArrays(GL_QUADS, 0, 20);
+        GL11.glDrawArrays(GL_QUADS, 0, isRenderNameUnderscore ? 28 : 20);
 
         GL20.glDisableVertexAttribArray(0);
         GL20.glDisableVertexAttribArray(1);

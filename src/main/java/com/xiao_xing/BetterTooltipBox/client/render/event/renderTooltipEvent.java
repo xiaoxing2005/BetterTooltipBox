@@ -177,7 +177,7 @@ public class renderTooltipEvent {
             if (texture != null) {
                 TooltipHelper.DrawTooltip(texture,x - 3, y - 5, fontWidth + 5, fontHeight + 9);
             }else {
-                TooltipHelper.DrawTooltip(x - 2, y - 2, fontWidth + 4, fontHeight + 4);
+                TooltipHelper.DrawTooltip(x - 3, y - 5, fontWidth + 5, fontHeight + 9);
             }
             // TooltipManager.getTooltip(event.itemStack, event.gui)
             //    .drawTooltip(x - 3, y - 3, width + 6, height + 6);

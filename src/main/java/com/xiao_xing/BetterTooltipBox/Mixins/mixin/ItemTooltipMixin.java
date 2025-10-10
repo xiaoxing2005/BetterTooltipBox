@@ -1,4 +1,4 @@
-package com.xiao_xing.BetterTooltipBox.Mixins;
+package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
 
 import static codechicken.lib.gui.GuiDraw.gui;
 

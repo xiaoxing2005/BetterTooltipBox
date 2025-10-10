@@ -1,5 +1,7 @@
 package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler;
 
+import cpw.mods.fml.common.Loader;
+
 import static gregtech.api.enums.Mods.ModIDs.BART_WORKS;
 import static gregtech.api.enums.Mods.ModIDs.DETRAV_SCANNER_MOD;
 import static gregtech.api.enums.Mods.ModIDs.GALACTI_GREG;
@@ -16,7 +18,7 @@ import static gregtech.api.enums.Mods.ModIDs.TECTECH;
 
 public class TooltipValidationLoader {
 
-    public static void loader(){
+    public static void loaderGT(){
         ITooltipValidationHandler GT = new GregTech();
         ITooltipValidationHandler.register(GREG_TECH, GT);
         ITooltipValidationHandler.register(BART_WORKS, GT);
