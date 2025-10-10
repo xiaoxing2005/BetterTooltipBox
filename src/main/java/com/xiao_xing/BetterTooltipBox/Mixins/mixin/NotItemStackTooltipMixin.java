@@ -2,6 +2,7 @@ package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
 
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
@@ -23,8 +24,6 @@ import squeek.applecore.client.TooltipOverlayHandler;
 @Mixin(value = GuiScreen.class)
 public class NotItemStackTooltipMixin extends Gui {
 
-    @Shadow
-    protected FontRenderer fontRendererObj;
 
     @Shadow
     protected static RenderItem itemRender;
@@ -41,7 +40,7 @@ public class NotItemStackTooltipMixin extends Gui {
      */
     @Overwrite(remap = false)
     public void func_146283_a(List<String> textLines, int x, int y) {
-        betterTooltipBox$drawHoveringText(textLines, x, y, fontRendererObj);
+        betterTooltipBox$drawHoveringText(textLines, x, y, Minecraft.getMinecraft().fontRenderer);
     }
 
     @Unique

@@ -9,6 +9,7 @@ import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.Toolti
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -194,7 +195,7 @@ public class renderTooltipEvent {
                         // 反射调用失败，按正常文本处理
                     }
                 }
-                if (i == 0 && font.getStringWidth(s) < fontWidth){
+                if (i == 0 && font.getStringWidth(s) < fontWidth && !(Minecraft.getMinecraft().currentScreen instanceof GuiMultiplayer)){
                     int nameX = x + ((fontWidth - font.getStringWidth(s)) / 2);
                     font.drawStringWithShadow(s, nameX, y, -1);
                 } else {
