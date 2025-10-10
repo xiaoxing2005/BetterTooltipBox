@@ -2,11 +2,12 @@ package com.xiao_xing.BetterTooltipBox;
 
 import java.io.IOException;
 
-import com.xiao_xing.BetterTooltipBox.Mixins.MixinPlugin;
+import com.xiao_xing.BetterTooltipBox.Mixins.plugin.mixinPlugin;
 import com.xiao_xing.BetterTooltipBox.client.render.event.keyInputEvent;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TextureLoader;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.TooltipValidationLoader;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -21,13 +22,15 @@ public class ClientProxy extends CommonProxy {
         super.preInit(event);
         new keyInputEvent();
         new TextureLoader().loader();
-        TooltipValidationLoader.loader();
+        if (Loader.isModLoaded("gregtech")) {
+            TooltipValidationLoader.loaderGT();
+        }
     }
 
     @Override
     public void init(FMLInitializationEvent event) throws IOException {
         super.init(event);
-        if (MixinPlugin.isLoaderGTNHlib) {
+        if (mixinPlugin.isLoaderGTNHlib) {
             try {
                 Class.forName("com.xiao_xing.BetterTooltipBox.client.render.event.renderTooltipEvent")
                     .getConstructor()

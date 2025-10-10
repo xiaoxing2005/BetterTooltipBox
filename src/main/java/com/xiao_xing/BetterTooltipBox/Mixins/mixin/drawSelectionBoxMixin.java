@@ -1,4 +1,4 @@
-package com.xiao_xing.BetterTooltipBox.Mixins;
+package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
 
 import static com.xiao_xing.BetterTooltipBox.Config.Config.Enable_SelectionBox;
 

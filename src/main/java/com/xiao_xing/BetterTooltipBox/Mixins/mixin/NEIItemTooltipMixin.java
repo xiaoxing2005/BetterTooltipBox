@@ -1,4 +1,4 @@
-package com.xiao_xing.BetterTooltipBox.Mixins;
+package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
 
 import static codechicken.lib.gui.GuiDraw.gui;
 
@@ -9,10 +9,13 @@ import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
 import codechicken.lib.gui.GuiDraw;
 import cpw.mods.fml.common.Loader;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import squeek.applecore.client.TooltipOverlayHandler;
 
 @Mixin(value = GuiDraw.class, priority = 999)
-public class ItemTooltipMixin {
+public class NEIItemTooltipMixin {
 
     /**
      * @author xiao_xing521
@@ -30,5 +33,11 @@ public class ItemTooltipMixin {
         }
         TooltipHelper.z = (int) gui.getZLevel();
         TooltipHelper.DrawTooltip(x, y, w, h);
+    }
+
+    @Inject(method = "drawGradientRect", at = @At(value = "HEAD"),remap = false, cancellable = true)
+    private static void drawGradientRect(int x, int y, int w, int h, int colour1, int colour2, CallbackInfo ci) {
+        TooltipHelper.DrawTooltip(x - 3, y - 5, w + 5, h + 9);
+        ci.cancel();
     }
 }

@@ -1,4 +1,4 @@
-package com.xiao_xing.BetterTooltipBox.Mixins;
+package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class TooltipMixin extends Gui {
     private void onDrawHoveringText(List<String> textLines, int x, int y, FontRenderer font, CallbackInfo ci,
         @Local(ordinal = 2) int k, @Local(ordinal = 3) int j2, @Local(ordinal = 4) int k2, @Local(ordinal = 5) int i1) {
         TooltipHelper.z = 300;
-        TooltipHelper.DrawTooltip(j2 - 2, k2 - 2, k + 4, i1 + 4);
+        TooltipHelper.DrawTooltip(j2 - 3, k2 - 5, k + 5, i1 + 9);
         for (int i2 = 0; i2 < textLines.size(); ++i2) {
             if (Loader.isModLoaded("AppleCore")) {
                 TooltipOverlayHandler.toolTipX = j2;

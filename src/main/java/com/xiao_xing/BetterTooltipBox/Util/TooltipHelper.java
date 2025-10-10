@@ -5,8 +5,10 @@ import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture
 
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipRender;
+import cpw.mods.fml.common.Loader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+import squeek.applecore.client.TooltipOverlayHandler;
 
 public class TooltipHelper {
 
@@ -18,6 +20,15 @@ public class TooltipHelper {
         ResourceID + "gui/Tooltip_Background.png");
 
     public static int z;
+
+    public static void AppleCoreDraw(int x, int y, int width, int height) {
+        if (Loader.isModLoaded("AppleCore")) {
+            TooltipOverlayHandler.toolTipX = x;
+            TooltipOverlayHandler.toolTipY = y;
+            TooltipOverlayHandler.toolTipW = width;
+            TooltipOverlayHandler.toolTipH = height;
+        }
+    }
 
     public static void DrawTooltip(int x, int y, int width, int height) {
         TooltipRender.getInstance().drawTooltip(defaultTexture,x, y, width, height);

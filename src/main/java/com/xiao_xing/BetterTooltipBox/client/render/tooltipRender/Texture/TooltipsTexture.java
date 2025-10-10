@@ -7,7 +7,10 @@ import java.util.ArrayList;
 public class TooltipsTexture{
 
     private final ResourceLocation resourceLocation;
+    // [0][0],[0][1],[0][2],[0][3] = startColor
+    // [1][0],[1][1],[1][2],[1][3] = endColor
     private final int[][] backgroundColor;
+    //
     private final int[][] lineColor;
     private final int width;
     private final int height;
