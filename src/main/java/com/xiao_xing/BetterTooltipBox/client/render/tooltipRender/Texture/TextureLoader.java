@@ -1,15 +1,8 @@
-package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue;
+package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture;
 
-import com.xiao_xing.BetterTooltipBox.Config.ConfigManager;
 import net.minecraft.util.ResourceLocation;
-
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragment;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Bottom_Center;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Bottom_Left;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Bottom_Right;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Top_Center;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Top_Left;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Top_Right;
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture.TextureFragment;
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture.TextureFragmentType.*;
 
 public class TextureLoader {
 
@@ -37,45 +30,38 @@ public class TextureLoader {
 
     public void loader(){
 
-        if (ConfigManager.Instance.TooltipsTextureList.containsKey("defaultTexture")){
-            defaultTexture = ConfigManager.Instance.TooltipsTextureList.get("defaultTexture");
-            textureManager.register(defaultTexture);
-        }else {
-            defaultTexture = new TooltipsTexture("defaultTexture",
-                new ResourceLocation("bettertooltipbox", "gui/LOGO.png"),
-                new int[][]{{56, 86, 181, 221}, {56, 86, 181, 221}},
-                new int[][]{
-                    {
-                        0, 224, 255, 255,
-                        0, 224, 255, 255,
-                    },
-                    {
-                        0, 224, 255, 255,
-                        0, 224, 255, 255,
-                    },
-                    {
-                        0, 224, 255, 255,
-                        0, 224, 255, 255,
-                    },
-                    {
-                        0, 224, 255, 255,
-                        0, 224, 255, 255,
-                    },
-                    {
-                        0, 224, 255, 0,
-                        0, 224, 255, 255,
-                    }},
-                15,
-                13
-            );
-            defaultTexture.addTextureFragment(
-                new TextureFragment(Top_Center, 15, 13, 0, 0, 15, 13, 0, -12)
-            );
-            ConfigManager.Instance.TooltipsTextureList.put("defaultTexture", defaultTexture);
-            ConfigManager.saveConfig();
-            textureManager.register(defaultTexture);
-        }
-        ULV = new TooltipsTexture("ULV",
+        defaultTexture = new TooltipsTexture(
+            new ResourceLocation("bettertooltipbox","gui/LOGO.png"),
+            new int[][]{{56,86,181,221},{56,86,181,221}},
+            new int[][]{
+                {
+                    0,224,255,255,
+                    0,224,255,255,
+                },
+                {
+                    0,224,255,255,
+                    0,224,255,255,
+                },
+                {
+                    0,224,255,255,
+                    0,224,255,255,
+                },
+                {
+                    0,224,255,255,
+                    0,224,255,255,
+                },
+                {
+                    0,224,255,0,
+                    0,224,255,255,
+                }},
+            15,
+            13
+        );
+        defaultTexture.addTextureFragment(
+            new TextureFragment(Top_Center, 15,13,0,0,15,13,0, -12)
+        );
+        textureManager.register("default",defaultTexture);
+        ULV = new TooltipsTexture(
                 new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
                 new int[][]{{17,7,7, 248},{ 160,108,95, 248,}},
                 new int[][]{
@@ -111,8 +97,8 @@ public class TextureLoader {
                 new TextureFragment(Bottom_Center,64,240,27,11,9,3, 0,3),
                 new TextureFragment(Bottom_Right,64,240,57,9,7,7, 4,4)
         );
-        textureManager.register(ULV);
-        LV = new TooltipsTexture("LV",
+        textureManager.register("ULV",ULV);
+        LV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{6,9,10, 248},{ 40,39,37, 248,}},
             new int[][]{
@@ -149,9 +135,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(LV);
+        textureManager.register("LV",LV);
         level++;
-        MV = new TooltipsTexture("MV",
+        MV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{6,7,8, 248},{ 86,109,121, 248,}},
             new int[][]{
@@ -187,9 +173,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(MV);
+        textureManager.register("MV",MV);
         level++;
-        HV = new TooltipsTexture("HV",
+        HV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{30,30,35, 248},{ 155,155,164, 248,}},
             new int[][]{
@@ -225,9 +211,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(HV);
+        textureManager.register("HV",HV);
         level++;
-        EV = new TooltipsTexture("EV",
+        EV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{15,13,16, 248},{ 105,85,110, 248,}},
             new int[][]{
@@ -263,9 +249,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(EV);
+        textureManager.register("EV",EV);
         level++;
-        IV = new TooltipsTexture("IV",
+        IV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{2,2,4, 248},{ 23,32,54, 248,}},
             new int[][]{
@@ -301,9 +287,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(IV);
+        textureManager.register("IV",IV);
         level++;
-        LuV = new TooltipsTexture("LuV",
+        LuV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{3,2,3, 248},{ 38,28,41, 248}},
             new int[][]{
@@ -339,9 +325,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(LuV);
+        textureManager.register("LuV",LuV);
         level++;
-        ZPM = new TooltipsTexture("ZPM",
+        ZPM = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{1,1,1, 248},{ 1,1,1, 248,}},
             new int[][]{
@@ -377,9 +363,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(ZPM);
+        textureManager.register("ZPM",ZPM);
         level++;
-        UV = new TooltipsTexture("UV",
+        UV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{17,18,27, 248},{ 53,57,87, 248,}},
             new int[][]{
@@ -415,9 +401,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(UV);
+        textureManager.register("UV",UV);
         level++;
-        UHV = new TooltipsTexture("UHV",
+        UHV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{23,22,26, 248},{ 71,69,81, 248,}},
             new int[][]{
@@ -453,9 +439,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(UHV);
+        textureManager.register("UHV",UHV);
         level++;
-        UEV = new TooltipsTexture("UEV",
+        UEV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{19,16,16, 248},{ 56,47,45, 248,}},
             new int[][]{
@@ -491,9 +477,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(UEV);
+        textureManager.register("UEV",UEV);
         level++;
-        UIV = new TooltipsTexture("UIV",
+        UIV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{14,14,17, 248},{ 45,45,57, 248,}},
             new int[][]{
@@ -529,9 +515,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(UIV);
+        textureManager.register("UIV",UIV);
         level++;
-        UMV = new TooltipsTexture("UMV",
+        UMV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{35,7,37, 248},{ 63,34,55, 248,}},
             new int[][]{
@@ -567,9 +553,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(UMV);
+        textureManager.register("UMV",UMV);
         level++;
-        UXV = new TooltipsTexture("UXV",
+        UXV = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{41,23,8, 248},{ 108,94,74, 248,}},
             new int[][]{
@@ -605,9 +591,9 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(UXV);
+        textureManager.register("UXV",UXV);
         level++;
-        MAX = new TooltipsTexture("MAX",
+        MAX = new TooltipsTexture(
             new ResourceLocation("bettertooltipbox","gui/GregTech.png"),
             new int[][]{{22,20,27, 248},{ 38,34,46, 248,}},
             new int[][]{
@@ -643,7 +629,7 @@ public class TextureLoader {
             new TextureFragment(Bottom_Center,64,240,27 + 64 * level,11 + 16 * level,9,3, 0,3),
             new TextureFragment(Bottom_Right,64,240,57 + 64 * level,9 + 16 * level,7,7, 4,4)
         );
-        textureManager.register(MAX);
+        textureManager.register("MAX",MAX);
     }
 
 }

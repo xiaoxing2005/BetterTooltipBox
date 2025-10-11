@@ -1,13 +1,13 @@
 package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
-import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
-import cpw.mods.fml.common.Loader;
+import java.util.List;
+
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,9 +15,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import squeek.applecore.client.TooltipOverlayHandler;
 
-import java.util.List;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
+
+import cpw.mods.fml.common.Loader;
+import squeek.applecore.client.TooltipOverlayHandler;
 
 @Mixin(value = GuiScreen.class)
 public class TooltipMixin extends Gui {

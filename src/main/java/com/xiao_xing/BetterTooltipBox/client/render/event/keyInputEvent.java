@@ -1,10 +1,13 @@
 package com.xiao_xing.BetterTooltipBox.client.render.event;
 
+import net.minecraft.client.Minecraft;
+
+import org.lwjgl.input.Keyboard;
+
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
-import net.minecraft.client.Minecraft;
-import org.lwjgl.input.Keyboard;
 
 public class keyInputEvent {
 

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class TooltipsTexture{
 
-    private final String textureName;
     private final ResourceLocation resourceLocation;
     // [0][0],[0][1],[0][2],[0][3] = startColor
     // [1][0],[1][1],[1][2],[1][3] = endColor
@@ -21,9 +20,8 @@ public class TooltipsTexture{
 
     private final ArrayList<TextureFragment> textureFragments = new ArrayList<>();
 
-    public TooltipsTexture(String textureName, ResourceLocation resourceLocation, int[][] backgroundColor, int[][] lineColor,
-                           int textureWidth, int textureHeight){
-        this.textureName = textureName;
+    public TooltipsTexture(ResourceLocation resourceLocation,int[][] backgroundColor,int[][] lineColor,
+                          int textureWidth,int textureHeight){
         this.resourceLocation = resourceLocation;
         this.backgroundColor = backgroundColor;
         this.lineColor = lineColor;
@@ -72,28 +70,20 @@ public class TooltipsTexture{
         return lineColor;
     }
 
-    public String getTextureName() {
-        return textureName;
-    }
-
     public static class TextureFragment implements ITexture{
         private final float uMin;
         private final float vMin;
         private final float uMax;
         private final float vMax;
-        private final float fragmentX;
-        private final float fragmentY;
         private final float fragmentWidth;
         private final float fragmentHeight;
         private final float offsetX;
         private final float offsetY;
         private final TextureFragmentType fragmentType;
 
-        public TextureFragment(TextureFragmentType fragmentType, float textureWidth, float textureHeight, float fragmentX, float fragmentY, float fragmentWidth, float fragmentHeight,
-                               float offsetX, float offsetY){
+        public TextureFragment(TextureFragmentType fragmentType,float textureWidth,float textureHeight,float fragmentX, float fragmentY,float fragmentWidth, float fragmentHeight,
+                                float offsetX, float offsetY){
             this.fragmentType = fragmentType;
-            this.fragmentX = fragmentX;
-            this.fragmentY = fragmentY;
             this.uMin = fragmentX / textureWidth;
             this.uMax = (fragmentX + fragmentWidth) / textureWidth;
             this.vMin = fragmentY / textureHeight;
@@ -146,18 +136,6 @@ public class TooltipsTexture{
         @Override
         public float getMinV() {
             return this.vMin;
-        }
-
-        public float getFragmentX() {
-            return fragmentX;
-        }
-
-        public float getFragmentY() {
-            return fragmentY;
-        }
-
-        public int[] getOffset() {
-            return new int[]{(int)offsetX,(int)offsetY};
         }
     }
 
