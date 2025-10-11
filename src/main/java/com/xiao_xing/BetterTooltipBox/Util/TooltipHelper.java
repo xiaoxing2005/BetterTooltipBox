@@ -1,14 +1,14 @@
 package com.xiao_xing.BetterTooltipBox.Util;
 
-import static com.xiao_xing.BetterTooltipBox.BetterTooltipBox.ResourceID;
-import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TextureLoader.defaultTexture;
-
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipRender;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import squeek.applecore.client.TooltipOverlayHandler;
+
+import static com.xiao_xing.BetterTooltipBox.BetterTooltipBox.ResourceID;
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureLoader.defaultTexture;
 
 public class TooltipHelper {
 
@@ -31,10 +31,20 @@ public class TooltipHelper {
     }
 
     public static void DrawTooltip(int x, int y, int width, int height) {
-        TooltipRender.getInstance().drawTooltip(defaultTexture,x, y, width, height);
+        TooltipRender.getInstance().drawTooltip(defaultTexture, x, y, width, height,false);
     }
+
+    public static void DrawTooltip(int x, int y, int width, int height,boolean isRenderNameUnderscore) {
+        TooltipRender.getInstance().drawTooltip(defaultTexture,x, y, width, height,isRenderNameUnderscore);
+    }
+
     public static void DrawTooltip(TooltipsTexture texture, int x, int y, int width, int height) {
-        TooltipRender.getInstance().drawTooltip(texture,x, y, width, height);
+        TooltipRender.getInstance().drawTooltip(texture,x, y, width, height,false);
+    }
+
+    public static void DrawTooltip(TooltipsTexture texture, int x, int y, int width, int height,boolean isRenderNameUnderscore) {
+        TooltipRender.getInstance().drawTooltip(texture,x, y, width, height,isRenderNameUnderscore);
     }
 
 }
+

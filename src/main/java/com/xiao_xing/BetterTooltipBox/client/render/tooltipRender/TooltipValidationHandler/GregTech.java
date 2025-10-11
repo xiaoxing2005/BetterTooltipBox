@@ -1,11 +1,9 @@
 package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler;
 
-import java.util.ArrayList;
-
 import bartworks.common.blocks.BWBlocks;
 import bartworks.common.blocks.BWBlocksGlass2;
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TextureManager;
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureManager;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -18,6 +16,8 @@ import gregtech.common.blocks.BlockMachines;
 import gregtech.common.blocks.ItemMachines;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class GregTech implements ITooltipValidationHandler{
 
@@ -90,7 +90,7 @@ public class GregTech implements ITooltipValidationHandler{
     }
 
     @Override
-    public TooltipsTexture TooltipValidation(String modId, ItemStack itemStack) {
+    public TooltipsTexture TooltipValidation(String name, ItemStack itemStack) {
        byte VoltageTier = checkTier(itemStack);
         if (VoltageTier != -1) {
             return getTierTexture(GTValues.VN[VoltageTier]);

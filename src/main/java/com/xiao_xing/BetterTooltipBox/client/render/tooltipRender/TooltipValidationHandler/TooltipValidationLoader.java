@@ -1,7 +1,5 @@
 package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler;
 
-import cpw.mods.fml.common.Loader;
-
 import static gregtech.api.enums.Mods.ModIDs.BART_WORKS;
 import static gregtech.api.enums.Mods.ModIDs.DETRAV_SCANNER_MOD;
 import static gregtech.api.enums.Mods.ModIDs.GALACTI_GREG;

@@ -1,8 +1,8 @@
 package com.xiao_xing.BetterTooltipBox.client.render.shader;
 
-import static com.xiao_xing.BetterTooltipBox.BetterTooltipBox.LOG;
-
 import java.util.HashMap;
+
+import static com.xiao_xing.BetterTooltipBox.BetterTooltipBox.LOG;
 
 public class ShaderFactory {
 
