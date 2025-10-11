@@ -1,29 +1,26 @@
 package com.xiao_xing.BetterTooltipBox.client.render.event;
 
-import java.awt.Dimension;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
+import com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent;
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureManager;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-
 import org.lwjgl.input.Mouse;
-
-import com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent;
-
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import squeek.applecore.client.TooltipOverlayHandler;
 
+import java.awt.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.ITooltipValidationHandler.getTooltipValidation;
@@ -173,14 +170,15 @@ public class renderTooltipEvent {
                 TooltipOverlayHandler.toolTipH = fontHeight;
             }
              TooltipHelper.z = 300;
-            TooltipsTexture texture = getTooltipValidation(Objects.requireNonNull(GameRegistry.findUniqueIdentifierFor(event.itemStack.getItem())).modId, event.itemStack);
-            if (texture != null) {
-                TooltipHelper.DrawTooltip(texture,x - 3, y - 5, fontWidth + 5, fontHeight + 9);
-            }else {
-                TooltipHelper.DrawTooltip(x - 3, y - 5, fontWidth + 5, fontHeight + 9);
+            TooltipsTexture texture = TextureManager.getInstance().fromItemTexture(event.itemStack);
+            if (texture == null) {
+                texture = getTooltipValidation(Objects.requireNonNull(GameRegistry.findUniqueIdentifierFor(event.itemStack.getItem())).modId, event.itemStack);
             }
-            // TooltipManager.getTooltip(event.itemStack, event.gui)
-            //    .drawTooltip(x - 3, y - 3, width + 6, height + 6);
+            if (texture != null) {
+                TooltipHelper.DrawTooltip(texture,x - 3, y - 5, fontWidth + 5, fontHeight + 9,true);
+            }else {
+                TooltipHelper.DrawTooltip(x - 3, y - 5, fontWidth + 5, fontHeight + 9,true);
+            }
             for (int i = 0; i < t.size(); i++) {
                 String s = t.get(i);
                 if (isLoaderNei && s.startsWith(TOOLTIP_HANDLER)) {
@@ -194,7 +192,7 @@ public class renderTooltipEvent {
                         // 反射调用失败，按正常文本处理
                     }
                 }
-                if (i == 0 && font.getStringWidth(s) < fontWidth && !(Minecraft.getMinecraft().currentScreen instanceof GuiMultiplayer)){
+                if (!(Minecraft.getMinecraft().currentScreen instanceof GuiMultiplayer) && i == 0 && font.getStringWidth(s) < fontWidth){
                     int nameX = x + ((fontWidth - font.getStringWidth(s)) / 2);
                     font.drawStringWithShadow(s, nameX, y, -1);
                 } else {

@@ -1,14 +1,12 @@
 package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
 
-import java.util.List;
-
+import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,10 +14,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
-import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
-
-import cpw.mods.fml.common.Loader;
-import squeek.applecore.client.TooltipOverlayHandler;
+import java.util.List;
 
 @Mixin(value = GuiScreen.class)
 public class NotItemStackTooltipMixin extends Gui {
@@ -84,7 +79,7 @@ public class NotItemStackTooltipMixin extends Gui {
             TooltipHelper.DrawTooltip(j2 - 3, k2 - 5, k + 5, i1 + 9);
 
             for (int i2 = 0; i2 < textLines.size(); ++i2) {
-                String s1 = (String) textLines.get(i2);
+                String s1 = textLines.get(i2);
                 font.drawStringWithShadow(s1, j2, k2, -1);
 
                 if (i2 == 0) {

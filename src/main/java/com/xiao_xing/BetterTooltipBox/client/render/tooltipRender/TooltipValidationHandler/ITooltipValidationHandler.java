@@ -11,24 +11,26 @@ public interface ITooltipValidationHandler {
 
     HashMap<String, ITooltipValidationHandler> TooltipValidationHandlerMap = new HashMap<>();
 
-    TooltipsTexture TooltipValidation(String modId,ItemStack itemStack);
 
-    static void register(String modId, ITooltipValidationHandler handler){
-        if (TooltipValidationHandlerMap.containsKey(modId)) {
+    TooltipsTexture TooltipValidation(String name,ItemStack itemStack);
+
+    static void register(String name, ITooltipValidationHandler handler){
+        if (TooltipValidationHandlerMap.containsKey(name)) {
             return;
         }
         if (handler != null) {
-            TooltipValidationHandlerMap.put(modId, handler);
+            TooltipValidationHandlerMap.put(name, handler);
             return;
         }
-        LOG.error("TooltipValidationHandler {} register failed", modId);
+        LOG.error("TooltipValidationHandler {} register failed", name);
     }
 
-    static TooltipsTexture getTooltipValidation(String modId, ItemStack itemStack){
-        if (TooltipValidationHandlerMap.containsKey(modId)) {
-            ITooltipValidationHandler handler = TooltipValidationHandlerMap.get(modId);
+
+    static TooltipsTexture getTooltipValidation(String name, ItemStack itemStack){
+        if (TooltipValidationHandlerMap.containsKey(name)) {
+            ITooltipValidationHandler handler = TooltipValidationHandlerMap.get(name);
             if(handler!=null){
-                return handler.TooltipValidation(modId,itemStack);
+                return handler.TooltipValidation(name,itemStack);
             }
         }
         return null;
