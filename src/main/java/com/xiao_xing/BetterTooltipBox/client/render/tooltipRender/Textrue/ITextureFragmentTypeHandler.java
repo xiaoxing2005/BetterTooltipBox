@@ -1,4 +1,4 @@
-package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Texture;
+package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue;
 
 @FunctionalInterface
 public interface ITextureFragmentTypeHandler {
