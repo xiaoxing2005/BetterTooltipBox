@@ -1,5 +1,16 @@
 package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender;
 
+import com.xiao_xing.BetterTooltipBox.client.render.shader.ShaderProgram;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GL15;
+import org.lwjgl.opengl.GL20;
+
+import java.nio.FloatBuffer;
+import java.util.ArrayList;
+
 import static com.xiao_xing.BetterTooltipBox.Util.TooltipHelper.mc;
 import static com.xiao_xing.BetterTooltipBox.client.render.shader.ShaderFactory.createProgram;
 import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Bottom_Center;
@@ -7,7 +18,6 @@ import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue
 import static org.lwjgl.BufferUtils.createFloatBuffer;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.GL_NEAREST;
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
@@ -17,23 +27,11 @@ import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 
-import java.nio.FloatBuffer;
-import java.util.ArrayList;
-
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
-
-import com.xiao_xing.BetterTooltipBox.client.render.shader.ShaderProgram;
-
 public class TooltipRender {
 
     public static TooltipRender Instance = new TooltipRender();
     private static final int VBO = GL15.glGenBuffers();
+    private static final FloatBuffer VertexBuffer = BufferUtils.createFloatBuffer(1024);
 
     private static final ShaderProgram TextureShader = createProgram(
         "TextureShader",
@@ -52,21 +50,20 @@ public class TooltipRender {
         return Instance;
     }
 
-    public void drawTooltip(TooltipsTexture texture, float x, float y, float width, float height) {
-        DrawBackgroundAndLines(texture, x, y, width, height);
+    public void drawTooltip(TooltipsTexture texture, float x, float y, float width, float height,boolean isRenderNameUnderscore) {
+        subMatrix(SmoothShader);
+        subMatrix(TextureShader);
+        DrawBackgroundAndLines(texture, x, y, width, height, isRenderNameUnderscore);
         DrawFrame(texture, x, y, width, height);
     }
 
-    private void DrawBackgroundAndLines(TooltipsTexture texture, float x, float y, float width, float height){
+    private void DrawBackgroundAndLines(TooltipsTexture texture, float x, float y, float width, float height, boolean isRenderNameUnderscore){
         assert SmoothShader != null;
-        // Draw Background and Lines
+        VertexBuffer.clear();
         // Draw Background
-        boolean isRenderNameUnderscore = height > 20;
-        int capacity = 24 + (24 * 4);
         if (isRenderNameUnderscore){
-            capacity += 48;
+            isRenderNameUnderscore = height > 20;
         }
-        FloatBuffer VertexBuffer = BufferUtils.createFloatBuffer(capacity);
         int[][] bgColor = texture.getBackgroundColor();
         int[][] lineColor = texture.getLineColor();
         VertexBuffer.put(new  float[] {
@@ -124,9 +121,7 @@ public class TooltipRender {
 
         SmoothShader.use();
 
-        subMatrix(SmoothShader);
-
-        fillVBO(VertexBuffer);
+        fillVBO();
 
         GL20.glEnableVertexAttribArray(0);
 
@@ -145,15 +140,14 @@ public class TooltipRender {
         glDisable(GL_BLEND);
         glEnable(GL_CULL_FACE);
         GL11.glPopMatrix();
-        VertexBuffer.clear();
     }
 
     private void DrawFrame(TooltipsTexture texture, float x, float y, float width, float height){
         assert TextureShader != null;
+        VertexBuffer.clear();
         ArrayList<TooltipsTexture.TextureFragment> frame = texture.getTextureFragments();
         boolean isRenderCenter = width > texture.CenterFragmentWidth;
         int capacity = isRenderCenter ? frame.size()  : frame.size() - texture.CenterFragmentAmount;
-        FloatBuffer VertexBuffer = BufferUtils.createFloatBuffer(capacity * 16);
         for (TooltipsTexture.TextureFragment fragment : frame) {
             if (!isRenderCenter) {
                 if (fragment.getFragmentType() == Top_Center || fragment.getFragmentType() == Bottom_Center) {
@@ -178,9 +172,7 @@ public class TooltipRender {
 
         TextureShader.use();
 
-        subMatrix(TextureShader);
-
-        fillVBO(VertexBuffer);
+        fillVBO();
 
         GL20.glEnableVertexAttribArray(0);
 
@@ -199,21 +191,22 @@ public class TooltipRender {
         glDisable(GL_BLEND);
         glEnable(GL_CULL_FACE);
         GL11.glPopMatrix();
-        VertexBuffer.clear();
     }
 
-    private void fillVBO(FloatBuffer vertexBuffer) {
+    private void fillVBO() {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, VBO);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vertexBuffer, GL15.GL_DYNAMIC_DRAW);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, VertexBuffer, GL15.GL_DYNAMIC_DRAW);
     }
 
     private void subMatrix(ShaderProgram shader) {
+        shader.use();
         FloatBuffer modelview = createFloatBuffer(16);
         FloatBuffer projection = createFloatBuffer(16);
         GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, modelview);
         GL11.glGetFloat(GL11.GL_PROJECTION_MATRIX, projection);
         GL20.glUniformMatrix4(GL20.glGetUniformLocation(shader.getProgram(), "modelview"), false, modelview);
         GL20.glUniformMatrix4(GL20.glGetUniformLocation(shader.getProgram(), "projection"), false, projection);
+        shader.clear();
     }
 
 
