@@ -86,7 +86,7 @@ public class GregTech implements ITooltipValidationHandler{
     }
 
     private TooltipsTexture getTierTexture(String tier) {
-        return TextureManager.getInstance().getTexture(tier);
+        return TextureManager.getInstance().getTexture(tier.equals("MAX+") ? "MAX" : tier);
     }
 
     @Override
