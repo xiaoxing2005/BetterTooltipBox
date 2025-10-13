@@ -16,7 +16,7 @@ import static gregtech.api.enums.Mods.ModIDs.TECTECH;
 
 public class TooltipValidationLoader {
 
-    public static void loaderGT(){
+    public static void loaderGT() {
         ITooltipValidationHandler GT = new GregTech();
         ITooltipValidationHandler.register(GREG_TECH, GT);
         ITooltipValidationHandler.register(BART_WORKS, GT);

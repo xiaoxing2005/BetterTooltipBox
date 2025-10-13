@@ -1,11 +1,11 @@
 package com.xiao_xing.BetterTooltipBox;
 
+import java.io.IOException;
+
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-
-import java.io.IOException;
 
 public class CommonProxy {
 

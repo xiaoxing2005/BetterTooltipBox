@@ -1,12 +1,13 @@
 package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
 
-
-import com.xiao_xing.BetterTooltipBox.Config.ConfigManager;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.util.AxisAlignedBB;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+
+import com.xiao_xing.BetterTooltipBox.Config.ConfigManager;
 
 @Mixin(RenderGlobal.class)
 public class drawSelectionBoxMixin {

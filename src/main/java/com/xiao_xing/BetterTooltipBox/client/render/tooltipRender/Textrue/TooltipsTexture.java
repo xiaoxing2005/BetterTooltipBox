@@ -1,10 +1,10 @@
 package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue;
 
-import net.minecraft.util.ResourceLocation;
-
 import java.util.ArrayList;
 
-public class TooltipsTexture{
+import net.minecraft.util.ResourceLocation;
+
+public class TooltipsTexture {
 
     private final String textureName;
     private final ResourceLocation resourceLocation;
@@ -18,11 +18,10 @@ public class TooltipsTexture{
     public int CenterFragmentWidth = 0;
     public int CenterFragmentAmount = 0;
 
-
     private final ArrayList<TextureFragment> textureFragments = new ArrayList<>();
 
-    public TooltipsTexture(String textureName, ResourceLocation resourceLocation, int[][] backgroundColor, int[][] lineColor,
-                           int textureWidth, int textureHeight){
+    public TooltipsTexture(String textureName, ResourceLocation resourceLocation, int[][] backgroundColor,
+        int[][] lineColor, int textureWidth, int textureHeight) {
         this.textureName = textureName;
         this.resourceLocation = resourceLocation;
         this.backgroundColor = backgroundColor;
@@ -44,12 +43,11 @@ public class TooltipsTexture{
         return this.height;
     }
 
-
     public int[][] getBackgroundColor() {
         return backgroundColor;
     }
 
-    public void addTextureFragment(TextureFragment... textureFragment){
+    public void addTextureFragment(TextureFragment... textureFragment) {
         for (TextureFragment textureFragment1 : textureFragment) {
             switch (textureFragment1.getFragmentType()) {
                 case Top_Center:
@@ -76,7 +74,8 @@ public class TooltipsTexture{
         return textureName;
     }
 
-    public static class TextureFragment implements ITexture{
+    public static class TextureFragment implements ITexture {
+
         private final float uMin;
         private final float vMin;
         private final float uMax;
@@ -89,8 +88,8 @@ public class TooltipsTexture{
         private final float offsetY;
         private final TextureFragmentType fragmentType;
 
-        public TextureFragment(TextureFragmentType fragmentType, float textureWidth, float textureHeight, float fragmentX, float fragmentY, float fragmentWidth, float fragmentHeight,
-                               float offsetX, float offsetY){
+        public TextureFragment(TextureFragmentType fragmentType, float textureWidth, float textureHeight,
+            float fragmentX, float fragmentY, float fragmentWidth, float fragmentHeight, float offsetX, float offsetY) {
             this.fragmentType = fragmentType;
             this.fragmentX = fragmentX;
             this.fragmentY = fragmentY;
@@ -104,9 +103,18 @@ public class TooltipsTexture{
             this.offsetY = offsetY;
         }
 
-        public float[] generateVertex(float x, float y, float width, float height){
-            return fragmentType.GenerateVertex(x + offsetX,y + offsetY,width,height,
-                fragmentWidth,fragmentHeight,uMin,uMax,vMin,vMax);
+        public float[] generateVertex(float x, float y, float width, float height) {
+            return fragmentType.GenerateVertex(
+                x + offsetX,
+                y + offsetY,
+                width,
+                height,
+                fragmentWidth,
+                fragmentHeight,
+                uMin,
+                uMax,
+                vMin,
+                vMax);
         }
 
         public TextureFragmentType getFragmentType() {
@@ -157,75 +165,52 @@ public class TooltipsTexture{
         }
 
         public int[] getOffset() {
-            return new int[]{(int)offsetX,(int)offsetY};
+            return new int[] { (int) offsetX, (int) offsetY };
         }
     }
 
-    public enum TextureFragmentType{
-        Top_Left(
-            (float x, float y, float width, float height,float fragmentWidth,float fragmentHeight,
-             float uMin, float uMax, float vMin, float vMax) -> new float[]{
-                 x, y, uMin, vMin,
-                 x + fragmentWidth, y, uMax, vMin,
-                 x + fragmentWidth, y + fragmentHeight, uMax, vMax,
-                 x, y + fragmentHeight, uMin, vMax,
-             }
-        ),
-        Bottom_Left(
-            (float x, float y, float width, float height,float fragmentWidth,float fragmentHeight,
-             float uMin, float uMax, float vMin, float vMax) -> new float[]{
-                x, y + height - fragmentHeight, uMin, vMin,
-                x + fragmentWidth, y + height - fragmentHeight, uMax, vMin,
-                x + fragmentWidth, y + height, uMax, vMax,
-                x, y + height, uMin, vMax,
-            }
-        ),
-        Top_Right(
-            (float x, float y, float width, float height,float fragmentWidth,float fragmentHeight,
-             float uMin, float uMax, float vMin, float vMax) -> new float[]{
-                x + width - fragmentWidth, y, uMin, vMin,
-                x + width, y, uMax, vMin,
-                x + width, y + fragmentHeight, uMax, vMax,
-                x + width - fragmentWidth, y + fragmentHeight, uMin, vMax,
-             }
-        ),
-        Bottom_Right(
-            (float x, float y, float width, float height,float fragmentWidth,float fragmentHeight,
-             float uMin, float uMax, float vMin, float vMax) -> new float[]{
-                x + width - fragmentWidth, y + height - fragmentHeight, uMin, vMin,
-                x + width, y + height - fragmentHeight, uMax, vMin,
-                x + width, y + height, uMax, vMax,
-                x+ width - fragmentWidth, y + height, uMin, vMax,
-             }
-        ),
-        Top_Center(
-            (float x, float y, float width, float height,float fragmentWidth,float fragmentHeight,
-             float uMin, float uMax, float vMin, float vMax) -> new float[]{
-                 (x + (width / 2)) - (fragmentWidth / 2), y, uMin, vMin,
-                 (x + (width / 2)) + (fragmentWidth / 2), y, uMax, vMin,
-                 (x + (width / 2)) + (fragmentWidth / 2), y + fragmentHeight, uMax, vMax,
-                 (x + (width / 2)) - (fragmentWidth / 2), y + fragmentHeight, uMin, vMax,
-             }
-        ),
-        Bottom_Center(
-            (float x, float y, float width, float height,float fragmentWidth,float fragmentHeight,
-             float uMin, float uMax, float vMin, float vMax) -> new float[]{
-                (x + (width / 2)) - (fragmentWidth / 2), y + height - fragmentHeight, uMin, vMin,
-                (x + (width / 2)) + (fragmentWidth / 2), y + height - fragmentHeight, uMax, vMin,
+    public enum TextureFragmentType {
+
+        Top_Left((float x, float y, float width, float height, float fragmentWidth, float fragmentHeight, float uMin,
+            float uMax, float vMin,
+            float vMax) -> new float[] { x, y, uMin, vMin, x + fragmentWidth, y, uMax, vMin, x + fragmentWidth,
+                y + fragmentHeight, uMax, vMax, x, y + fragmentHeight, uMin, vMax, }),
+        Bottom_Left((float x, float y, float width, float height, float fragmentWidth, float fragmentHeight, float uMin,
+            float uMax, float vMin,
+            float vMax) -> new float[] { x, y + height - fragmentHeight, uMin, vMin, x + fragmentWidth,
+                y + height - fragmentHeight, uMax, vMin, x + fragmentWidth, y + height, uMax, vMax, x, y + height, uMin,
+                vMax, }),
+        Top_Right((float x, float y, float width, float height, float fragmentWidth, float fragmentHeight, float uMin,
+            float uMax, float vMin,
+            float vMax) -> new float[] { x + width - fragmentWidth, y, uMin, vMin, x + width, y, uMax, vMin, x + width,
+                y + fragmentHeight, uMax, vMax, x + width - fragmentWidth, y + fragmentHeight, uMin, vMax, }),
+        Bottom_Right((float x, float y, float width, float height, float fragmentWidth, float fragmentHeight,
+            float uMin, float uMax, float vMin,
+            float vMax) -> new float[] { x + width - fragmentWidth, y + height - fragmentHeight, uMin, vMin, x + width,
+                y + height - fragmentHeight, uMax, vMin, x + width, y + height, uMax, vMax, x + width - fragmentWidth,
+                y + height, uMin, vMax, }),
+        Top_Center((float x, float y, float width, float height, float fragmentWidth, float fragmentHeight, float uMin,
+            float uMax, float vMin,
+            float vMax) -> new float[] { (x + (width / 2)) - (fragmentWidth / 2), y, uMin, vMin,
+                (x + (width / 2)) + (fragmentWidth / 2), y, uMax, vMin, (x + (width / 2)) + (fragmentWidth / 2),
+                y + fragmentHeight, uMax, vMax, (x + (width / 2)) - (fragmentWidth / 2), y + fragmentHeight, uMin,
+                vMax, }),
+        Bottom_Center((float x, float y, float width, float height, float fragmentWidth, float fragmentHeight,
+            float uMin, float uMax, float vMin,
+            float vMax) -> new float[] { (x + (width / 2)) - (fragmentWidth / 2), y + height - fragmentHeight, uMin,
+                vMin, (x + (width / 2)) + (fragmentWidth / 2), y + height - fragmentHeight, uMax, vMin,
                 (x + (width / 2)) + (fragmentWidth / 2), y + height, uMax, vMax,
-                (x + (width / 2)) - (fragmentWidth / 2), y + height, uMin, vMax,
-             }
-        );
+                (x + (width / 2)) - (fragmentWidth / 2), y + height, uMin, vMax, });
 
         private final ITextureFragmentTypeHandler handler;
 
-        TextureFragmentType(ITextureFragmentTypeHandler handler){
+        TextureFragmentType(ITextureFragmentTypeHandler handler) {
             this.handler = handler;
         }
 
-        public float[] GenerateVertex(float x, float y, float width, float height,float fragmentWidth,float fragmentHeight,
-                                      float uMin, float uMax, float vMin, float vMaxV){
-            return handler.GenerateVertex(x,y,width,height,fragmentWidth,fragmentHeight,uMin,uMax,vMin,vMaxV);
+        public float[] GenerateVertex(float x, float y, float width, float height, float fragmentWidth,
+            float fragmentHeight, float uMin, float uMax, float vMin, float vMaxV) {
+            return handler.GenerateVertex(x, y, width, height, fragmentWidth, fragmentHeight, uMin, uMax, vMin, vMaxV);
         }
     }
 

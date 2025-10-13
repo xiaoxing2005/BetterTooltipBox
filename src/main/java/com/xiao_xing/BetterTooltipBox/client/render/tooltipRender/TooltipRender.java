@@ -1,16 +1,5 @@
 package com.xiao_xing.BetterTooltipBox.client.render.tooltipRender;
 
-import com.xiao_xing.BetterTooltipBox.client.render.shader.ShaderProgram;
-import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
-
-import java.nio.FloatBuffer;
-import java.util.ArrayList;
-
 import static com.xiao_xing.BetterTooltipBox.Util.TooltipHelper.mc;
 import static com.xiao_xing.BetterTooltipBox.client.render.shader.ShaderFactory.createProgram;
 import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture.TextureFragmentType.Bottom_Center;
@@ -26,6 +15,18 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
 import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
+
+import java.nio.FloatBuffer;
+import java.util.ArrayList;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GL15;
+import org.lwjgl.opengl.GL20;
+
+import com.xiao_xing.BetterTooltipBox.client.render.shader.ShaderProgram;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
 
 public class TooltipRender {
 
@@ -44,73 +45,73 @@ public class TooltipRender {
         "shader/Smooth.vert",
         "shader/Smooth.frag");
 
-    public TooltipRender(){}
+    public TooltipRender() {}
 
     public static TooltipRender getInstance() {
         return Instance;
     }
 
-    public void drawTooltip(TooltipsTexture texture, float x, float y, float width, float height,boolean isRenderNameUnderscore) {
+    public void drawTooltip(TooltipsTexture texture, float x, float y, float width, float height,
+        boolean isRenderNameUnderscore) {
         subMatrix(SmoothShader);
         subMatrix(TextureShader);
         DrawBackgroundAndLines(texture, x, y, width, height, isRenderNameUnderscore);
         DrawFrame(texture, x, y, width, height);
     }
 
-    private void DrawBackgroundAndLines(TooltipsTexture texture, float x, float y, float width, float height, boolean isRenderNameUnderscore){
+    private void DrawBackgroundAndLines(TooltipsTexture texture, float x, float y, float width, float height,
+        boolean isRenderNameUnderscore) {
         assert SmoothShader != null;
         VertexBuffer.clear();
         // Draw Background
-        if (isRenderNameUnderscore){
+        if (isRenderNameUnderscore) {
             isRenderNameUnderscore = height > 20;
         }
         int[][] bgColor = texture.getBackgroundColor();
         int[][] lineColor = texture.getLineColor();
-        VertexBuffer.put(new  float[] {
-            x, y, bgColor[0][0], bgColor[0][1], bgColor[0][2], bgColor[0][3],
-            x + width, y, bgColor[0][0], bgColor[0][1], bgColor[0][2], bgColor[0][3],
-            x + width, y + height, bgColor[1][0], bgColor[1][1], bgColor[1][2], bgColor[1][3],
-            x, y + height, bgColor[1][0], bgColor[1][1], bgColor[1][2], bgColor[1][3]
-        });
+        VertexBuffer.put(
+            new float[] { x, y, bgColor[0][0], bgColor[0][1], bgColor[0][2], bgColor[0][3], x + width, y, bgColor[0][0],
+                bgColor[0][1], bgColor[0][2], bgColor[0][3], x + width, y + height, bgColor[1][0], bgColor[1][1],
+                bgColor[1][2], bgColor[1][3], x, y + height, bgColor[1][0], bgColor[1][1], bgColor[1][2],
+                bgColor[1][3] });
         // Draw Lines
-        VertexBuffer.put(new float[]{
-            // Top
-            x, y, lineColor[0][0], lineColor[0][1], lineColor[0][2], lineColor[0][3],
-            x + width, y, lineColor[0][4], lineColor[0][5], lineColor[0][6], lineColor[0][7],
-            x + width, y + 1, lineColor[0][4], lineColor[0][5], lineColor[0][6], lineColor[0][7],
-            x, y + 1, lineColor[0][0], lineColor[0][1], lineColor[0][2], lineColor[0][3],
-            // Bottom
-            x, y + height - 1, lineColor[1][0], lineColor[1][1], lineColor[1][2], lineColor[1][3],
-            x + width, y + height - 1, lineColor[1][4], lineColor[1][5], lineColor[1][6], lineColor[1][7],
-            x + width, y + height, lineColor[1][4], lineColor[1][5], lineColor[1][6], lineColor[1][7],
-            x, y + height, lineColor[1][0], lineColor[1][1], lineColor[1][2], lineColor[1][3],
-            // Left
-            x, y, lineColor[2][0], lineColor[2][1], lineColor[2][2], lineColor[2][3],
-            x + 1, y, lineColor[2][0], lineColor[2][1], lineColor[2][2], lineColor[2][3],
-            x + 1, y + height, lineColor[2][4], lineColor[2][5], lineColor[2][6], lineColor[2][7],
-            x, y + height, lineColor[2][4], lineColor[2][5], lineColor[2][6], lineColor[2][7],
-            // Right
-            x + width - 1, y, lineColor[3][0], lineColor[3][1], lineColor[3][2], lineColor[3][3],
-            x + width, y, lineColor[3][0], lineColor[3][1], lineColor[3][2], lineColor[3][3],
-            x + width, y + height, lineColor[3][4], lineColor[3][5], lineColor[3][6], lineColor[3][7],
-            x + width - 1, y + height,lineColor[3][4], lineColor[3][5], lineColor[3][6], lineColor[3][7],
+        VertexBuffer.put(
+            new float[] {
+                // Top
+                x, y, lineColor[0][0], lineColor[0][1], lineColor[0][2], lineColor[0][3], x + width, y, lineColor[0][4],
+                lineColor[0][5], lineColor[0][6], lineColor[0][7], x + width, y + 1, lineColor[0][4], lineColor[0][5],
+                lineColor[0][6], lineColor[0][7], x, y + 1, lineColor[0][0], lineColor[0][1], lineColor[0][2],
+                lineColor[0][3],
+                // Bottom
+                x, y + height - 1, lineColor[1][0], lineColor[1][1], lineColor[1][2], lineColor[1][3], x + width,
+                y + height - 1, lineColor[1][4], lineColor[1][5], lineColor[1][6], lineColor[1][7], x + width,
+                y + height, lineColor[1][4], lineColor[1][5], lineColor[1][6], lineColor[1][7], x, y + height,
+                lineColor[1][0], lineColor[1][1], lineColor[1][2], lineColor[1][3],
+                // Left
+                x, y, lineColor[2][0], lineColor[2][1], lineColor[2][2], lineColor[2][3], x + 1, y, lineColor[2][0],
+                lineColor[2][1], lineColor[2][2], lineColor[2][3], x + 1, y + height, lineColor[2][4], lineColor[2][5],
+                lineColor[2][6], lineColor[2][7], x, y + height, lineColor[2][4], lineColor[2][5], lineColor[2][6],
+                lineColor[2][7],
+                // Right
+                x + width - 1, y, lineColor[3][0], lineColor[3][1], lineColor[3][2], lineColor[3][3], x + width, y,
+                lineColor[3][0], lineColor[3][1], lineColor[3][2], lineColor[3][3], x + width, y + height,
+                lineColor[3][4], lineColor[3][5], lineColor[3][6], lineColor[3][7], x + width - 1, y + height,
+                lineColor[3][4], lineColor[3][5], lineColor[3][6], lineColor[3][7],
 
-        });
-        if (isRenderNameUnderscore){
+            });
+        if (isRenderNameUnderscore) {
             VertexBuffer.put(
-                new float[]{
+                new float[] {
                     // Name underscore
-                    x, y + 14, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3],
-                    x + width / 2, y + 14, lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7],
-                    x + width / 2, y + 15, lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7],
-                    x, y + 15, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3],
+                    x, y + 14, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3], x + width / 2,
+                    y + 14, lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7], x + width / 2, y + 15,
+                    lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7], x, y + 15, lineColor[4][0],
+                    lineColor[4][1], lineColor[4][2], lineColor[4][3],
 
                     x + width / 2, y + 14, lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7],
-                    x + width, y + 14, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3],
-                    x + width, y + 15, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3],
-                    x + width / 2, y + 15, lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7],
-                }
-            );
+                    x + width, y + 14, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3], x + width,
+                    y + 15, lineColor[4][0], lineColor[4][1], lineColor[4][2], lineColor[4][3], x + width / 2, y + 15,
+                    lineColor[4][4], lineColor[4][5], lineColor[4][6], lineColor[4][7], });
         }
         VertexBuffer.flip();
 
@@ -142,12 +143,12 @@ public class TooltipRender {
         GL11.glPopMatrix();
     }
 
-    private void DrawFrame(TooltipsTexture texture, float x, float y, float width, float height){
+    private void DrawFrame(TooltipsTexture texture, float x, float y, float width, float height) {
         assert TextureShader != null;
         VertexBuffer.clear();
         ArrayList<TooltipsTexture.TextureFragment> frame = texture.getTextureFragments();
         boolean isRenderCenter = width > texture.CenterFragmentWidth;
-        int capacity = isRenderCenter ? frame.size()  : frame.size() - texture.CenterFragmentAmount;
+        int capacity = isRenderCenter ? frame.size() : frame.size() - texture.CenterFragmentAmount;
         for (TooltipsTexture.TextureFragment fragment : frame) {
             if (!isRenderCenter) {
                 if (fragment.getFragmentType() == Top_Center || fragment.getFragmentType() == Bottom_Center) {
@@ -208,6 +209,5 @@ public class TooltipRender {
         GL20.glUniformMatrix4(GL20.glGetUniformLocation(shader.getProgram(), "projection"), false, projection);
         shader.clear();
     }
-
 
 }

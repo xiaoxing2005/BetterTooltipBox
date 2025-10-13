@@ -1,23 +1,21 @@
 package com.xiao_xing.BetterTooltipBox;
 
+import static com.xiao_xing.BetterTooltipBox.Config.ConfigManager.registerSpecialItemList;
+
+import java.io.IOException;
+
 import com.xiao_xing.BetterTooltipBox.Config.ConfigManager;
 import com.xiao_xing.BetterTooltipBox.Mixins.plugin.mixinPlugin;
 import com.xiao_xing.BetterTooltipBox.client.command.commandConfig;
 import com.xiao_xing.BetterTooltipBox.client.render.event.keyInputEvent;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureLoader;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.TooltipValidationLoader;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-import static com.xiao_xing.BetterTooltipBox.Config.ConfigManager.registerSpecialItemList;
 
 public class ClientProxy extends CommonProxy {
 
@@ -55,7 +53,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void serverStarting(FMLServerStartingEvent event){
+    public void serverStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new commandConfig());
     }
 
