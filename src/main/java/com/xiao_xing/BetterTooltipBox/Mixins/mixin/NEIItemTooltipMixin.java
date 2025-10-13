@@ -16,7 +16,7 @@ public class NEIItemTooltipMixin {
      */
     @Inject(method = "drawTooltipBox(IIIIIIII)V", at = @At(value = "HEAD"),remap = false, cancellable = true)
     private static void drawGradientRect(int x, int y, int w, int h, int bgStart, int bgEnd, int borderStart, int borderEnd, CallbackInfo ci) {
-        TooltipHelper.DrawTooltip(x, y, w, h);
+        TooltipHelper.NEIDrawTooltip(x, y, w, h);
         ci.cancel();
     }
 }

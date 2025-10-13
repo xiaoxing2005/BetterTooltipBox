@@ -1,20 +1,26 @@
 package com.xiao_xing.BetterTooltipBox.Util;
 
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureManager;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipRender;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import squeek.applecore.client.TooltipOverlayHandler;
 
+import java.util.Objects;
+
 import static com.xiao_xing.BetterTooltipBox.BetterTooltipBox.ResourceID;
 import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureLoader.defaultTexture;
+import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.ITooltipValidationHandler.getTooltipValidation;
 
 public class TooltipHelper {
 
     public static final Minecraft mc = Minecraft.getMinecraft();
 
-    public static final ResourceLocation TEXTURE_TOOLTIP = new ResourceLocation(ResourceID + "gui/tooltip_borders.png");
+    public static ItemStack NEIItemStack = null;
 
     private static final ResourceLocation TEXTURE_TOOLTIP_BACKGROUND = new ResourceLocation(
         ResourceID + "gui/Tooltip_Background.png");
@@ -32,6 +38,20 @@ public class TooltipHelper {
 
     public static void DrawTooltip(int x, int y, int width, int height) {
         TooltipRender.getInstance().drawTooltip(defaultTexture, x, y, width, height,false);
+    }
+
+    public static void NEIDrawTooltip(int x, int y, int width, int height) {
+        TooltipsTexture texture = null;
+        if (NEIItemStack != null){
+            texture = TextureManager.getInstance().fromItemTexture(NEIItemStack);
+            if (texture == null) {
+                texture = getTooltipValidation(Objects.requireNonNull(GameRegistry.findUniqueIdentifierFor(NEIItemStack.getItem())).modId, NEIItemStack);
+            }
+        }
+        if (texture == null){
+            DrawTooltip(x, y, width, height);
+        }else DrawTooltip(texture,x,y,width,height);
+        NEIItemStack = null;
     }
 
     public static void DrawTooltip(int x, int y, int width, int height,boolean isRenderNameUnderscore) {
