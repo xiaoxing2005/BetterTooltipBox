@@ -20,6 +20,12 @@ public class lateMixinPlugin implements ILateMixinLoader {
         ArrayList<String> list = new ArrayList<>();
         if (loadedMods.contains("modularui")) {
             list.add("MuiTextBoxMixin");
+            list.add("MixinModularGui");
+        }
+        if (loadedMods.contains("CodeChickenCore") && loadedMods.contains("blockrenderer6343")){
+            list.add("MixinMultiBlockHandler");
+            list.add("MixinGuiMultiBlockHandler");
+            list.add("MixinInputHandler");
         }
         return list;
     }

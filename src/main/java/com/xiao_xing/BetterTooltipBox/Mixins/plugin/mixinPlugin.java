@@ -55,6 +55,7 @@ public class mixinPlugin implements IMixinConfigPlugin {
         } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException ignored1) {}
         MixinClass.add("TooltipMixin");
         MixinClass.add("drawSelectionBoxMixin");
+        MixinClass.add("MixinGuiContainerManager");
         return MixinClass;
         // System.out.println("id" + mod.version());
     }
