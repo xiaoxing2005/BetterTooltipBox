@@ -1,50 +1,46 @@
 # BetterTooltipBox
 
-[English Documentation](docs/README_EN.md) | 中文文档
+A Minecraft mod that allows players to fully customize tooltip appearance with custom textures, colors, and layouts.
 
-本 Mod 修改了游戏内 Tooltip 提示框，玩家可以自由按照固定的图片格式修改各种各样精美的贴图。
+![Example](https://via.placeholder.com/800x400?text=Tooltip+Preview)
 
-**GTNH 2.8.0 及以上请使用 v1.1.4 或更高版本**
+## Features
 
-## 功能特性
+- 🎨 Customizable tooltip backgrounds with gradient colors
+- 🖼️ Support for custom texture fragments
+- 🌈 Per-edge border color control with gradient effects
+- 📦 Per-item or per-mod tooltip styling
+- 🔄 Live reload configuration without restarting
 
-- 🎨 自定义 Tooltip 背景色，支持渐变效果
-- 🖼️ 支持自定义贴图碎片装饰
-- 🌈 独立控制每条边框的颜色和渐变
-- 📦 可为特定物品或整个模组设置专属样式
-- 🔄 热重载配置，无需重启游戏
-
-## 环境要求
+## Requirements
 
 - Minecraft 1.7.10
 - Forge
-- GTNH 2.8.0+（适用于 1.1.4+ 版本）
+- GTNH 2.8.0+ (for versions 1.1.4+)
 
-## 安装方法
+## Installation
 
-1. 从 [Releases](https://github.com/yourusername/BetterTooltipBox/releases) 下载最新版本
-2. 将 `.jar` 文件放入 `mods/` 文件夹
-3. 启动 Minecraft
+1. Download the latest release from [Releases](https://github.com/yourusername/BetterTooltipBox/releases)
+2. Place the `.jar` file in your `mods/` folder
+3. Launch Minecraft
 
-## 配置文件
+## Configuration
 
-配置文件位置：
-
+The configuration file is located at:
 ```
 .minecraft/config/BetterTooltipBox/config.json
 ```
 
-修改配置后，在游戏内使用以下命令重载：
-
+After making changes, reload the configuration in-game with:
 ```
 /bettertooltipbox reload
 ```
 
 ---
 
-## 配置文件结构
+## Configuration File Structure
 
-### 根对象
+### Root Object
 
 ```json
 {
@@ -59,18 +55,18 @@
 }
 ```
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| `Enable_SelectionBox` | `boolean` | 启用/禁用方块选择框渲染 |
-| `Enable_TooltipsOverwrite` | `boolean` | 允许覆盖已有的 Tooltip 材质 |
-| `TooltipsTextureList` | `object` | Tooltip 材质定义列表（键名 = 材质名称）|
-| `SpecialItemList` | `object` | 为特定物品指定材质的映射表 |
+| Field | Type | Description |
+|-------|------|-------------|
+| `Enable_SelectionBox` | `boolean` | Enable/disable block selection box rendering |
+| `Enable_TooltipsOverwrite` | `boolean` | Allow overwriting existing tooltip textures |
+| `TooltipsTextureList` | `object` | Map of texture definitions (key = texture name) |
+| `SpecialItemList` | `object` | Map of item-specific texture assignments |
 
 ---
 
-## Tooltip 材质定义
+## Tooltip Texture Definition
 
-`TooltipsTextureList` 中的每个材质遵循以下结构：
+Each texture in `TooltipsTextureList` follows this structure:
 
 ```json
 {
@@ -106,77 +102,66 @@
 
 ---
 
-## 字段说明
+## Field Reference
 
-### TextureName（材质名称）
+### TextureName
+**Type:** `string`
+**Required:** Yes
+**Description:** Unique identifier for this texture definition. Used to reference this texture in `SpecialItemList`.
 
-**类型：** `string`
-**必填：** 是
-**说明：** 该材质定义的唯一标识符，用于在 `SpecialItemList` 中引用此材质。
-
-**示例：**
-
+**Example:**
 ```json
 "TextureName": "myCustomTooltip"
 ```
 
 ---
 
-### ModId（模组 ID）
+### ModId
+**Type:** `string`
+**Required:** No
+**Description:** Mod ID to automatically apply this texture to all items from that mod.
 
-**类型：** `string`
-**必填：** 否
-**说明：** 指定模组 ID，自动将此材质应用到该模组的所有物品。
-
-**示例：**
-
+**Example:**
 ```json
 "ModId": "gregtech"
 ```
 
 ---
 
-### ResourceLocation（资源位置）
+### ResourceLocation
+**Type:** `string`
+**Required:** Yes
+**Description:** Path to the texture file in the resource pack format. Must follow Minecraft's resource location format: `modid:path/to/texture.png`
 
-**类型：** `string`
-**必填：** 是
-**说明：** 贴图文件的资源路径，必须遵循 Minecraft 资源定位格式：`modid:path/to/texture.png`
+**Notes:**
+- Textures must be placed in a resource pack
+- Cannot directly reference files in the config directory
 
-**注意事项：**
-
-- 贴图必须放置在资源包中
-- 无法直接引用 config 目录下的文件
-
-**示例：**
-
+**Example:**
 ```json
 "ResourceLocation": "bettertooltipbox:gui/GregTech.png"
 ```
 
 ---
 
-### TextureSize（贴图尺寸）
+### TextureSize
+**Type:** `[width, height]`
+**Required:** Yes
+**Description:** Dimensions of the source texture file in pixels.
 
-**类型：** `[width, height]`
-**必填：** 是
-**说明：** 源贴图文件的像素尺寸。
-
-**示例：**
-
+**Example:**
 ```json
 "TextureSize": [256, 256]
 ```
 
 ---
 
-### BackgroundColor（背景颜色）
+### BackgroundColor
+**Type:** `object`
+**Required:** Yes
+**Description:** Defines the tooltip background with vertical gradient support.
 
-**类型：** `object`
-**必填：** 是
-**说明：** 定义 Tooltip 背景色，支持垂直渐变。
-
-**结构：**
-
+**Structure:**
 ```json
 {
   "StartColor": [R, G, B, A],
@@ -184,15 +169,14 @@
 }
 ```
 
-- `StartColor`：顶部颜色
-- `EndColor`：底部颜色
-- 每个通道取值范围 0-255
-- `A`（Alpha）控制透明度：0 = 完全透明，255 = 完全不透明
+- `StartColor`: Top edge color
+- `EndColor`: Bottom edge color
+- Each channel ranges from 0-255
+- `A` (alpha) controls transparency: 0 = fully transparent, 255 = fully opaque
 
-**示例：**
+**Examples:**
 
-纯色紫色背景（70% 不透明度）：
-
+Solid purple background (70% opacity):
 ```json
 "BackgroundColor": {
   "StartColor": [147, 112, 219, 180],
@@ -200,8 +184,7 @@
 }
 ```
 
-从深蓝（顶部）到黑色（底部）的渐变：
-
+Gradient from dark blue (top) to black (bottom):
 ```json
 "BackgroundColor": {
   "StartColor": [25, 25, 112, 200],
@@ -209,8 +192,7 @@
 }
 ```
 
-完全透明背景：
-
+Fully transparent background:
 ```json
 "BackgroundColor": {
   "StartColor": [0, 0, 0, 0],
@@ -220,14 +202,12 @@
 
 ---
 
-### LineColor（边框颜色）
+### LineColor
+**Type:** `object`
+**Required:** Yes
+**Description:** Defines colors for all border edges. Each edge supports horizontal/vertical gradients.
 
-**类型：** `object`
-**必填：** 是
-**说明：** 定义所有边框的颜色，每条边支持水平/垂直渐变。
-
-**结构：**
-
+**Structure:**
 ```json
 {
   "Top": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
@@ -238,16 +218,15 @@
 }
 ```
 
-| 边框位置 | 渐变方向 | 说明 |
-|---------|---------|------|
-| `Top` | 左 → 右 | 顶部边框（1 像素高）|
-| `Bottom` | 左 → 右 | 底部边框（1 像素高）|
-| `Left` | 上 → 下 | 左侧边框（1 像素宽）|
-| `Right` | 上 → 下 | 右侧边框（1 像素宽）|
-| `Center` | 左 → 右 | 物品名称和描述之间的水平分割线 |
+| Edge | Gradient Direction | Description |
+|------|-------------------|-------------|
+| `Top` | Left → Right | Top border (1px tall) |
+| `Bottom` | Left → Right | Bottom border (1px tall) |
+| `Left` | Top → Bottom | Left border (1px wide) |
+| `Right` | Top → Bottom | Right border (1px wide) |
+| `Center` | Left → Right | Horizontal divider line between item name and description |
 
-**示例 - 金色边框：**
-
+**Example - Golden borders:**
 ```json
 "LineColor": {
   "Top": {
@@ -273,8 +252,7 @@
 }
 ```
 
-**示例 - 渐变边框（边缘淡出为透明）：**
-
+**Example - Gradient borders (fade to transparent at edges):**
 ```json
 "LineColor": {
   "Top": {
@@ -302,16 +280,14 @@
 
 ---
 
-### FragmentList（贴图碎片列表）
+### FragmentList
+**Type:** `array` of `Fragment` objects
+**Required:** No (can be empty array `[]`)
+**Description:** List of texture fragments to overlay on the tooltip. Used for decorative elements like corners, borders, or logos.
 
-**类型：** `array`，包含多个 `Fragment` 对象
-**必填：** 否（可以为空数组 `[]`）
-**说明：** 叠加在 Tooltip 上的贴图碎片列表，用于装饰性元素，如角落、边框或 Logo。
+Each fragment is a rectangular region cropped from the source texture and positioned on the tooltip.
 
-每个碎片是从源贴图中裁剪的矩形区域，放置在 Tooltip 的指定位置。
-
-**碎片对象结构：**
-
+**Fragment Object Structure:**
 ```json
 {
   "X": 0,
@@ -322,18 +298,17 @@
 }
 ```
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| `X` | `number` | 源贴图中的 X 坐标（从左侧开始的像素数）|
-| `Y` | `number` | 源贴图中的 Y 坐标（从顶部开始的像素数）|
-| `Width` | `number` | 裁剪区域的宽度（像素）|
-| `Height` | `number` | 裁剪区域的高度（像素）|
-| `Offset` | `[x, y]` | 相对于角落的位置偏移，`[-1, -1]` = 从左上角向内偏移 1 像素 |
+| Field | Type | Description |
+|-------|------|-------------|
+| `X` | `number` | X coordinate in the source texture (pixels from left) |
+| `Y` | `number` | Y coordinate in the source texture (pixels from top) |
+| `Width` | `number` | Width of the cropped region (pixels) |
+| `Height` | `number` | Height of the cropped region (pixels) |
+| `Offset` | `[x, y]` | Position offset from the corner `[-1, -1]` = 1px inward from top-left corner |
 
-**示例 - 四角装饰：**
+**Example - Corner decorations:**
 
-4 个小的 1x1 像素碎片，每个从角落向内偏移 1 像素：
-
+4 small 1x1 pixel fragments, each inset 1 pixel from the corners:
 ```json
 "FragmentList": [
   {
@@ -367,8 +342,7 @@
 ]
 ```
 
-**示例 - 顶部中心的 Logo：**
-
+**Example - Logo at top center:**
 ```json
 "FragmentList": [
   {
@@ -381,18 +355,17 @@
 ]
 ```
 
-**使用技巧：**
-
-- 使用小的 1x1 碎片可以实现精细的角落点缀
-- 负偏移值会将碎片向角落外侧移动
-- 正偏移值会将碎片向角落内侧移动
-- 留空 `FragmentList`（`[]`）可获得干净无贴图的 Tooltip
+**Tips:**
+- Use small 1x1 fragments for subtle corner accents
+- Negative offset values move the fragment outward from the corner
+- Positive offset values move the fragment inward from the corner
+- Leave `FragmentList` empty (`[]`) for a clean, texture-less tooltip
 
 ---
 
-## 完整配置示例
+## Complete Configuration Examples
 
-### 示例 1：紫色背景 + 金色边框
+### Example 1: Purple Background with Golden Borders
 
 ```json
 {
@@ -465,7 +438,7 @@
 }
 ```
 
-### 示例 2：透明背景 + 白色边框
+### Example 2: Transparent Background with White Border
 
 ```json
 {
@@ -509,7 +482,7 @@
 }
 ```
 
-### 示例 3：为不同模组配置多个材质
+### Example 3: Multiple Textures for Different Mods
 
 ```json
 {
@@ -562,12 +535,11 @@
 
 ---
 
-## 特殊物品列表
+## Special Item List
 
-`SpecialItemList` 允许你为特定物品指定专属材质。
+The `SpecialItemList` allows you to assign specific textures to individual items.
 
-**格式：**
-
+**Format:**
 ```json
 "SpecialItemList": {
   "textureName": [
@@ -576,8 +548,7 @@
 }
 ```
 
-**示例：**
-
+**Example:**
 ```json
 "SpecialItemList": {
   "epicTooltip": [
@@ -592,12 +563,11 @@
 
 ---
 
-## 配色方案参考
+## Color Palette Reference
 
-以下是一些预设配色方案供你使用：
+Here are some pre-made color schemes you can use:
 
-### 皇家紫金
-
+### Royal Purple & Gold
 ```json
 "BackgroundColor": {
   "StartColor": [147, 112, 219, 180],
@@ -605,12 +575,11 @@
 },
 "LineColor": {
   "Top": { "StartColor": [205, 165, 100, 255], "EndColor": [205, 165, 100, 255] }
-  // ... (其他边框重复相同设置)
+  // ... (repeat for all edges)
 }
 ```
 
-### 深蓝青色
-
+### Dark Blue & Cyan
 ```json
 "BackgroundColor": {
   "StartColor": [0, 30, 60, 200],
@@ -621,8 +590,7 @@
 }
 ```
 
-### 血红金色
-
+### Blood Red & Gold
 ```json
 "BackgroundColor": {
   "StartColor": [139, 0, 0, 180],
@@ -633,8 +601,7 @@
 }
 ```
 
-### 森林绿棕
-
+### Forest Green & Brown
 ```json
 "BackgroundColor": {
   "StartColor": [34, 139, 34, 180],
@@ -647,60 +614,56 @@
 
 ---
 
-## 游戏内命令
+## Commands
 
-| 命令 | 说明 |
-|------|------|
-| `/bettertooltipbox reload` | 重载配置文件，无需重启游戏 |
-
----
-
-## 常见问题
-
-### Tooltip 显示了但颜色没有改变
-
-- 检查 JSON 语法是否正确（可使用在线 JSON 验证器）
-- 确认 RGBA 值在 0-255 范围内
-- 编辑后运行 `/bettertooltipbox reload`
-
-### 贴图碎片没有显示
-
-- 确认 `ResourceLocation` 指向有效的贴图文件
-- 验证贴图已放置在已加载的资源包中
-- 检查 `X`、`Y`、`Width`、`Height` 是否在贴图范围内
-
-### 找不到配置文件
-
-- 配置文件在首次启动时自动生成
-- 位置：`.minecraft/config/BetterTooltipBox/config.json`
-- 如果缺失，启动一次游戏即可生成
-
-### 对特定物品的修改没有生效
-
-- 检查 `SpecialItemList` 语法
-- 物品格式：`"modid:itemname:metadata"`（全小写）
-- 修改后使用 `/bettertooltipbox reload`
+| Command | Description |
+|---------|-------------|
+| `/bettertooltipbox reload` | Reload configuration without restarting Minecraft |
 
 ---
 
-## 贡献指南
+## Troubleshooting
 
-欢迎贡献代码！请遵循以下准则：
+### Tooltip appears but colors don't change
+- Verify your JSON syntax is correct (use a JSON validator)
+- Check that RGBA values are between 0-255
+- Run `/bettertooltipbox reload` after editing
 
-1. Fork 本仓库
-2. 创建功能分支
-3. 遵循现有代码风格
-4. 充分测试你的修改
-5. 提交 Pull Request
+### Texture fragments don't appear
+- Ensure `ResourceLocation` points to a valid texture file
+- Verify the texture is in a loaded resource pack
+- Check that `X`, `Y`, `Width`, `Height` are within the texture bounds
+
+### Configuration file not found
+- The config file is auto-generated on first launch
+- Location: `.minecraft/config/BetterTooltipBox/config.json`
+- If missing, launch the game once to generate it
+
+### Changes don't apply to specific items
+- Check `SpecialItemList` syntax
+- Item format: `"modid:itemname:metadata"` (all lowercase)
+- Use `/bettertooltipbox reload` after changes
 
 ---
 
-## 致谢
+## Contributing
 
-- 贡献者：[查看贡献者列表](https://github.com/xiaoxing2005/BetterTooltipBox/graphs/contributors)
+Contributions are welcome! Please follow these guidelines:
+
+1. Fork the repository
+2. Create a feature branch
+3. Follow existing code style
+4. Test your changes thoroughly
+5. Submit a pull request
 
 ---
 
-## 支持与反馈
+## Credits
 
-- 问题反馈：[GitHub Issues](https://github.com/xiaoxing2005/BetterTooltipBox/issues)
+- Contributors: [See Contributors](https://github.com/xiaoxing2005/BetterTooltipBox/graphs/contributors)
+
+---
+
+## Support
+
+- Issues: [GitHub Issues](https://github.com/xiaoxing2005/BetterTooltipBox/issues)
