@@ -14,6 +14,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent;
@@ -21,8 +22,10 @@ import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureManager;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -72,6 +75,21 @@ public class renderTooltipEvent {
 
     public renderTooltipEvent() {
         MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance()
+            .bus()
+            .register(this);
+    }
+
+    private int dwheel = 0;
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void getMouseWheel(TickEvent.ClientTickEvent event) {
+        if (event.phase == TickEvent.Phase.END) {
+            if (Minecraft.getMinecraft().currentScreen != null && Mouse.isCreated()) {
+                dwheel = Mouse.getDWheel();
+            }
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -149,20 +167,16 @@ public class renderTooltipEvent {
                     // 如果居中后依旧小于0，那么将调整为指定坐标
                     if (y < 0) {
                         // 滚轮调整偏移
-                        if (Mouse.isCreated()) {
-                            while (Mouse.next()) {
-                                int wheel = Mouse.getEventDWheel();
-                                if (wheel != 0) {
-                                    if (wheel > 0) { // 上限位
-                                        offsetY = Math.min(0, offsetY + 8);
-                                    } else {
-                                        offsetY -= 8;
-                                    }
-                                }
+                        if (Keyboard.isKeyDown(Keyboard.KEY_TAB) && dwheel != 0) {
+                            if (dwheel > 0) { // 上限位
+                                offsetY = Math.min(0, offsetY + (Math.abs(dwheel) / 120) * 8);
+                            } else {
+                                offsetY -= (Math.abs(dwheel) / 120) * 8;
                             }
+                            dwheel = 0;
                         }
-                        y = 14 + offsetY; // 这里的14为恰好露出logo并与画面顶端间隔1格像素
                     }
+                    y = 14 + offsetY; // 这里的14为恰好露出logo并与画面顶端间隔1格像素
                 }
             }
 
