@@ -19,9 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 
-import cpw.mods.fml.common.Loader;
-import squeek.applecore.client.TooltipOverlayHandler;
-
 @Mixin(value = GuiScreen.class)
 public class TooltipMixin extends Gui {
 
