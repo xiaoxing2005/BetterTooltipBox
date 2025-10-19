@@ -1,38 +1,43 @@
 # BetterTooltipBox
 
-A Minecraft mod that allows players to fully customize tooltip appearance with custom textures, colors, and layouts.
+[中文文档](../README.md) | English Documentation
 
-![Example](https://via.placeholder.com/800x400?text=Tooltip+Preview)
+This mod modifies the in-game Tooltip box, allowing players to freely customize it with various exquisite textures according to a fixed image format.
+
+**For GTNH 2.8.0 and above, please use v1.1.4 or higher.**
 
 ## Features
 
-- 🎨 Customizable tooltip backgrounds with gradient colors
-- 🖼️ Support for custom texture fragments
-- 🌈 Per-edge border color control with gradient effects
-- 📦 Per-item or per-mod tooltip styling
-- 🔄 Live reload configuration without restarting
+- 🎨 Customize Tooltip background color, with gradient support
+- 🖼️ Support for custom texture fragment decorations
+- 🌈 Independent color and gradient control for each border
+- 📦 Set exclusive styles for specific items or entire mods
+- 🔄 Hot-reload configuration without restarting the game
 
 ## Requirements
 
 - Minecraft 1.7.10
 - Forge
-- GTNH 2.8.0+ (for versions 1.1.4+)
+- GTNH 2.8.0+ (for version 1.1.4+)
 
 ## Installation
 
-1. Download the latest release from [Releases](https://github.com/yourusername/BetterTooltipBox/releases)
-2. Place the `.jar` file in your `mods/` folder
+1. Download the latest version from [Releases](https://github.com/yourusername/BetterTooltipBox/releases)
+2. Place the `.jar` file into the `mods/` folder
 3. Launch Minecraft
 
-## Configuration
+## Configuration File
 
-The configuration file is located at:
+Configuration file location:
+
 ```
 .minecraft/config/BetterTooltipBox/config.json
 ```
 
-After making changes, reload the configuration in-game with:
+After modifying the configuration, use the following commands in-game to reload:
+
 ```
+/bettertooltipbox save
 /bettertooltipbox reload
 ```
 
@@ -46,21 +51,21 @@ After making changes, reload the configuration in-game with:
 {
   "Enable_SelectionBox": true,
   "Enable_TooltipsOverwrite": false,
-  "TooltipsTextureList": {
-    "defaultTexture": { ... }
+  "TooltipsTextureList":{
+    "defaultTexture":{}
   },
-  "SpecialItemList": {
-    "textureName": ["modid:itemname:meta"]
+  "SpecialItemList":{
+    "textureName":["modid:itemname:meta"]
   }
 }
 ```
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `Enable_SelectionBox` | `boolean` | Enable/disable block selection box rendering |
-| `Enable_TooltipsOverwrite` | `boolean` | Allow overwriting existing tooltip textures |
-| `TooltipsTextureList` | `object` | Map of texture definitions (key = texture name) |
-| `SpecialItemList` | `object` | Map of item-specific texture assignments |
+| Field                      | Type      | Description                                               |
+|----------------------------|-----------|-----------------------------------------------------------|
+| `Enable_SelectionBox`      | `boolean` | Enable/disable block selection box rendering.             |
+| `Enable_TooltipsOverwrite` | `boolean` | Allow overwriting existing Tooltip textures.              |
+| `TooltipsTextureList`      | `object`  | List of Tooltip texture definitions (key = texture name). |
+| `SpecialItemList`          | `object`  | Mapping table to assign textures to specific items.       |
 
 ---
 
@@ -70,144 +75,174 @@ Each texture in `TooltipsTextureList` follows this structure:
 
 ```json
 {
-  "TextureName": "defaultTexture",
-  "ModId": "bettertooltipbox",
-  "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
-  "TextureSize": [256, 256],
-  "BackgroundColor": {
-    "StartColor": [147, 112, 219, 180],
-    "EndColor": [147, 112, 219, 180]
+  "TextureName":"defaultTexture",
+  "ModId":"bettertooltipbox",
+  "ResourceLocation":"bettertooltipbox:gui/GregTech.png",
+  "TextureSize":[256, 256],
+  "BackgroundColor":{
+    "StartColor":[147, 112, 219, 180],
+    "EndColor":[147, 112, 219, 180]
   },
-  "LineColor": {
-    "Top": {
-      "StartColor": [205, 165, 100, 255],
-      "EndColor": [205, 165, 100, 255]
+  "LineColor":{
+    "Top":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
     },
-    "Bottom": { ... },
-    "Left": { ... },
-    "Right": { ... },
-    "Center": { ... }
+    "Bottom":{},
+    "Left":{},
+    "Right":{},
+    "Center": {}
   },
-  "FragmentList": [
-    {
+  "FragmentList":{
+    "Top_Center":{
       "X": 0,
       "Y": 0,
       "Width": 16,
       "Height": 16,
-      "Offset": [-1, -1]
+      "Offset":[-1, -1]
     }
-  ]
+  }
 }
 ```
 
 ---
 
-## Field Reference
+## Field Descriptions
 
 ### TextureName
+
 **Type:** `string`
 **Required:** Yes
-**Description:** Unique identifier for this texture definition. Used to reference this texture in `SpecialItemList`.
+**Description:** A unique identifier for this texture definition, used to reference it in `SpecialItemList`.
 
 **Example:**
+
 ```json
-"TextureName": "myCustomTooltip"
+{
+  "TextureName": "myCustomTooltip"
+}
 ```
 
 ---
 
 ### ModId
+
 **Type:** `string`
 **Required:** No
-**Description:** Mod ID to automatically apply this texture to all items from that mod.
+**Description:** Specify a mod ID to automatically apply this texture to all items from that mod. The mod has a built-in GregTech Tooltip texture. To replace it, set `Enable_TooltipsOverwrite` to true and use the corresponding voltage tier name as the texture name.
 
 **Example:**
+
 ```json
-"ModId": "gregtech"
+{
+  "ModId": "gregtech"
+}
 ```
 
 ---
 
 ### ResourceLocation
+
 **Type:** `string`
 **Required:** Yes
-**Description:** Path to the texture file in the resource pack format. Must follow Minecraft's resource location format: `modid:path/to/texture.png`
+**Description:** The resource path to the texture file, which must follow the Minecraft resource location format: `modid:path/to/texture.png`
 
 **Notes:**
-- Textures must be placed in a resource pack
-- Cannot directly reference files in the config directory
+
+- The texture must be placed in a resource pack.
+- You cannot directly reference files in the config directory.
 
 **Example:**
+
 ```json
-"ResourceLocation": "bettertooltipbox:gui/GregTech.png"
+{
+  "ResourceLocation": "bettertooltipbox:gui/GregTech.png"
+}
 ```
 
 ---
 
 ### TextureSize
+
 **Type:** `[width, height]`
 **Required:** Yes
-**Description:** Dimensions of the source texture file in pixels.
+**Description:** The pixel dimensions of the source texture file.
 
 **Example:**
+
 ```json
-"TextureSize": [256, 256]
+{
+  "TextureSize":[256, 256]
+}
 ```
 
 ---
 
 ### BackgroundColor
+
 **Type:** `object`
 **Required:** Yes
-**Description:** Defines the tooltip background with vertical gradient support.
+**Description:** Defines the Tooltip background color, supporting a vertical gradient.
 
 **Structure:**
+
 ```json
 {
-  "StartColor": [R, G, B, A],
-  "EndColor": [R, G, B, A]
+  "StartColor":[R, G, B, A],
+  "EndColor":[R, G, B, A]
 }
 ```
 
-- `StartColor`: Top edge color
-- `EndColor`: Bottom edge color
-- Each channel ranges from 0-255
-- `A` (alpha) controls transparency: 0 = fully transparent, 255 = fully opaque
+- `StartColor`: Top color
+- `EndColor`: Bottom color
+- Each channel value ranges from 0-255.
+- `A` (Alpha) controls transparency: 0 = fully transparent, 255 = fully opaque.
 
-**Examples:**
+**Example:**
 
 Solid purple background (70% opacity):
+
 ```json
-"BackgroundColor": {
-  "StartColor": [147, 112, 219, 180],
-  "EndColor": [147, 112, 219, 180]
+{
+  "BackgroundColor":{
+    "StartColor":[147, 112, 219, 180],
+    "EndColor":[147, 112, 219, 180]
+  }
 }
 ```
 
 Gradient from dark blue (top) to black (bottom):
+
 ```json
-"BackgroundColor": {
-  "StartColor": [25, 25, 112, 200],
-  "EndColor": [0, 0, 0, 200]
+{
+  "BackgroundColor":{
+    "StartColor":[25, 25, 112, 200],
+    "EndColor":[0, 0, 0, 200]
+  }
 }
 ```
 
 Fully transparent background:
+
 ```json
-"BackgroundColor": {
-  "StartColor": [0, 0, 0, 0],
-  "EndColor": [0, 0, 0, 0]
+{
+  "BackgroundColor":{
+    "StartColor":[0, 0, 0, 0],
+    "EndColor":[0, 0, 0, 0]
+  }
 }
 ```
 
 ---
 
-### LineColor
+### LineColor (Border Color)
+
 **Type:** `object`
 **Required:** Yes
-**Description:** Defines colors for all border edges. Each edge supports horizontal/vertical gradients.
+**Description:** Defines the color for all borders. Each border supports a horizontal/vertical gradient.
 
 **Structure:**
+
 ```json
 {
   "Top": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
@@ -218,267 +253,284 @@ Fully transparent background:
 }
 ```
 
-| Edge | Gradient Direction | Description |
-|------|-------------------|-------------|
-| `Top` | Left → Right | Top border (1px tall) |
-| `Bottom` | Left → Right | Bottom border (1px tall) |
-| `Left` | Top → Bottom | Left border (1px wide) |
-| `Right` | Top → Bottom | Right border (1px wide) |
-| `Center` | Left → Right | Horizontal divider line between item name and description |
+| Border Position | Gradient Direction | Description                                       |
+|-----------------|--------------------|---------------------------------------------------|
+| `Top`           | Left → Right       | Top border (1 pixel high)                         |
+| `Bottom`        | Left → Right       | Bottom border (1 pixel high)                      |
+| `Left`          | Top → Bottom       | Left border (1 pixel wide)                        |
+| `Right`         | Top → Bottom       | Right border (1 pixel wide)                       |
+| `Center`        | Left → Right       | Horizontal separator between item name and description |
 
-**Example - Golden borders:**
+**Example - Gold Border:**
+
 ```json
-"LineColor": {
-  "Top": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
-  },
-  "Bottom": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
-  },
-  "Left": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
-  },
-  "Right": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
-  },
-  "Center": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
+{
+  "LineColor":{
+    "Top":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    },
+    "Bottom":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    },
+    "Left":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    },
+    "Right":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    },
+    "Center":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    }
   }
 }
 ```
 
-**Example - Gradient borders (fade to transparent at edges):**
+**Example - Gradient Border (fading to transparent at edges):**
+
 ```json
-"LineColor": {
-  "Top": {
-    "StartColor": [255, 255, 255, 0],
-    "EndColor": [255, 255, 255, 255]
-  },
-  "Bottom": {
-    "StartColor": [255, 255, 255, 255],
-    "EndColor": [255, 255, 255, 0]
-  },
-  "Left": {
-    "StartColor": [255, 255, 255, 0],
-    "EndColor": [255, 255, 255, 255]
-  },
-  "Right": {
-    "StartColor": [255, 255, 255, 255],
-    "EndColor": [255, 255, 255, 0]
-  },
-  "Center": {
-    "StartColor": [100, 100, 100, 255],
-    "EndColor": [100, 100, 100, 255]
+{
+  "LineColor":{
+    "Top": {
+      "StartColor":[255, 255, 255, 0],
+      "EndColor":[255, 255, 255, 255]
+    },
+    "Bottom":{
+      "StartColor":[255, 255, 255, 255],
+      "EndColor":[255, 255, 255, 0]
+    },
+    "Left":{
+      "StartColor":[255, 255, 255, 0],
+      "EndColor":[255, 255, 255, 255]
+    },
+    "Right": {
+      "StartColor":[255, 255, 255, 255],
+      "EndColor":[255, 255, 255, 0]
+    },
+    "Center":{
+      "StartColor":[100, 100, 100, 255],
+      "EndColor":[100, 100, 100, 255]
+    }
   }
 }
 ```
 
 ---
 
-### FragmentList
-**Type:** `array` of `Fragment` objects
-**Required:** No (can be empty array `[]`)
-**Description:** List of texture fragments to overlay on the tooltip. Used for decorative elements like corners, borders, or logos.
+### FragmentList (Texture Fragment List)
 
-Each fragment is a rectangular region cropped from the source texture and positioned on the tooltip.
+**Type:** `array`, containing multiple `Fragment` objects
+**Required:** No (can be an empty object `{}`, optional types are `Top_Left`, `Bottom_Left`, `Top_Right`, `Bottom_Right`, `Top_Center`, `Bottom_Center`)
+**Description:** A list of texture fragments overlaid on the Tooltip, used for decorative elements like corners, borders, or logos.
+
+Each fragment is a rectangular area cropped from the source texture and placed at a specified position on the Tooltip.
 
 **Fragment Object Structure:**
+
 ```json
 {
-  "X": 0,
-  "Y": 0,
-  "Width": 16,
-  "Height": 16,
-  "Offset": [0, 0]
-}
-```
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `X` | `number` | X coordinate in the source texture (pixels from left) |
-| `Y` | `number` | Y coordinate in the source texture (pixels from top) |
-| `Width` | `number` | Width of the cropped region (pixels) |
-| `Height` | `number` | Height of the cropped region (pixels) |
-| `Offset` | `[x, y]` | Position offset from the corner `[-1, -1]` = 1px inward from top-left corner |
-
-**Example - Corner decorations:**
-
-4 small 1x1 pixel fragments, each inset 1 pixel from the corners:
-```json
-"FragmentList": [
-  {
+  "Top_Center":{
     "X": 0,
     "Y": 0,
-    "Width": 1,
-    "Height": 1,
-    "Offset": [-1, -1]
-  },
-  {
-    "X": 0,
-    "Y": 0,
-    "Width": 1,
-    "Height": 1,
-    "Offset": [1, -1]
-  },
-  {
-    "X": 0,
-    "Y": 0,
-    "Width": 1,
-    "Height": 1,
-    "Offset": [-1, 1]
-  },
-  {
-    "X": 0,
-    "Y": 0,
-    "Width": 1,
-    "Height": 1,
-    "Offset": [1, 1]
-  }
-]
-```
-
-**Example - Logo at top center:**
-```json
-"FragmentList": [
-  {
-    "X": 0,
-    "Y": 0,
-    "Width": 64,
+    "Width": 16,
     "Height": 16,
     "Offset": [0, 0]
   }
-]
-```
-
-**Tips:**
-- Use small 1x1 fragments for subtle corner accents
-- Negative offset values move the fragment outward from the corner
-- Positive offset values move the fragment inward from the corner
-- Leave `FragmentList` empty (`[]`) for a clean, texture-less tooltip
-
----
-
-## Complete Configuration Examples
-
-### Example 1: Purple Background with Golden Borders
-
-```json
-{
-  "Enable_SelectionBox": true,
-  "Enable_TooltipsOverwrite": false,
-  "TooltipsTextureList": {
-    "defaultTexture": {
-      "TextureName": "defaultTexture",
-      "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
-      "TextureSize": [256, 256],
-      "BackgroundColor": {
-        "StartColor": [147, 112, 219, 180],
-        "EndColor": [147, 112, 219, 180]
-      },
-      "LineColor": {
-        "Top": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
-        },
-        "Bottom": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
-        },
-        "Left": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
-        },
-        "Right": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
-        },
-        "Center": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
-        }
-      },
-      "FragmentList": [
-        {
-          "X": 0,
-          "Y": 0,
-          "Width": 1,
-          "Height": 1,
-          "Offset": [-1, -1]
-        },
-        {
-          "X": 0,
-          "Y": 0,
-          "Width": 1,
-          "Height": 1,
-          "Offset": [1, -1]
-        },
-        {
-          "X": 0,
-          "Y": 0,
-          "Width": 1,
-          "Height": 1,
-          "Offset": [-1, 1]
-        },
-        {
-          "X": 0,
-          "Y": 0,
-          "Width": 1,
-          "Height": 1,
-          "Offset": [1, 1]
-        }
-      ]
-    }
-  },
-  "SpecialItemList": {}
 }
 ```
 
-### Example 2: Transparent Background with White Border
+| Field  | Type     | Description                                                          |
+|--------|----------|----------------------------------------------------------------------|
+| `X`    | `number` | X coordinate in the source texture (pixels from the left)            |
+| `Y`    | `number` | Y coordinate in the source texture (pixels from the top)             |
+| `Width`| `number` | Width of the cropped area (pixels)                                   |
+| `Height`| `number` | Height of the cropped area (pixels)                                  |
+| `Offset`| `[x, y]` | Positional offset relative to the corner, `[-1, -1]` = offset 1 pixel inwards from the top-left corner |
+
+**Example - Four Corner Decorations:**
+
+4 small 1x1 pixel fragments, each offset 1 pixel inwards from its corner:
+
+```json
+{
+  "FragmentList":{
+    "Top_Left":{
+      "X": 0,
+      "Y": 0,
+      "Width": 1,
+      "Height": 1,
+      "Offset":[-1, -1]
+    },
+    "Bottom_Left":{
+      "X": 0,
+      "Y": 0,
+      "Width": 1,
+      "Height": 1,
+      "Offset":[1, -1]
+    },
+    "Top_Right":{
+      "X": 0,
+      "Y": 0,
+      "Width": 1,
+      "Height": 1,
+      "Offset":[-1, 1]
+    },
+    "Bottom_Right":{
+      "X": 0,
+      "Y": 0,
+      "Width": 1,
+      "Height": 1,
+      "Offset":[1, 1]
+    }
+  }
+}
+```
+
+**Example - Logo at the Top Center:**
+
+```json
+{
+  "FragmentList":{
+    "Top_Center":{
+      "X": 0,
+      "Y": 0,
+      "Width": 64,
+      "Height": 16,
+      "Offset":[0, 0]
+    }
+  }
+}
+```
+
+**Usage Tips:**
+
+- Use small 1x1 fragments for fine corner details.
+- Negative offset values move the fragment outwards from the corner.
+- Positive offset values move the fragment inwards from the corner.
+- Leave `FragmentList` empty (`{}`) for a clean, texture-free Tooltip.
+
+---
+
+## Full Configuration Examples
+
+### Example 1: Purple Background + Gold Border
 
 ```json
 {
   "Enable_SelectionBox": true,
   "Enable_TooltipsOverwrite": false,
-  "TooltipsTextureList": {
-    "defaultTexture": {
+  "TooltipsTextureList":{
+    "defaultTexture":{
       "TextureName": "defaultTexture",
       "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
-      "TextureSize": [256, 256],
-      "BackgroundColor": {
-        "StartColor": [0, 0, 0, 0],
-        "EndColor": [0, 0, 0, 0]
+      "TextureSize":[256, 256],
+      "BackgroundColor":{
+        "StartColor":[147, 112, 219, 180],
+        "EndColor":[147, 112, 219, 180]
       },
-      "LineColor": {
-        "Top": {
-          "StartColor": [255, 255, 255, 255],
-          "EndColor": [255, 255, 255, 255]
+      "LineColor":{
+        "Top":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         },
-        "Bottom": {
-          "StartColor": [255, 255, 255, 255],
-          "EndColor": [255, 255, 255, 255]
+        "Bottom":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         },
-        "Left": {
-          "StartColor": [255, 255, 255, 255],
-          "EndColor": [255, 255, 255, 255]
+        "Left":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         },
-        "Right": {
-          "StartColor": [255, 255, 255, 255],
-          "EndColor": [255, 255, 255, 255]
+        "Right":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         },
-        "Center": {
-          "StartColor": [255, 255, 255, 128],
-          "EndColor": [255, 255, 255, 128]
+        "Center":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         }
       },
-      "FragmentList": []
+      "FragmentList":{
+        "Top_Left":{
+          "X": 0,
+          "Y": 0,
+          "Width": 1,
+          "Height": 1,
+          "Offset":[-1, -1]
+        },
+        "Bottom_Left":{
+          "X": 0,
+          "Y": 0,
+          "Width": 1,
+          "Height": 1,
+          "Offset":[1, -1]
+        },
+        "Top_Right":{
+          "X": 0,
+          "Y": 0,
+          "Width": 1,
+          "Height": 1,
+          "Offset":[-1, 1]
+        },
+        "Bottom_Right":{
+          "X": 0,
+          "Y": 0,
+          "Width": 1,
+          "Height": 1,
+          "Offset":[1, 1]
+        }
+      }
     }
   },
-  "SpecialItemList": {}
+  "SpecialItemList":{}
+}
+```
+
+### Example 2: Transparent Background + White Border
+
+```json
+{
+  "Enable_SelectionBox": true,
+  "Enable_TooltipsOverwrite": false,
+  "TooltipsTextureList":{
+    "defaultTexture":{
+      "TextureName": "defaultTexture",
+      "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
+      "TextureSize":[256, 256],
+      "BackgroundColor":{
+        "StartColor":[0, 0, 0, 0],
+        "EndColor":[0, 0, 0, 0]
+      },
+      "LineColor":{
+        "Top":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255]
+        },
+        "Bottom":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255]
+        },
+        "Left":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255]
+        },
+        "Right":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255]
+        },
+        "Center":{
+          "StartColor":[255, 255, 255, 128],
+          "EndColor":[255, 255, 255, 128]
+        }
+      },
+      "FragmentList":{}
+    }
+  },
+  "SpecialItemList":{}
 }
 ```
 
@@ -487,7 +539,7 @@ Each fragment is a rectangular region cropped from the source texture and positi
 ```json
 {
   "Enable_SelectionBox": true,
-  "Enable_TooltipsOverwrite": false,
+  "Enable_TooltipsOverwrite": true,
   "TooltipsTextureList": {
     "defaultTexture": {
       "TextureName": "defaultTexture",
@@ -497,36 +549,56 @@ Each fragment is a rectangular region cropped from the source texture and positi
         "StartColor": [100, 100, 100, 200],
         "EndColor": [100, 100, 100, 200]
       },
-      "LineColor": {
-        "Top": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] },
-        "Bottom": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] },
-        "Left": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] },
-        "Right": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] },
-        "Center": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] }
+      "LineColor":{
+        "Top":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] },
+        "Bottom":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] },
+        "Left":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] },
+        "Right":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] },
+        "Center":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] }
       },
-      "FragmentList": []
+      "FragmentList":{}
     },
-    "gregTechTooltip": {
-      "TextureName": "gregTechTooltip",
+    "ULV": {
+      "TextureName": "ULV",
       "ModId": "gregtech",
       "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
-      "TextureSize": [256, 256],
-      "BackgroundColor": {
-        "StartColor": [0, 100, 200, 180],
-        "EndColor": [0, 50, 100, 180]
+      "TextureSize":[256, 256],
+      "BackgroundColor":{
+        "StartColor":[0, 100, 200, 180],
+        "EndColor":[0, 50, 100, 180]
       },
-      "LineColor": {
-        "Top": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] },
-        "Bottom": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] },
-        "Left": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] },
-        "Right": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] },
-        "Center": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] }
+      "LineColor":{
+        "Top":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] },
+        "Bottom":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] },
+        "Left":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] },
+        "Right":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] },
+        "Center":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] }
       },
-      "FragmentList": []
+      "FragmentList":{}
     }
   },
   "SpecialItemList": {
-    "gregTechTooltip": [
+    "ULV": [
       "gregtech:gt.metaitem.01:32600"
     ]
   }
@@ -537,133 +609,171 @@ Each fragment is a rectangular region cropped from the source texture and positi
 
 ## Special Item List
 
-The `SpecialItemList` allows you to assign specific textures to individual items.
+`SpecialItemList` allows you to assign specific textures to particular items.
 
 **Format:**
+
 ```json
-"SpecialItemList": {
-  "textureName": [
-    "modid:itemname:metadata"
-  ]
+{
+  "SpecialItemList":{
+    "textureName":[
+      "modid:itemname:metadata"
+    ]
+  }
 }
 ```
 
 **Example:**
+
 ```json
-"SpecialItemList": {
-  "epicTooltip": [
-    "minecraft:diamond_sword:0",
-    "minecraft:diamond_pickaxe:0"
-  ],
-  "rareTooltip": [
-    "minecraft:gold_sword:0"
-  ]
+{
+  "SpecialItemList":{
+    "epicTooltip":[
+      "minecraft:diamond_sword:0",
+      "minecraft:diamond_pickaxe:0"
+    ],
+    "rareTooltip":[
+      "minecraft:gold_sword:0"
+    ]
+  }
 }
 ```
 
 ---
 
-## Color Palette Reference
+## Color Scheme Reference
 
-Here are some pre-made color schemes you can use:
+Here are some preset color schemes for you to use:
 
 ### Royal Purple & Gold
-```json
-"BackgroundColor": {
-  "StartColor": [147, 112, 219, 180],
-  "EndColor": [147, 112, 219, 180]
-},
-"LineColor": {
-  "Top": { "StartColor": [205, 165, 100, 255], "EndColor": [205, 165, 100, 255] }
-  // ... (repeat for all edges)
-}
-```
 
-### Dark Blue & Cyan
 ```json
-"BackgroundColor": {
-  "StartColor": [0, 30, 60, 200],
-  "EndColor": [0, 15, 30, 200]
-},
-"LineColor": {
-  "Top": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] }
+{
+  "BackgroundColor":{
+    "StartColor":[147, 112, 219, 180],
+    "EndColor":[147, 112, 219, 180]
+  },
+  "LineColor":{
+    "Top":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    }
+  }
+}
+
+```
+// ... (repeat same settings for other borders)
+
+### Deep Blue & Cyan
+
+```json
+{
+  "BackgroundColor":{
+    "StartColor":[0, 30, 60, 200],
+    "EndColor":[0, 15, 30, 200]
+  },
+  "LineColor":{
+    "Top":{
+      "StartColor":[0, 200, 255, 255],
+      "EndColor":[0, 200, 255, 255]
+    }
+  }
 }
 ```
 
 ### Blood Red & Gold
+
 ```json
-"BackgroundColor": {
-  "StartColor": [139, 0, 0, 180],
-  "EndColor": [80, 0, 0, 180]
-},
-"LineColor": {
-  "Top": { "StartColor": [255, 215, 0, 255], "EndColor": [255, 215, 0, 255] }
+{
+  "BackgroundColor":{
+    "StartColor":[139, 0, 0, 180],
+    "EndColor":[80, 0, 0, 180]
+  },
+  "LineColor":{
+    "Top":{
+      "StartColor":[255, 215, 0, 255],
+      "EndColor":[255, 215, 0, 255]
+    }
+  }
 }
 ```
 
 ### Forest Green & Brown
+
 ```json
-"BackgroundColor": {
-  "StartColor": [34, 139, 34, 180],
-  "EndColor": [20, 80, 20, 180]
-},
-"LineColor": {
-  "Top": { "StartColor": [139, 90, 43, 255], "EndColor": [139, 90, 43, 255] }
+{
+  "BackgroundColor":{
+    "StartColor":[34, 139, 34, 180],
+    "EndColor":[20, 80, 20, 180]
+  },
+  "LineColor":{
+    "Top":{
+      "StartColor":[139, 90, 43, 255],
+      "EndColor":[139, 90, 43, 255]
+    }
+  }
 }
 ```
 
 ---
 
-## Commands
+## In-Game Commands
 
-| Command | Description |
-|---------|-------------|
-| `/bettertooltipbox reload` | Reload configuration without restarting Minecraft |
+| Command                                 | Description                                                                                                   |
+|-----------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| `/bettertooltipbox add "TooltipName"`   | Adds the item in hand to the `SpecialItemList` and applies the specified Tooltip texture.                   |
+| `/bettertooltipbox reload`              | Reloads the configuration file without restarting the game. Usually used with `/bettertooltipbox save`.       |
+| `/bettertooltipbox save`                | Saves the configuration file without restarting the game. Usually used with `/bettertooltipbox reload`.       |
+| `/bettertooltipbox reload`              | Reloads the configuration file without restarting the game. Usually used with `/bettertooltipbox save`.       |
 
 ---
 
-## Troubleshooting
+## FAQ
 
-### Tooltip appears but colors don't change
-- Verify your JSON syntax is correct (use a JSON validator)
-- Check that RGBA values are between 0-255
-- Run `/bettertooltipbox reload` after editing
+### The Tooltip is displayed, but the color hasn't changed.
 
-### Texture fragments don't appear
-- Ensure `ResourceLocation` points to a valid texture file
-- Verify the texture is in a loaded resource pack
-- Check that `X`, `Y`, `Width`, `Height` are within the texture bounds
+- Check if the JSON syntax is correct (you can use an online JSON validator).
+- Confirm that RGBA values are within the 0-255 range.
+- Run `/bettertooltipbox save` and `/bettertooltipbox reload` after editing.
 
-### Configuration file not found
-- The config file is auto-generated on first launch
+### Texture fragments are not showing.
+
+- Confirm that `ResourceLocation` points to a valid texture file.
+- Verify that the texture is placed in a loaded resource pack.
+- Check if `X`, `Y`, `Width`, and `Height` are within the texture's bounds.
+
+### Cannot find the configuration file.
+
+- The configuration file is generated automatically on the first launch.
 - Location: `.minecraft/config/BetterTooltipBox/config.json`
-- If missing, launch the game once to generate it
+- If it's missing, launching the game once will generate it.
 
-### Changes don't apply to specific items
-- Check `SpecialItemList` syntax
-- Item format: `"modid:itemname:metadata"` (all lowercase)
-- Use `/bettertooltipbox reload` after changes
+### Changes to a specific item are not taking effect.
+
+- Check the `SpecialItemList` syntax.
+- Item format: `"modid:itemname:metadata"` (all lowercase).
+- Use `/bettertooltipbox save` and `/bettertooltipbox reload` after making changes.
 
 ---
 
-## Contributing
+## Contribution Guidelines
 
 Contributions are welcome! Please follow these guidelines:
 
-1. Fork the repository
-2. Create a feature branch
-3. Follow existing code style
-4. Test your changes thoroughly
-5. Submit a pull request
+1. Fork this repository.
+2. Create a feature branch.
+3. Adhere to the existing code style.
+4. Thoroughly test your changes.
+5. Submit a Pull Request.
 
 ---
 
-## Credits
+## Acknowledgements
 
-- Contributors: [See Contributors](https://github.com/xiaoxing2005/BetterTooltipBox/graphs/contributors)
+- Contributors: [View contributor list](https://github.com/xiaoxing2005/BetterTooltipBox/graphs/contributors)
 
 ---
 
-## Support
+## Support and Feedback
 
-- Issues: [GitHub Issues](https://github.com/xiaoxing2005/BetterTooltipBox/issues)
+- For issues: [GitHub Issues](https://github.com/xiaoxing2005/BetterTooltipBox/issues)

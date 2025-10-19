@@ -37,6 +37,7 @@
 修改配置后，在游戏内使用以下命令重载：
 
 ```
+/bettertooltipbox save
 /bettertooltipbox reload
 ```
 
@@ -50,21 +51,21 @@
 {
   "Enable_SelectionBox": true,
   "Enable_TooltipsOverwrite": false,
-  "TooltipsTextureList": {
-    "defaultTexture": { ... }
+  "TooltipsTextureList":{
+    "defaultTexture":{}
   },
-  "SpecialItemList": {
-    "textureName": ["modid:itemname:meta"]
+  "SpecialItemList":{
+    "textureName":["modid:itemname:meta"]
   }
 }
 ```
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| `Enable_SelectionBox` | `boolean` | 启用/禁用方块选择框渲染 |
-| `Enable_TooltipsOverwrite` | `boolean` | 允许覆盖已有的 Tooltip 材质 |
-| `TooltipsTextureList` | `object` | Tooltip 材质定义列表（键名 = 材质名称）|
-| `SpecialItemList` | `object` | 为特定物品指定材质的映射表 |
+| 字段                         | 类型        | 说明                        |
+|----------------------------|-----------|---------------------------|
+| `Enable_SelectionBox`      | `boolean` | 启用/禁用方块选择框渲染              |
+| `Enable_TooltipsOverwrite` | `boolean` | 允许覆盖已有的 Tooltip 材质        |
+| `TooltipsTextureList`      | `object`  | Tooltip 材质定义列表（键名 = 材质名称） |
+| `SpecialItemList`          | `object`  | 为特定物品指定材质的映射表             |
 
 ---
 
@@ -74,33 +75,33 @@
 
 ```json
 {
-  "TextureName": "defaultTexture",
-  "ModId": "bettertooltipbox",
-  "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
-  "TextureSize": [256, 256],
-  "BackgroundColor": {
-    "StartColor": [147, 112, 219, 180],
-    "EndColor": [147, 112, 219, 180]
+  "TextureName":"defaultTexture",
+  "ModId":"bettertooltipbox",
+  "ResourceLocation":"bettertooltipbox:gui/GregTech.png",
+  "TextureSize":[256, 256],
+  "BackgroundColor":{
+    "StartColor":[147, 112, 219, 180],
+    "EndColor":[147, 112, 219, 180]
   },
-  "LineColor": {
-    "Top": {
-      "StartColor": [205, 165, 100, 255],
-      "EndColor": [205, 165, 100, 255]
+  "LineColor":{
+    "Top":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
     },
-    "Bottom": { ... },
-    "Left": { ... },
-    "Right": { ... },
-    "Center": { ... }
+    "Bottom":{},
+    "Left":{},
+    "Right":{},
+    "Center": {}
   },
-  "FragmentList": [
-    {
+  "FragmentList":{
+    "Top_Center":{
       "X": 0,
       "Y": 0,
       "Width": 16,
       "Height": 16,
-      "Offset": [-1, -1]
+      "Offset":[-1, -1]
     }
-  ]
+  }
 }
 ```
 
@@ -117,7 +118,9 @@
 **示例：**
 
 ```json
-"TextureName": "myCustomTooltip"
+{
+  "TextureName": "myCustomTooltip"
+}
 ```
 
 ---
@@ -126,12 +129,14 @@
 
 **类型：** `string`
 **必填：** 否
-**说明：** 指定模组 ID，自动将此材质应用到该模组的所有物品。
+**说明：** 指定模组 ID，自动将此材质应用到该模组的所有物品。mod内置了gregtech的Tooltip材质，如需替换请将`Enable_TooltipsOverwrite`设为true并直接以对应电压等级作为材质名称。
 
 **示例：**
 
 ```json
-"ModId": "gregtech"
+{
+  "ModId": "gregtech"
+}
 ```
 
 ---
@@ -150,7 +155,9 @@
 **示例：**
 
 ```json
-"ResourceLocation": "bettertooltipbox:gui/GregTech.png"
+{
+  "ResourceLocation": "bettertooltipbox:gui/GregTech.png"
+}
 ```
 
 ---
@@ -164,7 +171,9 @@
 **示例：**
 
 ```json
-"TextureSize": [256, 256]
+{
+  "TextureSize":[256, 256]
+}
 ```
 
 ---
@@ -179,8 +188,8 @@
 
 ```json
 {
-  "StartColor": [R, G, B, A],
-  "EndColor": [R, G, B, A]
+  "StartColor":[R, G, B, A],
+  "EndColor":[R, G, B, A]
 }
 ```
 
@@ -194,27 +203,33 @@
 纯色紫色背景（70% 不透明度）：
 
 ```json
-"BackgroundColor": {
-  "StartColor": [147, 112, 219, 180],
-  "EndColor": [147, 112, 219, 180]
+{
+  "BackgroundColor":{
+    "StartColor":[147, 112, 219, 180],
+    "EndColor":[147, 112, 219, 180]
+  }
 }
 ```
 
 从深蓝（顶部）到黑色（底部）的渐变：
 
 ```json
-"BackgroundColor": {
-  "StartColor": [25, 25, 112, 200],
-  "EndColor": [0, 0, 0, 200]
+{
+  "BackgroundColor":{
+    "StartColor":[25, 25, 112, 200],
+    "EndColor":[0, 0, 0, 200]
+  }
 }
 ```
 
 完全透明背景：
 
 ```json
-"BackgroundColor": {
-  "StartColor": [0, 0, 0, 0],
-  "EndColor": [0, 0, 0, 0]
+{
+  "BackgroundColor":{
+    "StartColor":[0, 0, 0, 0],
+    "EndColor":[0, 0, 0, 0]
+  }
 }
 ```
 
@@ -249,26 +264,28 @@
 **示例 - 金色边框：**
 
 ```json
-"LineColor": {
-  "Top": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
-  },
-  "Bottom": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
-  },
-  "Left": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
-  },
-  "Right": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
-  },
-  "Center": {
-    "StartColor": [205, 165, 100, 255],
-    "EndColor": [205, 165, 100, 255]
+{
+  "LineColor":{
+    "Top":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    },
+    "Bottom":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    },
+    "Left":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    },
+    "Right":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    },
+    "Center":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    }
   }
 }
 ```
@@ -276,26 +293,28 @@
 **示例 - 渐变边框（边缘淡出为透明）：**
 
 ```json
-"LineColor": {
-  "Top": {
-    "StartColor": [255, 255, 255, 0],
-    "EndColor": [255, 255, 255, 255]
-  },
-  "Bottom": {
-    "StartColor": [255, 255, 255, 255],
-    "EndColor": [255, 255, 255, 0]
-  },
-  "Left": {
-    "StartColor": [255, 255, 255, 0],
-    "EndColor": [255, 255, 255, 255]
-  },
-  "Right": {
-    "StartColor": [255, 255, 255, 255],
-    "EndColor": [255, 255, 255, 0]
-  },
-  "Center": {
-    "StartColor": [100, 100, 100, 255],
-    "EndColor": [100, 100, 100, 255]
+{
+  "LineColor":{
+    "Top": {
+      "StartColor":[255, 255, 255, 0],
+      "EndColor":[255, 255, 255, 255]
+    },
+    "Bottom":{
+      "StartColor":[255, 255, 255, 255],
+      "EndColor":[255, 255, 255, 0]
+    },
+    "Left":{
+      "StartColor":[255, 255, 255, 0],
+      "EndColor":[255, 255, 255, 255]
+    },
+    "Right": {
+      "StartColor":[255, 255, 255, 255],
+      "EndColor":[255, 255, 255, 0]
+    },
+    "Center":{
+      "StartColor":[100, 100, 100, 255],
+      "EndColor":[100, 100, 100, 255]
+    }
   }
 }
 ```
@@ -305,7 +324,7 @@
 ### FragmentList（贴图碎片列表）
 
 **类型：** `array`，包含多个 `Fragment` 对象
-**必填：** 否（可以为空数组 `[]`）
+**必填：** 否（可以为空数组 `{}`,可选类型有`Top_Left`,`Bottom_Left`,`Top_Right`,`Bottom_Right`,`Top_Center`,`Bottom_Center`）
 **说明：** 叠加在 Tooltip 上的贴图碎片列表，用于装饰性元素，如角落、边框或 Logo。
 
 每个碎片是从源贴图中裁剪的矩形区域，放置在 Tooltip 的指定位置。
@@ -314,11 +333,13 @@
 
 ```json
 {
-  "X": 0,
-  "Y": 0,
-  "Width": 16,
-  "Height": 16,
-  "Offset": [0, 0]
+  "Top_Center":{
+    "X": 0,
+    "Y": 0,
+    "Width": 16,
+    "Height": 16,
+    "Offset": [0, 0]
+  }
 }
 ```
 
@@ -335,50 +356,54 @@
 4 个小的 1x1 像素碎片，每个从角落向内偏移 1 像素：
 
 ```json
-"FragmentList": [
-  {
-    "X": 0,
-    "Y": 0,
-    "Width": 1,
-    "Height": 1,
-    "Offset": [-1, -1]
-  },
-  {
-    "X": 0,
-    "Y": 0,
-    "Width": 1,
-    "Height": 1,
-    "Offset": [1, -1]
-  },
-  {
-    "X": 0,
-    "Y": 0,
-    "Width": 1,
-    "Height": 1,
-    "Offset": [-1, 1]
-  },
-  {
-    "X": 0,
-    "Y": 0,
-    "Width": 1,
-    "Height": 1,
-    "Offset": [1, 1]
+{
+  "FragmentList":{
+    "Top_Left":{
+      "X": 0,
+      "Y": 0,
+      "Width": 1,
+      "Height": 1,
+      "Offset":[-1, -1]
+    },
+    "Bottom_Left":{
+      "X": 0,
+      "Y": 0,
+      "Width": 1,
+      "Height": 1,
+      "Offset":[1, -1]
+    },
+    "Top_Right":{
+      "X": 0,
+      "Y": 0,
+      "Width": 1,
+      "Height": 1,
+      "Offset":[-1, 1]
+    },
+    "Bottom_Right":{
+      "X": 0,
+      "Y": 0,
+      "Width": 1,
+      "Height": 1,
+      "Offset":[1, 1]
+    }
   }
-]
+}
 ```
 
 **示例 - 顶部中心的 Logo：**
 
 ```json
-"FragmentList": [
-  {
-    "X": 0,
-    "Y": 0,
-    "Width": 64,
-    "Height": 16,
-    "Offset": [0, 0]
+{
+  "FragmentList":{
+    "Top_Center":{
+      "X": 0,
+      "Y": 0,
+      "Width": 64,
+      "Height": 16,
+      "Offset":[0, 0]
+    }
   }
-]
+}
 ```
 
 **使用技巧：**
@@ -386,7 +411,7 @@
 - 使用小的 1x1 碎片可以实现精细的角落点缀
 - 负偏移值会将碎片向角落外侧移动
 - 正偏移值会将碎片向角落内侧移动
-- 留空 `FragmentList`（`[]`）可获得干净无贴图的 Tooltip
+- 留空 `FragmentList`（`{}`）可获得干净无贴图的 Tooltip
 
 ---
 
@@ -398,70 +423,70 @@
 {
   "Enable_SelectionBox": true,
   "Enable_TooltipsOverwrite": false,
-  "TooltipsTextureList": {
-    "defaultTexture": {
+  "TooltipsTextureList":{
+    "defaultTexture":{
       "TextureName": "defaultTexture",
       "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
-      "TextureSize": [256, 256],
-      "BackgroundColor": {
-        "StartColor": [147, 112, 219, 180],
-        "EndColor": [147, 112, 219, 180]
+      "TextureSize":[256, 256],
+      "BackgroundColor":{
+        "StartColor":[147, 112, 219, 180],
+        "EndColor":[147, 112, 219, 180]
       },
-      "LineColor": {
-        "Top": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
+      "LineColor":{
+        "Top":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         },
-        "Bottom": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
+        "Bottom":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         },
-        "Left": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
+        "Left":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         },
-        "Right": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
+        "Right":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         },
-        "Center": {
-          "StartColor": [205, 165, 100, 255],
-          "EndColor": [205, 165, 100, 255]
+        "Center":{
+          "StartColor":[205, 165, 100, 255],
+          "EndColor":[205, 165, 100, 255]
         }
       },
-      "FragmentList": [
-        {
+      "FragmentList":{
+        "Top_Left":{
           "X": 0,
           "Y": 0,
           "Width": 1,
           "Height": 1,
-          "Offset": [-1, -1]
+          "Offset":[-1, -1]
         },
-        {
+        "Bottom_Left":{
           "X": 0,
           "Y": 0,
           "Width": 1,
           "Height": 1,
-          "Offset": [1, -1]
+          "Offset":[1, -1]
         },
-        {
+        "Top_Right":{
           "X": 0,
           "Y": 0,
           "Width": 1,
           "Height": 1,
-          "Offset": [-1, 1]
+          "Offset":[-1, 1]
         },
-        {
+        "Bottom_Right":{
           "X": 0,
           "Y": 0,
           "Width": 1,
           "Height": 1,
-          "Offset": [1, 1]
+          "Offset":[1, 1]
         }
-      ]
+      }
     }
   },
-  "SpecialItemList": {}
+  "SpecialItemList":{}
 }
 ```
 
@@ -471,41 +496,41 @@
 {
   "Enable_SelectionBox": true,
   "Enable_TooltipsOverwrite": false,
-  "TooltipsTextureList": {
-    "defaultTexture": {
+  "TooltipsTextureList":{
+    "defaultTexture":{
       "TextureName": "defaultTexture",
       "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
-      "TextureSize": [256, 256],
-      "BackgroundColor": {
-        "StartColor": [0, 0, 0, 0],
-        "EndColor": [0, 0, 0, 0]
+      "TextureSize":[256, 256],
+      "BackgroundColor":{
+        "StartColor":[0, 0, 0, 0],
+        "EndColor":[0, 0, 0, 0]
       },
-      "LineColor": {
-        "Top": {
-          "StartColor": [255, 255, 255, 255],
-          "EndColor": [255, 255, 255, 255]
+      "LineColor":{
+        "Top":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255]
         },
-        "Bottom": {
-          "StartColor": [255, 255, 255, 255],
-          "EndColor": [255, 255, 255, 255]
+        "Bottom":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255]
         },
-        "Left": {
-          "StartColor": [255, 255, 255, 255],
-          "EndColor": [255, 255, 255, 255]
+        "Left":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255]
         },
-        "Right": {
-          "StartColor": [255, 255, 255, 255],
-          "EndColor": [255, 255, 255, 255]
+        "Right":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255]
         },
-        "Center": {
-          "StartColor": [255, 255, 255, 128],
-          "EndColor": [255, 255, 255, 128]
+        "Center":{
+          "StartColor":[255, 255, 255, 128],
+          "EndColor":[255, 255, 255, 128]
         }
       },
-      "FragmentList": []
+      "FragmentList":{}
     }
   },
-  "SpecialItemList": {}
+  "SpecialItemList":{}
 }
 ```
 
@@ -514,7 +539,7 @@
 ```json
 {
   "Enable_SelectionBox": true,
-  "Enable_TooltipsOverwrite": false,
+  "Enable_TooltipsOverwrite": true,
   "TooltipsTextureList": {
     "defaultTexture": {
       "TextureName": "defaultTexture",
@@ -524,36 +549,56 @@
         "StartColor": [100, 100, 100, 200],
         "EndColor": [100, 100, 100, 200]
       },
-      "LineColor": {
-        "Top": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] },
-        "Bottom": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] },
-        "Left": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] },
-        "Right": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] },
-        "Center": { "StartColor": [255, 255, 255, 255], "EndColor": [255, 255, 255, 255] }
+      "LineColor":{
+        "Top":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] },
+        "Bottom":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] },
+        "Left":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] },
+        "Right":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] },
+        "Center":{
+          "StartColor":[255, 255, 255, 255],
+          "EndColor":[255, 255, 255, 255] }
       },
-      "FragmentList": []
+      "FragmentList":{}
     },
-    "gregTechTooltip": {
-      "TextureName": "gregTechTooltip",
+    "ULV": {
+      "TextureName": "ULV",
       "ModId": "gregtech",
       "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
-      "TextureSize": [256, 256],
-      "BackgroundColor": {
-        "StartColor": [0, 100, 200, 180],
-        "EndColor": [0, 50, 100, 180]
+      "TextureSize":[256, 256],
+      "BackgroundColor":{
+        "StartColor":[0, 100, 200, 180],
+        "EndColor":[0, 50, 100, 180]
       },
-      "LineColor": {
-        "Top": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] },
-        "Bottom": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] },
-        "Left": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] },
-        "Right": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] },
-        "Center": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] }
+      "LineColor":{
+        "Top":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] },
+        "Bottom":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] },
+        "Left":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] },
+        "Right":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] },
+        "Center":{
+          "StartColor": [0, 200, 255, 255],
+          "EndColor": [0, 200, 255, 255] }
       },
-      "FragmentList": []
+      "FragmentList":{}
     }
   },
   "SpecialItemList": {
-    "gregTechTooltip": [
+    "ULV": [
       "gregtech:gt.metaitem.01:32600"
     ]
   }
@@ -569,24 +614,28 @@
 **格式：**
 
 ```json
-"SpecialItemList": {
-  "textureName": [
-    "modid:itemname:metadata"
-  ]
+{
+  "SpecialItemList":{
+    "textureName":[
+      "modid:itemname:metadata"
+    ]
+  }
 }
 ```
 
 **示例：**
 
 ```json
-"SpecialItemList": {
-  "epicTooltip": [
-    "minecraft:diamond_sword:0",
-    "minecraft:diamond_pickaxe:0"
-  ],
-  "rareTooltip": [
-    "minecraft:gold_sword:0"
-  ]
+{
+  "SpecialItemList":{
+    "epicTooltip":[
+      "minecraft:diamond_sword:0",
+      "minecraft:diamond_pickaxe:0"
+    ],
+    "rareTooltip":[
+      "minecraft:gold_sword:0"
+    ]
+  }
 }
 ```
 
@@ -599,49 +648,70 @@
 ### 皇家紫金
 
 ```json
-"BackgroundColor": {
-  "StartColor": [147, 112, 219, 180],
-  "EndColor": [147, 112, 219, 180]
-},
-"LineColor": {
-  "Top": { "StartColor": [205, 165, 100, 255], "EndColor": [205, 165, 100, 255] }
-  // ... (其他边框重复相同设置)
+{
+  "BackgroundColor":{
+    "StartColor":[147, 112, 219, 180],
+    "EndColor":[147, 112, 219, 180]
+  },
+  "LineColor":{
+    "Top":{
+      "StartColor":[205, 165, 100, 255],
+      "EndColor":[205, 165, 100, 255]
+    }
+  }
 }
+
 ```
+// ... (其他边框重复相同设置)
 
 ### 深蓝青色
 
 ```json
-"BackgroundColor": {
-  "StartColor": [0, 30, 60, 200],
-  "EndColor": [0, 15, 30, 200]
-},
-"LineColor": {
-  "Top": { "StartColor": [0, 200, 255, 255], "EndColor": [0, 200, 255, 255] }
+{
+  "BackgroundColor":{
+    "StartColor":[0, 30, 60, 200],
+    "EndColor":[0, 15, 30, 200]
+  },
+  "LineColor":{
+    "Top":{
+      "StartColor":[0, 200, 255, 255],
+      "EndColor":[0, 200, 255, 255]
+    }
+  }
 }
 ```
 
 ### 血红金色
 
 ```json
-"BackgroundColor": {
-  "StartColor": [139, 0, 0, 180],
-  "EndColor": [80, 0, 0, 180]
-},
-"LineColor": {
-  "Top": { "StartColor": [255, 215, 0, 255], "EndColor": [255, 215, 0, 255] }
+{
+  "BackgroundColor":{
+    "StartColor":[139, 0, 0, 180],
+    "EndColor":[80, 0, 0, 180]
+  },
+  "LineColor":{
+    "Top":{
+      "StartColor":[255, 215, 0, 255],
+      "EndColor":[255, 215, 0, 255]
+    }
+  }
 }
 ```
 
 ### 森林绿棕
 
 ```json
-"BackgroundColor": {
-  "StartColor": [34, 139, 34, 180],
-  "EndColor": [20, 80, 20, 180]
-},
-"LineColor": {
-  "Top": { "StartColor": [139, 90, 43, 255], "EndColor": [139, 90, 43, 255] }
+{
+  "BackgroundColor":{
+    "StartColor":[34, 139, 34, 180],
+    "EndColor":[20, 80, 20, 180]
+  },
+  "LineColor":{
+    "Top":{
+      "StartColor":[139, 90, 43, 255],
+      "EndColor":[139, 90, 43, 255]
+    }
+  }
 }
 ```
 
@@ -649,9 +719,12 @@
 
 ## 游戏内命令
 
-| 命令 | 说明 |
-|------|------|
-| `/bettertooltipbox reload` | 重载配置文件，无需重启游戏 |
+| 命令                                    | 说明                                                |
+|---------------------------------------|---------------------------------------------------|
+| `/bettertooltipbox add “TooltipName”` | 将手中的物品添加进`SpecialItemList`中并使用指定的Tooltip材质        |
+| `/bettertooltipbox reload`            | 重载配置文件，无需重启游戏，一般需要与`/bettertooltipbox save`配合使用   |
+| `/bettertooltipbox save`              | 保存配置文件，无需重启游戏，一般需要与`/bettertooltipbox reload`配合使用 |
+| `/bettertooltipbox reload`            | 重载配置文件，无需重启游戏，一般需要与`/bettertooltipbox save`配合使用   |
 
 ---
 
@@ -661,7 +734,7 @@
 
 - 检查 JSON 语法是否正确（可使用在线 JSON 验证器）
 - 确认 RGBA 值在 0-255 范围内
-- 编辑后运行 `/bettertooltipbox reload`
+- 编辑后运行 `/bettertooltipbox save`与`/bettertooltipbox reload`
 
 ### 贴图碎片没有显示
 
@@ -679,7 +752,7 @@
 
 - 检查 `SpecialItemList` 语法
 - 物品格式：`"modid:itemname:metadata"`（全小写）
-- 修改后使用 `/bettertooltipbox reload`
+- 修改后使用 `/bettertooltipbox save`与`/bettertooltipbox reload`
 
 ---
 
