@@ -1,6 +1,6 @@
 # BetterTooltipBox
 
-[中文文档](../README.md) | English Documentation
+[中文文档](README.md) | English Documentation
 
 This mod modifies the in-game Tooltip box, allowing players to freely customize it with various exquisite textures according to a fixed image format.
 
@@ -75,31 +75,33 @@ Each texture in `TooltipsTextureList` follows this structure:
 
 ```json
 {
-  "TextureName":"defaultTexture",
-  "ModId":"bettertooltipbox",
-  "ResourceLocation":"bettertooltipbox:gui/GregTech.png",
-  "TextureSize":[256, 256],
-  "BackgroundColor":{
-    "StartColor":[147, 112, 219, 180],
-    "EndColor":[147, 112, 219, 180]
-  },
-  "LineColor":{
-    "Top":{
-      "StartColor":[205, 165, 100, 255],
-      "EndColor":[205, 165, 100, 255]
+  "defaultTexture":{
+    "TextureName": "defaultTexture",
+    "ModId": "bettertooltipbox",
+    "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
+    "TextureSize":[256, 256],
+    "BackgroundColor": {
+      "StartColor":[147, 112, 219, 180],
+      "EndColor":[147, 112, 219, 180]
     },
-    "Bottom":{},
-    "Left":{},
-    "Right":{},
-    "Center": {}
-  },
-  "FragmentList":{
-    "Top_Center":{
-      "X": 0,
-      "Y": 0,
-      "Width": 16,
-      "Height": 16,
-      "Offset":[-1, -1]
+    "LineColor": {
+      "Top": {
+        "StartColor":[205, 165, 100, 255],
+        "EndColor":[205, 165, 100, 255]
+      },
+      "Bottom": {},
+      "Left": {},
+      "Right": {},
+      "Center": {}
+    },
+    "FragmentList":{
+      "Top_Center":{
+        "X": 0,
+        "Y": 0,
+        "Width": 16,
+        "Height": 16,
+        "Offset":[-1, -1]
+      }
     }
   }
 }
@@ -188,8 +190,8 @@ Each texture in `TooltipsTextureList` follows this structure:
 
 ```json
 {
-  "StartColor":[R, G, B, A],
-  "EndColor":[R, G, B, A]
+  "StartColor":["R", "G", "B", "A"],
+  "EndColor":["R", "G", "B", "A"]
 }
 ```
 
@@ -245,11 +247,11 @@ Fully transparent background:
 
 ```json
 {
-  "Top": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
-  "Bottom": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
-  "Left": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
-  "Right": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
-  "Center": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] }
+  "Top": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] },
+  "Bottom": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] },
+  "Left": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] },
+  "Right": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] },
+  "Center": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] }
 }
 ```
 
@@ -324,7 +326,7 @@ Fully transparent background:
 ### FragmentList (Texture Fragment List)
 
 **Type:** `array`, containing multiple `Fragment` objects
-**Required:** No (can be an empty object `{}`, optional types are `Top_Left`, `Bottom_Left`, `Top_Right`, `Bottom_Right`, `Top_Center`, `Bottom_Center`)
+**Required:** No (can be an empty object `{}`, optional types are `Top_Left`, `Bottom_Left`, `Top_Right`, `Bottom_Right`, `Top_Center`, `Bottom_Center`, where `Top_Center` and `Bottom_Center` will be forced to the center based on the texture width)
 **Description:** A list of texture fragments overlaid on the Tooltip, used for decorative elements like corners, borders, or logos.
 
 Each fragment is a rectangular area cropped from the source texture and placed at a specified position on the Tooltip.

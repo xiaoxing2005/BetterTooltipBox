@@ -75,31 +75,33 @@
 
 ```json
 {
-  "TextureName":"defaultTexture",
-  "ModId":"bettertooltipbox",
-  "ResourceLocation":"bettertooltipbox:gui/GregTech.png",
-  "TextureSize":[256, 256],
-  "BackgroundColor":{
-    "StartColor":[147, 112, 219, 180],
-    "EndColor":[147, 112, 219, 180]
-  },
-  "LineColor":{
-    "Top":{
-      "StartColor":[205, 165, 100, 255],
-      "EndColor":[205, 165, 100, 255]
+  "defaultTexture":{
+    "TextureName": "defaultTexture",
+    "ModId": "bettertooltipbox",
+    "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
+    "TextureSize":[256, 256],
+    "BackgroundColor": {
+      "StartColor":[147, 112, 219, 180],
+      "EndColor":[147, 112, 219, 180]
     },
-    "Bottom":{},
-    "Left":{},
-    "Right":{},
-    "Center": {}
-  },
-  "FragmentList":{
-    "Top_Center":{
-      "X": 0,
-      "Y": 0,
-      "Width": 16,
-      "Height": 16,
-      "Offset":[-1, -1]
+    "LineColor": {
+      "Top": {
+        "StartColor":[205, 165, 100, 255],
+        "EndColor":[205, 165, 100, 255]
+      },
+      "Bottom": {},
+      "Left": {},
+      "Right": {},
+      "Center": {}
+    },
+    "FragmentList":{
+      "Top_Center":{
+        "X": 0,
+        "Y": 0,
+        "Width": 16,
+        "Height": 16,
+        "Offset":[-1, -1]
+      }
     }
   }
 }
@@ -188,8 +190,8 @@
 
 ```json
 {
-  "StartColor":[R, G, B, A],
-  "EndColor":[R, G, B, A]
+  "StartColor":["R", "G", "B", "A"],
+  "EndColor":["R", "G", "B", "A"]
 }
 ```
 
@@ -245,11 +247,11 @@
 
 ```json
 {
-  "Top": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
-  "Bottom": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
-  "Left": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
-  "Right": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] },
-  "Center": { "StartColor": [R, G, B, A], "EndColor": [R, G, B, A] }
+  "Top": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] },
+  "Bottom": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] },
+  "Left": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] },
+  "Right": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] },
+  "Center": { "StartColor": ["R", "G", "B", "A"], "EndColor": ["R", "G", "B", "A"] }
 }
 ```
 
@@ -324,7 +326,7 @@
 ### FragmentList（贴图碎片列表）
 
 **类型：** `array`，包含多个 `Fragment` 对象
-**必填：** 否（可以为空数组 `{}`,可选类型有`Top_Left`,`Bottom_Left`,`Top_Right`,`Bottom_Right`,`Top_Center`,`Bottom_Center`）
+**必填：** 否（可以为空数组 `{}`,可选类型有`Top_Left`,`Bottom_Left`,`Top_Right`,`Bottom_Right`,`Top_Center`,`Bottom_Center`,其中`Top_Center`,`Bottom_Center`会根据纹理宽度强制居中）
 **说明：** 叠加在 Tooltip 上的贴图碎片列表，用于装饰性元素，如角落、边框或 Logo。
 
 每个碎片是从源贴图中裁剪的矩形区域，放置在 Tooltip 的指定位置。
