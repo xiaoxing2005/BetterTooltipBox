@@ -28,6 +28,7 @@ public class lateMixinPlugin implements ILateMixinLoader {
             list.add("MixinMultiBlockHandler");
             list.add("MixinGuiMultiBlockHandler");
             list.add("MixinInputHandler");
+            list.add("MixinGuiContainerManager");
         }
         return list;
     }

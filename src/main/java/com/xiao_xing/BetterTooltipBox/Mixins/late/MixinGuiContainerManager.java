@@ -1,4 +1,4 @@
-package com.xiao_xing.BetterTooltipBox.Mixins.mixin;
+package com.xiao_xing.BetterTooltipBox.Mixins.late;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
