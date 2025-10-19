@@ -2,7 +2,6 @@ package com.xiao_xing.BetterTooltipBox.client.render.event;
 
 import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.ITooltipValidationHandler.getTooltipValidation;
 
-
 import java.awt.Dimension;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
