@@ -16,7 +16,6 @@ import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipRender;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-import org.lwjgl.opengl.GL43;
 import squeek.applecore.client.TooltipOverlayHandler;
 
 public class TooltipHelper {

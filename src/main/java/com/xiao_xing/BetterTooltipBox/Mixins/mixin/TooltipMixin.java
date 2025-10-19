@@ -38,15 +38,10 @@ public class TooltipMixin extends Gui {
     private void onDrawHoveringText(List<String> textLines, int x, int y, FontRenderer font, CallbackInfo ci,
         @Local(ordinal = 2) int k, @Local(ordinal = 3) int j2, @Local(ordinal = 4) int k2, @Local(ordinal = 5) int i1) {
         TooltipHelper.z = 300;
+        TooltipHelper.AppleCoreDraw(j2, k2, k, i1);
         TooltipHelper.DrawTooltip(j2 - 3, k2 - 5, k + 5, i1 + 9);
         for (int i2 = 0; i2 < textLines.size(); ++i2) {
-            if (Loader.isModLoaded("AppleCore")) {
-                TooltipOverlayHandler.toolTipX = j2;
-                TooltipOverlayHandler.toolTipY = k2;
-                TooltipOverlayHandler.toolTipW = k;
-                TooltipOverlayHandler.toolTipH = i1;
-            }
-            String s1 = (String) textLines.get(i2);
+            String s1 = textLines.get(i2);
             font.drawStringWithShadow(s1, j2, k2, -1);
 
             if (i2 == 0) {
