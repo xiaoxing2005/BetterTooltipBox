@@ -78,7 +78,7 @@ Each texture in `TooltipsTextureList` follows this structure:
   "defaultTexture":{
     "TextureName": "defaultTexture",
     "ModId": "bettertooltipbox",
-    "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
+    "ResourceLocation": "bettertooltipbox:gui/LOGO.png",
     "TextureSize":[256, 256],
     "BackgroundColor": {
       "StartColor":[147, 112, 219, 180],
@@ -158,7 +158,7 @@ Each texture in `TooltipsTextureList` follows this structure:
 
 ```json
 {
-  "ResourceLocation": "bettertooltipbox:gui/GregTech.png"
+  "ResourceLocation": "bettertooltipbox:gui/LOGO.png"
 }
 ```
 
@@ -428,7 +428,7 @@ Each fragment is a rectangular area cropped from the source texture and placed a
   "TooltipsTextureList":{
     "defaultTexture":{
       "TextureName": "defaultTexture",
-      "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
+      "ResourceLocation": "bettertooltipbox:gui/LOGO.png",
       "TextureSize":[256, 256],
       "BackgroundColor":{
         "StartColor":[147, 112, 219, 180],
@@ -501,7 +501,7 @@ Each fragment is a rectangular area cropped from the source texture and placed a
   "TooltipsTextureList":{
     "defaultTexture":{
       "TextureName": "defaultTexture",
-      "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
+      "ResourceLocation": "bettertooltipbox:gui/LOGO.png",
       "TextureSize":[256, 256],
       "BackgroundColor":{
         "StartColor":[0, 0, 0, 0],
@@ -573,7 +573,7 @@ Each fragment is a rectangular area cropped from the source texture and placed a
     "ULV": {
       "TextureName": "ULV",
       "ModId": "gregtech",
-      "ResourceLocation": "bettertooltipbox:gui/GregTech.png",
+      "ResourceLocation": "bettertooltipbox:gui/LOGO.png",
       "TextureSize":[256, 256],
       "BackgroundColor":{
         "StartColor":[0, 100, 200, 180],
