@@ -1,3 +1,5 @@
 # Any Github changes require admin approval
 /.github/** @GTNewHorizons/admin
 
+/src/** @xiaoxing2005
+
