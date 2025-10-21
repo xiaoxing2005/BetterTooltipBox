@@ -51,6 +51,19 @@ public class TooltipRender {
         return Instance;
     }
 
+    public static void setAlpha(float alpha) {
+        if (SmoothShader != null) {
+            SmoothShader.use();
+            GL20.glUniform1f(GL20.glGetUniformLocation(SmoothShader.getProgram(), "alpha"), alpha);
+            SmoothShader.clear();
+        }
+        if (TextureShader != null) {
+            TextureShader.use();
+            GL20.glUniform1f(GL20.glGetUniformLocation(TextureShader.getProgram(), "alpha"), alpha);
+            TextureShader.clear();
+        }
+    }
+
     public void drawTooltip(TooltipsTexture texture, float x, float y, float width, float height,
         boolean isRenderNameUnderscore) {
         subMatrix(SmoothShader);

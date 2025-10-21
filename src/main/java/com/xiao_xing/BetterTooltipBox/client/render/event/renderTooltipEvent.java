@@ -142,7 +142,7 @@ public class renderTooltipEvent {
                     // 居中
                     x = (scaledWidth / 2) - (fontWidth / 2);
                     // 居中后依旧小于0，那么将调整为左侧对齐
-                    if (x > scaledWidth) {
+                    if (x < 0) {
                         x = 2;
                     }
                 }
@@ -206,6 +206,8 @@ public class renderTooltipEvent {
                     if (s.contains(event.itemStack.getDisplayName())) {
                         int nameX = x + ((fontWidth - font.getStringWidth(s)) / 2);
                         font.drawStringWithShadow(s, nameX, y, -1);
+                    } else {
+                        font.drawStringWithShadow(s, x, y, -1);
                     }
                 } else {
                     font.drawStringWithShadow(s, x, y, -1);
