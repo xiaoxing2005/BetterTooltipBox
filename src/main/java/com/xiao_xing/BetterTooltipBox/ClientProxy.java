@@ -4,6 +4,8 @@ import static com.xiao_xing.BetterTooltipBox.Config.ConfigManager.registerSpecia
 
 import java.io.IOException;
 
+import net.minecraftforge.client.ClientCommandHandler;
+
 import com.xiao_xing.BetterTooltipBox.Config.ConfigManager;
 import com.xiao_xing.BetterTooltipBox.Mixins.plugin.mixinPlugin;
 import com.xiao_xing.BetterTooltipBox.client.command.commandConfig;
@@ -15,7 +17,6 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class ClientProxy extends CommonProxy {
 
@@ -37,6 +38,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) throws IOException {
         super.init(event);
+        ClientCommandHandler.instance.registerCommand(new commandConfig());
         if (mixinPlugin.isLoaderGTNHlib) {
             try {
                 Class.forName("com.xiao_xing.BetterTooltipBox.client.render.event.renderTooltipEvent")
@@ -50,11 +52,6 @@ public class ClientProxy extends CommonProxy {
     public void postInit(FMLPostInitializationEvent event) {
         registerSpecialItemList();
         super.postInit(event);
-    }
-
-    @Override
-    public void serverStarting(FMLServerStartingEvent event) {
-        event.registerServerCommand(new commandConfig());
     }
 
 }

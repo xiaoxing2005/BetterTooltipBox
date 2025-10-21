@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 
 import com.gtnewhorizon.gtnhlib.client.event.RenderTooltipEvent;
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
@@ -25,7 +24,6 @@ import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.Toolti
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -78,18 +76,6 @@ public class renderTooltipEvent {
         FMLCommonHandler.instance()
             .bus()
             .register(this);
-    }
-
-    private int dwheel = 0;
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public void getMouseWheel(TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            if (Minecraft.getMinecraft().currentScreen != null && Mouse.isCreated()) {
-                dwheel = Mouse.getDWheel();
-            }
-        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -155,6 +141,10 @@ public class renderTooltipEvent {
                 if (x < 0) {
                     // 居中
                     x = (scaledWidth / 2) - (fontWidth / 2);
+                    // 居中后依旧小于0，那么将调整为左侧对齐
+                    if (x > scaledWidth) {
+                        x = 2;
+                    }
                 }
             }
 
@@ -166,17 +156,16 @@ public class renderTooltipEvent {
 
                     // 如果居中后依旧小于0，那么将调整为指定坐标
                     if (y < 0) {
-                        // 滚轮调整偏移
-                        if (Keyboard.isKeyDown(Keyboard.KEY_TAB) && dwheel != 0) {
-                            if (dwheel > 0) { // 上限位
-                                offsetY = Math.min(0, offsetY + (Math.abs(dwheel) / 120) * 8);
-                            } else {
-                                offsetY -= (Math.abs(dwheel) / 120) * 8;
+                        // 方向键调整偏移
+                        if (Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
+                            if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+                                offsetY = Math.min(0, offsetY + 4);
+                            } else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                                offsetY -= 4;
                             }
-                            dwheel = 0;
                         }
+                        y = 14 + offsetY; // 这里的14为恰好露出logo并与画面顶端间隔1格像素
                     }
-                    y = 14 + offsetY; // 这里的14为恰好露出logo并与画面顶端间隔1格像素
                 }
             }
 
@@ -214,8 +203,10 @@ public class renderTooltipEvent {
                 }
                 if (!(Minecraft.getMinecraft().currentScreen instanceof GuiMultiplayer) && i == 0
                     && font.getStringWidth(s) < fontWidth) {
-                    int nameX = x + ((fontWidth - font.getStringWidth(s)) / 2);
-                    font.drawStringWithShadow(s, nameX, y, -1);
+                    if (s.contains(event.itemStack.getDisplayName())) {
+                        int nameX = x + ((fontWidth - font.getStringWidth(s)) / 2);
+                        font.drawStringWithShadow(s, nameX, y, -1);
+                    }
                 } else {
                     font.drawStringWithShadow(s, x, y, -1);
                 }
