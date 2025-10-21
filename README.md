@@ -56,7 +56,8 @@
   },
   "SpecialItemList":{
     "textureName":["modid:itemname:meta"]
-  }
+  },
+  "WailaTooltipTexture": "defaultTexture"
 }
 ```
 
@@ -66,6 +67,7 @@
 | `Enable_TooltipsOverwrite` | `boolean` | 允许覆盖已有的 Tooltip 材质        |
 | `TooltipsTextureList`      | `object`  | Tooltip 材质定义列表（键名 = 材质名称） |
 | `SpecialItemList`          | `object`  | 为特定物品指定材质的映射表             |
+| `WailaTooltipTexture`      | `String`  | 为Waila指定材质                |
 
 ---
 
@@ -122,6 +124,20 @@
 ```json
 {
   "TextureName": "myCustomTooltip"
+}
+```
+
+### WailaTooltipTexture
+
+**类型：** `string`
+**必填：** 是
+**说明：** 该材质定义的唯一标识符，用于在 Waila 中引用此材质。
+
+**示例：**
+
+```json
+{
+  "WailaTooltipTexture": "defaultTexture"
 }
 ```
 

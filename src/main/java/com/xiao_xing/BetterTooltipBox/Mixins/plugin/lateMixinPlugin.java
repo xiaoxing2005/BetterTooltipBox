@@ -30,6 +30,10 @@ public class lateMixinPlugin implements ILateMixinLoader {
             list.add("MixinInputHandler");
             list.add("MixinGuiContainerManager");
         }
+        if (loadedMods.contains("Waila")) {
+            list.add("MixinOverlayRenderer");
+            list.add("MixinTooltip");
+        }
         return list;
     }
 }

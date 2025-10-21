@@ -21,6 +21,7 @@ public class Config {
 
     public boolean Enable_TooltipsOverwrite;
 
+    public String WailaTooltipTexture;
     // 存储从配置文件中读取的特殊处理物品
     public final HashMap<String, ArrayList<String>> SpecialItemList;
     // 存储从配置文件中读取的TooltipsTexture
@@ -30,6 +31,7 @@ public class Config {
         // 设置默认值
         Enable_SelectionBox = true;
         Enable_TooltipsOverwrite = false;
+        WailaTooltipTexture = "defaultTexture";
         TooltipsTextureList = new HashMap<>();
         SpecialItemList = new HashMap<>();
     }
