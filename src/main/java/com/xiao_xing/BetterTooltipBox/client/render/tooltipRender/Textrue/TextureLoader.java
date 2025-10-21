@@ -16,6 +16,7 @@ public class TextureLoader {
 
     private final TextureManager textureManager;
     public static TooltipsTexture defaultTexture;
+    public static TooltipsTexture WailaTexture;
     public static TooltipsTexture ULV;
     public static TooltipsTexture LV;
     public static TooltipsTexture MV;
@@ -56,6 +57,12 @@ public class TextureLoader {
             ConfigManager.saveConfig();
             textureManager.register(defaultTexture);
         }
+
+        TooltipsTexture texture = textureManager.getTexture(ConfigManager.Instance.WailaTooltipTexture);
+        if (texture != null) {
+            WailaTexture = texture;
+        } else WailaTexture = defaultTexture;
+
         ULV = new TooltipsTexture(
             "ULV",
             new ResourceLocation("bettertooltipbox", "gui/GregTech.png"),
