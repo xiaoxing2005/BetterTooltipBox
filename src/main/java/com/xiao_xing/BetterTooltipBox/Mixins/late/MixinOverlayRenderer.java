@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.xiao_xing.BetterTooltipBox.Mixins.Interface.IMixinTooltip;
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipRender;
 
 import mcp.mobius.waila.overlay.OverlayRenderer;
 import mcp.mobius.waila.overlay.Tooltip;
@@ -42,7 +43,10 @@ public class MixinOverlayRenderer {
         if (W + BottomCenterHeight > Minecraft.getMinecraft().displayHeight) {
             Y += (int) (W + BottomCenterHeight - Minecraft.getMinecraft().displayHeight);
         }
+        float alpha = (bg >> 24 & 255) / 255.0F;
+        TooltipRender.setAlpha(alpha);
         TooltipHelper.DrawTooltip(WailaTexture, x, Y, w, h);
+        TooltipRender.setAlpha(1);
         ci.cancel();
     }
 

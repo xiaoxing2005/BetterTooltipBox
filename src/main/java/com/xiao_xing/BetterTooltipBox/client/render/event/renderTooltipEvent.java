@@ -1,5 +1,10 @@
 package com.xiao_xing.BetterTooltipBox.client.render.event;
 
+import static com.xiao_xing.BetterTooltipBox.client.KeyLoader.TooltipsDOWN;
+import static com.xiao_xing.BetterTooltipBox.client.KeyLoader.TooltipsLEFT;
+import static com.xiao_xing.BetterTooltipBox.client.KeyLoader.TooltipsRight;
+import static com.xiao_xing.BetterTooltipBox.client.KeyLoader.TooltipsRollingActivation;
+import static com.xiao_xing.BetterTooltipBox.client.KeyLoader.TooltipsUP;
 import static com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.ITooltipValidationHandler.getTooltipValidation;
 
 import java.awt.Dimension;
@@ -34,6 +39,7 @@ public class renderTooltipEvent {
     // 用于记录上一次渲染的物品
     private static ItemStack lastRenderItemStack = null;
     private static int offsetY = 0;
+    private static int offsetX = 0;
 
     // NEI 反射相关
     private static boolean isLoaderNei = true;
@@ -88,6 +94,7 @@ public class renderTooltipEvent {
                 lastRenderItemStack = event.itemStack;
             } else if (!lastRenderItemStack.isItemEqual(event.itemStack)) {
                 offsetY = 0;
+                offsetX = 0;
                 lastRenderItemStack = event.itemStack;
             }
 
@@ -135,6 +142,7 @@ public class renderTooltipEvent {
             // height += 2 + (t.size() - 1) * 10;
             // }
 
+            boolean isCenterItemName = true;
             if (x + fontWidth > scaledWidth) {
                 x -= 28 + fontWidth;
                 // 判定是否超出游戏画面
@@ -142,8 +150,17 @@ public class renderTooltipEvent {
                     // 居中
                     x = (scaledWidth / 2) - (fontWidth / 2);
                     // 居中后依旧小于0，那么将调整为左侧对齐
-                    if (x > scaledWidth) {
-                        x = 2;
+                    if (x < 0) {
+                        if (Keyboard.isKeyDown(TooltipsRollingActivation.getKeyCode())) {
+                            if (Keyboard.isKeyDown(TooltipsLEFT.getKeyCode())) {
+                                offsetX = Math.min(0, offsetX + 4);
+                            } else if (Keyboard.isKeyDown(TooltipsRight.getKeyCode())) {
+                                offsetX -= 4;
+                            }
+                        }
+
+                        x = 2 + offsetX; // 这里的2为与画面左端间隔1格像素
+                        isCenterItemName = false;
                     }
                 }
             }
@@ -157,10 +174,10 @@ public class renderTooltipEvent {
                     // 如果居中后依旧小于0，那么将调整为指定坐标
                     if (y < 0) {
                         // 方向键调整偏移
-                        if (Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
-                            if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+                        if (Keyboard.isKeyDown(TooltipsRollingActivation.getKeyCode())) {
+                            if (Keyboard.isKeyDown(TooltipsUP.getKeyCode())) {
                                 offsetY = Math.min(0, offsetY + 4);
-                            } else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+                            } else if (Keyboard.isKeyDown(TooltipsDOWN.getKeyCode())) {
                                 offsetY -= 4;
                             }
                         }
@@ -201,11 +218,14 @@ public class renderTooltipEvent {
                         // 反射调用失败，按正常文本处理
                     }
                 }
-                if (!(Minecraft.getMinecraft().currentScreen instanceof GuiMultiplayer) && i == 0
+                if (isCenterItemName && !(Minecraft.getMinecraft().currentScreen instanceof GuiMultiplayer)
+                    && i == 0
                     && font.getStringWidth(s) < fontWidth) {
                     if (s.contains(event.itemStack.getDisplayName())) {
                         int nameX = x + ((fontWidth - font.getStringWidth(s)) / 2);
                         font.drawStringWithShadow(s, nameX, y, -1);
+                    } else {
+                        font.drawStringWithShadow(s, x, y, -1);
                     }
                 } else {
                     font.drawStringWithShadow(s, x, y, -1);
