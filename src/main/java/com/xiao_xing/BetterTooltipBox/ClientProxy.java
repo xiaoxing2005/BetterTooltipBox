@@ -8,8 +8,8 @@ import net.minecraftforge.client.ClientCommandHandler;
 
 import com.xiao_xing.BetterTooltipBox.Config.ConfigManager;
 import com.xiao_xing.BetterTooltipBox.Mixins.plugin.mixinPlugin;
+import com.xiao_xing.BetterTooltipBox.client.KeyLoader;
 import com.xiao_xing.BetterTooltipBox.client.command.commandConfig;
-import com.xiao_xing.BetterTooltipBox.client.render.event.keyInputEvent;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TextureLoader;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipValidationHandler.TooltipValidationLoader;
 
@@ -28,7 +28,7 @@ public class ClientProxy extends CommonProxy {
         super.preInit(event);
         ConfigManager.init(event.getModConfigurationDirectory());
         new TextureLoader().loader();
-        new keyInputEvent();
+        KeyLoader.init();
 
         if (Loader.isModLoaded("gregtech")) {
             TooltipValidationLoader.loaderGT();
