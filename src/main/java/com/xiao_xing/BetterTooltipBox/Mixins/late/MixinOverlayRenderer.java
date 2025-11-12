@@ -10,9 +10,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.xiao_xing.BetterTooltipBox.Config.ConfigManager;
 import com.xiao_xing.BetterTooltipBox.Mixins.Interface.IMixinTooltip;
 import com.xiao_xing.BetterTooltipBox.Util.TooltipHelper;
 import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.Textrue.TooltipsTexture;
+import com.xiao_xing.BetterTooltipBox.client.render.tooltipRender.TooltipRender;
 
 import mcp.mobius.waila.overlay.OverlayRenderer;
 import mcp.mobius.waila.overlay.Tooltip;
@@ -25,6 +27,7 @@ public class MixinOverlayRenderer {
 
     @Inject(method = "drawTooltipBox", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void drawTooltipBox(int x, int y, int w, int h, int bg, int grad1, int grad2, CallbackInfo ci) {
+        if (!ConfigManager.Instance.Enable_WailaOverwrite) return;
         float TopCenterHeight = 0;
         float BottomCenterHeight = 0;
         Y = y;
@@ -42,7 +45,10 @@ public class MixinOverlayRenderer {
         if (W + BottomCenterHeight > Minecraft.getMinecraft().displayHeight) {
             Y += (int) (W + BottomCenterHeight - Minecraft.getMinecraft().displayHeight);
         }
+        float alpha = (bg >> 24 & 255) / 255.0F;
+        TooltipRender.setAlpha(alpha);
         TooltipHelper.DrawTooltip(WailaTexture, x, Y, w, h);
+        TooltipRender.setAlpha(1);
         ci.cancel();
     }
 
@@ -54,6 +60,7 @@ public class MixinOverlayRenderer {
             shift = At.Shift.AFTER),
         remap = false)
     private static void doRenderOverlay(Tooltip tooltip, CallbackInfo ci) {
+        if (!ConfigManager.Instance.Enable_WailaOverwrite) return;
         if (tooltip instanceof IMixinTooltip iMixinTooltip) {
             iMixinTooltip.betterTooltipBox$setTooltipY(Y);
         }

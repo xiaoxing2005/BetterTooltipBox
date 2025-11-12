@@ -19,7 +19,11 @@ public class Config {
 
     public boolean Enable_SelectionBox;
 
+    public float SelectionBoxLineWidth = 1.0f;
+
     public boolean Enable_TooltipsOverwrite;
+
+    public boolean Enable_WailaOverwrite;
 
     public String WailaTooltipTexture;
     // 存储从配置文件中读取的特殊处理物品
@@ -30,6 +34,7 @@ public class Config {
     public Config() {
         // 设置默认值
         Enable_SelectionBox = true;
+        Enable_WailaOverwrite = true;
         Enable_TooltipsOverwrite = false;
         WailaTooltipTexture = "defaultTexture";
         TooltipsTextureList = new HashMap<>();
