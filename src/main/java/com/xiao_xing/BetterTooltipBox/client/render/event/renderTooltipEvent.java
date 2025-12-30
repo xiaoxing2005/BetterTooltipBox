@@ -221,7 +221,8 @@ public class renderTooltipEvent {
                 if (isCenterItemName && !(Minecraft.getMinecraft().currentScreen instanceof GuiMultiplayer)
                     && i == 0
                     && font.getStringWidth(s) < fontWidth) {
-                    if (s.contains(event.itemStack.getDisplayName())) {
+                    String itemName = event.itemStack.getDisplayName();
+                    if (itemName != null && s.contains(itemName)) {
                         int nameX = x + ((fontWidth - font.getStringWidth(s)) / 2);
                         font.drawStringWithShadow(s, nameX, y, -1);
                     } else {
