@@ -45,6 +45,10 @@ public class TooltipRender {
         "shader/Smooth.vert",
         "shader/Smooth.frag");
 
+    static {
+        setAlpha(1.0f);
+    }
+
     public TooltipRender() {}
 
     public static TooltipRender getInstance() {
