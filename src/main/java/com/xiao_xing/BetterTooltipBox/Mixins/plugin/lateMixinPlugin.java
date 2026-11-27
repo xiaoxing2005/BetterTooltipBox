@@ -30,7 +30,9 @@ public class lateMixinPlugin implements ILateMixinLoader {
             list.add("MixinInputHandler");
             list.add("MixinGuiContainerManager");
         }
-        if (loadedMods.contains("Waila")) {
+        // ChromaticTooltipsCompat can overwrite doRenderOverlay without calling drawTooltipBox.
+        // Leave Waila rendering to it rather than injecting into the replaced method.
+        if (loadedMods.contains("Waila") && !loadedMods.contains("chromatictooltipscompat")) {
             list.add("MixinOverlayRenderer");
             list.add("MixinTooltip");
         }
